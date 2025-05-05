@@ -2,19 +2,22 @@
 import React from 'react';
 import { TrainingCombo } from '../../data/combos';
 import ComboTable from './ComboTable';
+import ComboItem from '../ComboItem';
 
 interface CombosTabProps {
   combos: (TrainingCombo & { key?: string })[];
   availableCombos: TrainingCombo[];
   selectedStat: boolean;
   onApplyCombo: (combo: TrainingCombo) => void;
+  viewMode?: 'table' | 'grid';
 }
 
 const CombosTab: React.FC<CombosTabProps> = ({
   combos,
   availableCombos,
   selectedStat,
-  onApplyCombo
+  onApplyCombo,
+  viewMode = 'grid'
 }) => {
   if (combos.length === 0) {
     return (
@@ -27,12 +30,31 @@ const CombosTab: React.FC<CombosTabProps> = ({
     );
   }
 
+  if (viewMode === 'table') {
+    return (
+      <ComboTable
+        combos={combos}
+        availableCombos={availableCombos}
+        onApplyCombo={onApplyCombo}
+      />
+    );
+  }
+
+  // Default grid view using ComboItem
   return (
-    <ComboTable
-      combos={combos}
-      availableCombos={availableCombos}
-      onApplyCombo={onApplyCombo}
-    />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {combos.map(combo => {
+        const isAvailable = availableCombos.some(c => c.id === combo.id);
+        return (
+          <ComboItem
+            key={combo.key || `combo-${combo.id}`}
+            combo={combo}
+            isAvailable={isAvailable}
+            onApply={() => onApplyCombo(combo)}
+          />
+        );
+      })}
+    </div>
   );
 };
 

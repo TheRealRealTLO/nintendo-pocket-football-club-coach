@@ -26,7 +26,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
   const [searchedAllCombos, setSearchedAllCombos] = useState<TrainingCombo[]>(allFilteredCombos);
-  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('grid');
   
   // Filter combos based on search query
   useEffect(() => {
@@ -117,6 +117,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             availableCombos={availableCombos}
             selectedStat={selectedStat}
             onApplyCombo={onApplyCombo}
+            viewMode={viewMode}
           />
         </TabsContent>
 
@@ -126,6 +127,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             availableCombos={availableCombos}
             selectedStat={selectedStat}
             onApplyCombo={onApplyCombo}
+            viewMode={viewMode}
           />
         </TabsContent>
       </Tabs>
