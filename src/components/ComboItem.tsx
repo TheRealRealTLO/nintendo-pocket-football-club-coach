@@ -14,7 +14,7 @@ interface ComboItemProps {
 
 const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) => {
   return (
-    <div className={`pixel-card mb-3 p-3 ${isAvailable ? '' : 'opacity-50'}`}>
+    <div className={`pixel-card p-3 ${isAvailable ? '' : 'opacity-50'}`}>
       <div className="flex justify-between items-center mb-2">
         <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
         {combo.recommendedPosition && (
@@ -22,7 +22,7 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
         )}
       </div>
       
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-3">
         <CardRequirements cards={combo.cards} />
         <StatImprovements stats={combo.stats} />
       </div>
