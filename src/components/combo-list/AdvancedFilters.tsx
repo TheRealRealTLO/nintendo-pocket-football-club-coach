@@ -1,67 +1,107 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { StatType, allStatTypes, statColors } from '../../data/combos';
+import { FilterBadges } from './FilterBadges';
 
 export type PositionFilter = "ALL" | "GK" | "DF" | "MF" | "FW" | null;
 
 interface AdvancedFiltersProps {
   positionFilter: PositionFilter;
   setPositionFilter: (position: PositionFilter) => void;
+  selectedStat: StatType | null;
+  sortDirection: 'asc' | 'desc';
+  setSelectedStat: (stat: StatType | null, toggleSort?: boolean) => void;
 }
+
+// Helper function to get position badge color
+const getPositionColor = (position: PositionFilter) => {
+  switch(position) {
+    case "GK": return "bg-orange-400 text-black";
+    case "DF": return "bg-blue-400 text-black";
+    case "MF": return "bg-green-400 text-black";
+    case "FW": return "bg-red-400 text-black";
+    case "ALL": return "bg-purple-400 text-black";
+    default: return "bg-gray-400 text-black";
+  }
+};
 
 const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   positionFilter,
-  setPositionFilter
+  setPositionFilter,
+  selectedStat,
+  sortDirection,
+  setSelectedStat
 }) => {
-  // Helper function to get position badge color
+  // Helper function to get position badge styles
   const getPositionBadgeStyles = (position: PositionFilter) => {
+    const baseColor = getPositionColor(position);
     if (positionFilter === position) {
-      return "bg-primary text-primary-foreground hover:bg-primary/80";
+      return `${baseColor} ring-2 ring-black`;
     }
-    return "bg-secondary text-secondary-foreground hover:bg-secondary/80";
+    return `${baseColor} opacity-70`;
   };
 
   return (
-    <div className="mb-4">
-      <p className="font-pixel text-xs mb-2">Position:</p>
-      <div className="flex flex-wrap gap-2">
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles(null)}`} 
-          onClick={() => setPositionFilter(null)}
-        >
-          Any Position
-        </Badge>
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles("ALL")}`} 
-          onClick={() => setPositionFilter("ALL")}
-        >
-          General
-        </Badge>
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles("GK")}`} 
-          onClick={() => setPositionFilter("GK")}
-        >
-          Goalkeeper
-        </Badge>
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles("DF")}`} 
-          onClick={() => setPositionFilter("DF")}
-        >
-          Defender
-        </Badge>
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles("MF")}`} 
-          onClick={() => setPositionFilter("MF")}
-        >
-          Midfielder
-        </Badge>
-        <Badge 
-          className={`cursor-pointer ${getPositionBadgeStyles("FW")}`} 
-          onClick={() => setPositionFilter("FW")}
-        >
-          Forward
-        </Badge>
-      </div>
+    <div className="mb-4 pixel-card p-3">
+      <h3 className="font-pixel text-sm mb-3">Filters</h3>
+      
+      <Tabs defaultValue="stat" className="w-full">
+        <TabsList className="w-full mb-3">
+          <TabsTrigger value="stat" className="w-1/2">Stat Filters</TabsTrigger>
+          <TabsTrigger value="position" className="w-1/2">Position Filters</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="stat" className="mt-0">
+          <FilterBadges 
+            selectedStat={selectedStat}
+            sortDirection={sortDirection}
+            setSelectedStat={setSelectedStat}
+          />
+        </TabsContent>
+        
+        <TabsContent value="position" className="mt-0">
+          <div className="flex flex-wrap gap-2">
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles(null)}`} 
+              onClick={() => setPositionFilter(null)}
+            >
+              Any Position
+            </Badge>
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles("ALL")}`} 
+              onClick={() => setPositionFilter("ALL")}
+            >
+              General
+            </Badge>
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles("GK")}`} 
+              onClick={() => setPositionFilter("GK")}
+            >
+              Goalkeeper
+            </Badge>
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles("DF")}`} 
+              onClick={() => setPositionFilter("DF")}
+            >
+              Defender
+            </Badge>
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles("MF")}`} 
+              onClick={() => setPositionFilter("MF")}
+            >
+              Midfielder
+            </Badge>
+            <Badge 
+              className={`cursor-pointer ${getPositionBadgeStyles("FW")}`} 
+              onClick={() => setPositionFilter("FW")}
+            >
+              Forward
+            </Badge>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

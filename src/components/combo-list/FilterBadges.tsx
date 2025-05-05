@@ -9,14 +9,13 @@ interface FilterBadgesProps {
   setSelectedStat: (stat: StatType | null, toggleSort?: boolean) => void;
 }
 
-const FilterBadges: React.FC<FilterBadgesProps> = ({
+export const FilterBadges: React.FC<FilterBadgesProps> = ({
   selectedStat,
   sortDirection,
   setSelectedStat
 }) => {
   return (
-    <div className="mb-4">
-      <p className="font-pixel text-xs mb-2">Filter by stat:</p>
+    <div>
       <div className="flex flex-wrap gap-2 justify-start">
         <Badge 
           className={`cursor-pointer ${!selectedStat ? 'bg-black text-white' : 'bg-gray-200 text-gray-700'}`}

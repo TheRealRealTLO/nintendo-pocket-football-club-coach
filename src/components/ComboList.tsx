@@ -65,15 +65,12 @@ const ComboList: React.FC<ComboListProps> = ({
         onUndo={undoLastCombo} 
       />
 
-      <FilterBadges 
-        selectedStat={selectedStat}
-        sortDirection={sortDirection}
-        setSelectedStat={setSelectedStatWithToggle}
-      />
-
       <AdvancedFilters
         positionFilter={positionFilter}
         setPositionFilter={setPositionFilter}
+        selectedStat={selectedStat}
+        sortDirection={sortDirection}
+        setSelectedStat={setSelectedStatWithToggle}
       />
 
       <ComboTabsContainer
