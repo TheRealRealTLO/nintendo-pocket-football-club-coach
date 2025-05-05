@@ -1,16 +1,22 @@
 
 import { TrainingCombo } from '../types';
-import { goalkeeperCombos } from './goalkeeperCombos';
-import { defenderCombos } from './defenderCombos';
-import { midfielderCombos } from './midfielderCombos';
-import { forwardCombos } from './forwardCombos';
-import { allPositionCombos } from './allPositionCombos';
+import {
+  attackingCombos,
+  dribblePassCombos,
+  defenseAerialCombos,
+  midfieldCombos,
+  specialCombos,
+  teamSpiritCombos,
+  goalkeeperCombos
+} from './themes';
 
-// Combine all combos into a single array
+// Combine all themed combos into a single array
 export const trainingCombos: TrainingCombo[] = [
-  ...goalkeeperCombos,
-  ...defenderCombos,
-  ...midfielderCombos,
-  ...forwardCombos,
-  ...allPositionCombos
+  ...attackingCombos,
+  ...dribblePassCombos,
+  ...defenseAerialCombos,
+  ...midfieldCombos,
+  ...specialCombos,
+  ...teamSpiritCombos,
+  ...goalkeeperCombos
 ];

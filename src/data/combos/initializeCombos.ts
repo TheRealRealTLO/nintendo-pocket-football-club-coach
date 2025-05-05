@@ -1,9 +1,8 @@
 
-import { rawComboData } from './rawComboData';
-import { processComboData } from './processComboData';
+import { groupCombosByPosition } from './themes';
 
-// Process the raw combo data into properly formatted combo arrays
-export const processedCombos = processComboData(rawComboData);
+// Get the processed combos directly from the themed organization
+export const processedCombos = groupCombosByPosition();
 
 // Export the processed combos
 export const {
