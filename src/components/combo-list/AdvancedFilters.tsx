@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./CustomTabs";
 import { StatType, allStatTypes, statColors } from '../../data/combos';
 import { FilterBadges } from './FilterBadges';
 
@@ -48,9 +48,9 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
       <h3 className="font-pixel text-sm mb-3">Filters</h3>
       
       <Tabs defaultValue="stat" className="w-full">
-        <TabsList className="w-full mb-3">
-          <TabsTrigger value="stat" className="w-1/2">Stat Filters</TabsTrigger>
-          <TabsTrigger value="position" className="w-1/2">Position Filters</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="stat" className="font-pixel text-xs">Stat Filters</TabsTrigger>
+          <TabsTrigger value="position" className="font-pixel text-xs">Position Filters</TabsTrigger>
         </TabsList>
         
         <TabsContent value="stat" className="mt-0">
@@ -64,7 +64,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
         <TabsContent value="position" className="mt-0">
           <div className="flex flex-wrap gap-2">
             <Badge 
-              className={`cursor-pointer ${getPositionBadgeStyles(null)}`} 
+              className={`cursor-pointer ${positionFilter === null ? "bg-black text-white" : "bg-gray-200"}`} 
               onClick={() => setPositionFilter(null)}
             >
               Any Position
