@@ -3,4 +3,4 @@
 export * from './types';
 export * from './cardRelations';
 export * from './styles';
-export * from './trainingCombos';
+export * from './combos/trainingCombos';
