@@ -2,7 +2,7 @@
 import React from 'react';
 import { CardCategory } from '@/data/types';
 import { allCategories, categoryColors } from '@/data/combos';
-import { Star, Wrench, Activity, Users } from 'lucide-react';
+import { Shield, Wrench, Dumbbell, Users } from 'lucide-react';
 
 interface CategoryFilterProps {
   activeCategory: CardCategory | "All";
@@ -12,9 +12,9 @@ interface CategoryFilterProps {
 // Get icon component based on category
 export const getCategoryIcon = (category: CardCategory) => {
   switch (category) {
-    case "Tactical": return <Star size={16} className="text-black" />;
+    case "Tactical": return <Shield size={16} className="text-black" />;
     case "Technical": return <Wrench size={16} className="text-black" />;
-    case "Physical": return <Activity size={16} className="text-black" />;
+    case "Physical": return <Dumbbell size={16} className="text-black" />;
     case "Support": return <Users size={16} className="text-black" />;
     default: return null;
   }
