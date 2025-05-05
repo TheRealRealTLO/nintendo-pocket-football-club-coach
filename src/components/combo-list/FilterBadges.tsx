@@ -46,7 +46,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
   return (
     <div className="flex flex-wrap gap-2 justify-start">
       <Badge 
-        className={`${!selectedStat ? 'bg-black text-white' : 'bg-gray-200'} cursor-pointer font-pixel text-xs flex items-center gap-1 border-2 ${!selectedStat ? 'border-white' : 'border-black'}`}
+        className={`${!selectedStat ? 'bg-black text-white' : 'bg-gray-200'} cursor-pointer font-pixel text-xs flex items-center gap-1`}
         onClick={() => setSelectedStat(null)}
       >
         All
@@ -56,7 +56,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
           key={stat}
           className={`cursor-pointer font-pixel text-xs ${getStatBadgeColor(stat)} ${
             selectedStat === stat ? 'ring-2 ring-black' : 'opacity-70'
-          } flex items-center gap-1 border-2 border-black`}
+          } flex items-center gap-1`}
           onClick={() => setSelectedStat(stat, true)}
         >
           {getStatIcon(stat)}

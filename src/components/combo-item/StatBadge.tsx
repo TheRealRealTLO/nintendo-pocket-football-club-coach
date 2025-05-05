@@ -32,7 +32,7 @@ const StatBadge: React.FC<StatBadgeProps> = ({ stat, value }) => {
   
   return (
     <Badge 
-      className={`${getIntensity(value)} flex items-center gap-1 text-[12px] px-1.5 py-0.5 font-bold ${value < 0 ? 'border-2 border-red-500' : 'border-2 border-black'}`}
+      className={`${getIntensity(value)} flex items-center gap-1 text-[12px] px-1.5 py-0.5 font-bold ${value < 0 ? 'ring-2 ring-red-500' : ''}`}
     >
       {getStatIcon(stat)} {stat} {value > 0 ? `+${value}` : value}
     </Badge>

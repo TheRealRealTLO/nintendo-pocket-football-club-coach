@@ -73,7 +73,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, className = "",
     <button
       className={`inline-flex items-center justify-center whitespace-nowrap px-2 py-1.5 text-xs font-medium ring-offset-background transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 ${
         isActive 
-          ? "bg-background text-foreground shadow-sm font-bold border-b-2 border-black" 
+          ? "bg-background text-foreground shadow-sm font-bold" 
           : "text-muted-foreground hover:bg-muted hover:text-foreground"
       } ${className}`}
       onClick={() => setActiveTab(value)}

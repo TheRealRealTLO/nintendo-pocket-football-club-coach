@@ -25,7 +25,7 @@ const getPositionLabel = (position: string) => {
 
 const PositionBadge: React.FC<PositionBadgeProps> = ({ position }) => {
   return (
-    <Badge className={`${getPositionColor(position)} ml-2 font-bold border-2 border-black`}>
+    <Badge className={`${getPositionColor(position)} ml-2 font-bold`}>
       {getPositionLabel(position)}
     </Badge>
   );
