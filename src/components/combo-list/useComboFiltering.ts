@@ -39,6 +39,9 @@ export const useComboFiltering = (
         const valueB = b.stats[selectedStat] || 0;
         return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
+    } else {
+      // If no stat is selected, sort alphabetically by name
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
     
     return result;
@@ -88,6 +91,9 @@ export const useComboFiltering = (
         const valueB = b.stats[selectedStat] || 0;
         return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
+    } else {
+      // If no stat is selected, sort alphabetically by name
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
     
     return result;
