@@ -2,7 +2,7 @@
 import React from 'react';
 import { TrainingCombo, allStatTypes, statColors, StatType } from '../data/combos';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import ComboItem from './ComboItem';
