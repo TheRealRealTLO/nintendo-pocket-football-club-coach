@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TrainingCombo } from '../../data/combos';
 import CombosTab from './CombosTab';
@@ -22,24 +22,41 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   onApplyCombo
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
+  const [searchedAllCombos, setSearchedAllCombos] = useState<TrainingCombo[]>(allFilteredCombos);
   
-  // Filter combos based on search query - make sure it's an exact match within the name
-  const filterBySearch = (combos: TrainingCombo[]) => {
-    if (!searchQuery.trim()) return combos;
+  // Filter combos based on search query
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setSearchedAvailableCombos(filteredCombos);
+      setSearchedAllCombos(allFilteredCombos);
+      return;
+    }
     
-    return combos.filter(combo => 
-      combo.name.toLowerCase().includes(searchQuery.toLowerCase())
+    const query = searchQuery.toLowerCase().trim();
+    
+    const filteredAvailable = filteredCombos.filter(combo => 
+      combo.name.toLowerCase().includes(query)
     );
-  };
-  
-  const searchedAvailableCombos = filterBySearch(filteredCombos);
-  const searchedAllCombos = filterBySearch(allFilteredCombos);
+    
+    const filteredAll = allFilteredCombos.filter(combo => 
+      combo.name.toLowerCase().includes(query)
+    );
+    
+    setSearchedAvailableCombos(filteredAvailable);
+    setSearchedAllCombos(filteredAll);
+    
+    // For debugging
+    console.log(`Searching for: "${query}"`);
+    console.log(`Available matches: ${filteredAvailable.length}`);
+    console.log(`All matches: ${filteredAll.length}`);
+  }, [searchQuery, filteredCombos, allFilteredCombos]);
   
   // Ensure we use the correct key for each combo to prevent duplicate key warnings
   const ensureUniqueKeys = (combos: TrainingCombo[]) => {
     return combos.map(combo => ({
       ...combo,
-      key: `combo-${combo.id}`
+      key: `combo-${combo.id}-${combo.name.replace(/\s+/g, '')}`
     }));
   };
 

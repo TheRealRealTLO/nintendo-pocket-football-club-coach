@@ -33,7 +33,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
         const isAvailable = availableCombos.some(c => c.id === combo.id);
         return (
           <ComboItem
-            key={combo.key || combo.id}
+            key={combo.key || `combo-${combo.id}`}
             combo={combo}
             isAvailable={isAvailable}
             onApply={() => onApplyCombo(combo)}
