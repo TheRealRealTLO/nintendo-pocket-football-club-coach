@@ -1,7 +1,6 @@
 
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
-import { RovingFocusGroup } from "@radix-ui/react-roving-focus"
 
 import { cn } from "@/lib/utils"
 
@@ -18,11 +17,7 @@ const TabsList = React.forwardRef<
       className
     )}
     {...props}
-  >
-    <RovingFocusGroup asChild orientation="horizontal">
-      {props.children}
-    </RovingFocusGroup>
-  </TabsPrimitive.List>
+  />
 ))
 TabsList.displayName = TabsPrimitive.List.displayName
 
