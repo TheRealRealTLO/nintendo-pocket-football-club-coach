@@ -28,7 +28,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="null">Any Position</SelectItem>
-            <SelectItem value="ALL">All Positions</SelectItem>
+            <SelectItem value="ALL">General Training</SelectItem>
             <SelectItem value="GK">Goalkeeper</SelectItem>
             <SelectItem value="DF">Defender</SelectItem>
             <SelectItem value="MF">Midfielder</SelectItem>

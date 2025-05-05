@@ -17,11 +17,19 @@ export const useComboFiltering = (
     // First apply position filter if selected
     let result = combos;
     if (positionFilter) {
-      result = result.filter(combo => 
-        combo.recommendedPosition === positionFilter || 
-        combo.recommendedPosition === "ALL" ||
-        !combo.recommendedPosition
-      );
+      // When a specific position (not null or "ALL") is selected, only show combos for that position
+      // Exclude "ALL" position combos when a specific position filter is applied
+      if (positionFilter !== "ALL") {
+        result = result.filter(combo => 
+          combo.recommendedPosition === positionFilter
+        );
+      } else {
+        // When "ALL" position filter is selected, show both "ALL" position combos and those without position
+        result = result.filter(combo => 
+          combo.recommendedPosition === "ALL" || 
+          !combo.recommendedPosition
+        );
+      }
     }
     
     // Then sort based on sort option
@@ -58,11 +66,19 @@ export const useComboFiltering = (
     
     // Apply position filter if selected
     if (positionFilter) {
-      result = result.filter(combo => 
-        combo.recommendedPosition === positionFilter || 
-        combo.recommendedPosition === "ALL" ||
-        !combo.recommendedPosition
-      );
+      // When a specific position (not null or "ALL") is selected, only show combos for that position
+      // Exclude "ALL" position combos when a specific position filter is applied
+      if (positionFilter !== "ALL") {
+        result = result.filter(combo => 
+          combo.recommendedPosition === positionFilter
+        );
+      } else {
+        // When "ALL" position filter is selected, show both "ALL" position combos and those without position
+        result = result.filter(combo => 
+          combo.recommendedPosition === "ALL" || 
+          !combo.recommendedPosition
+        );
+      }
     }
     
     // Apply sorting

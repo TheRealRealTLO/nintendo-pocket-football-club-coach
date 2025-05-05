@@ -18,10 +18,15 @@ const getPositionColor = (position: string) => {
   }
 };
 
+const getPositionLabel = (position: string) => {
+  if (position === "ALL") return "General";
+  return position;
+};
+
 const PositionBadge: React.FC<PositionBadgeProps> = ({ position }) => {
   return (
     <Badge className={`${getPositionColor(position)} ml-2 font-bold`}>
-      {position}
+      {getPositionLabel(position)}
     </Badge>
   );
 };
