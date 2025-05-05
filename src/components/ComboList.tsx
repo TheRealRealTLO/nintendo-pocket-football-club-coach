@@ -8,6 +8,7 @@ import { toast } from '@/components/ui/use-toast';
 import ComboItem from './ComboItem';
 import { Undo2, Filter, ArrowDownAZ, ArrowUpAZ } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { trainingCombos } from '../data/combos';
 
 interface ComboListProps {
   availableCombos: TrainingCombo[];
@@ -80,6 +81,38 @@ const ComboList: React.FC<ComboListProps> = ({
   // Get filtered and sorted combos
   const processedAvailableCombos = getFilteredAndSortedCombos(availableCombos);
   const processedFilteredCombos = getFilteredAndSortedCombos(filteredCombos);
+  
+  // Filter all combos by stat and position
+  const getFilteredAllCombos = () => {
+    let result = trainingCombos;
+    
+    // Apply stat filter if selected
+    if (selectedStat) {
+      result = result.filter(combo => combo.stats[selectedStat] !== undefined && combo.stats[selectedStat]! > 0);
+    }
+    
+    // Apply position filter if selected
+    if (positionFilter) {
+      result = result.filter(combo => 
+        combo.recommendedPosition === positionFilter || 
+        combo.recommendedPosition === "ALL" ||
+        !combo.recommendedPosition
+      );
+    }
+    
+    // Apply sorting
+    if (sortOption !== "none" && selectedStat) {
+      result = [...result].sort((a, b) => {
+        const valueA = a.stats[selectedStat] || 0;
+        const valueB = b.stats[selectedStat] || 0;
+        return sortOption === "stat-high" ? valueB - valueA : valueA - valueB;
+      });
+    }
+    
+    return result;
+  };
+  
+  const allFilteredCombos = getFilteredAllCombos();
 
   // Render filter badges
   const renderStatFilters = () => (
@@ -145,7 +178,7 @@ const ComboList: React.FC<ComboListProps> = ({
   const renderCombosList = (combos: TrainingCombo[], showUnavailable = false) => {
     if (combos.length > 0) {
       return combos.map((combo) => {
-        const isAvailable = availableCombos.some(c => c.id === combo.id) || !showUnavailable;
+        const isAvailable = availableCombos.some(c => c.id === combo.id);
         return (
           <ComboItem
             key={combo.id}
@@ -160,7 +193,7 @@ const ComboList: React.FC<ComboListProps> = ({
     return (
       <div className="text-center p-6">
         <p className="font-pixel text-sm text-gray-500">
-          No {showUnavailable ? "" : "available "}combos match your filter.
+          No combos match your filter.
           {selectedStat && " Try selecting a different stat or position."}
         </p>
       </div>
@@ -187,7 +220,7 @@ const ComboList: React.FC<ComboListProps> = ({
       <Tabs defaultValue="available">
         <TabsList className="grid w-full grid-cols-2 mb-4">
           <TabsTrigger value="available">Available ({processedFilteredCombos.length})</TabsTrigger>
-          <TabsTrigger value="all">All Combos</TabsTrigger>
+          <TabsTrigger value="all">All Training Combinations</TabsTrigger>
         </TabsList>
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
@@ -195,7 +228,7 @@ const ComboList: React.FC<ComboListProps> = ({
         </TabsContent>
 
         <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
-          {renderCombosList(processedFilteredCombos, true)}
+          {renderCombosList(allFilteredCombos, true)}
         </TabsContent>
       </Tabs>
     </div>
