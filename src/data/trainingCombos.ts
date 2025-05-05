@@ -1,3 +1,4 @@
+
 import { TrainingCombo, StatType, CardType } from './types';
 
 // Collection of all training combos
@@ -1038,4 +1039,15 @@ export const trainingCombos: TrainingCombo[] = [
     name: "Target Man",
     description: "Become a target man with strength and aerial ability.",
     cards: [
-      {
+      { type: "Strength", count: 3 },
+      { type: "Agility", count: 2 },
+      { type: "Power", count: 1 }
+    ],
+    stats: {
+      FIN: 2,
+      STR: 1,
+      JMP: 1
+    },
+    recommendedPosition: "FW"
+  }
+];
