@@ -1,4 +1,3 @@
-
 import { TrainingCombo } from '../../types';
 
 // Combos focused on team spirit, leadership, and morale
@@ -113,7 +112,7 @@ export const teamSpiritCombos: TrainingCombo[] = [
     id: "combo-71",
     name: "Tricky Play",
     cards: [
-      { type: "Set Plays", quantity: 1 },
+      { type: "Set Play", quantity: 1 },
       { type: "Meeting", quantity: 1 }
     ],
     stats: {

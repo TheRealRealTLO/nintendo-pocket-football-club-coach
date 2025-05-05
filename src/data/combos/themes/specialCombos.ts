@@ -1,4 +1,3 @@
-
 import { TrainingCombo } from '../../types';
 
 // Special combos, including those with negative effects or unique characteristics
@@ -22,7 +21,7 @@ export const specialCombos: TrainingCombo[] = [
     id: "combo-93",
     name: "Trickery",
     cards: [
-      { type: "Set Plays", quantity: 1 },
+      { type: "Set Play", quantity: 1 },
       { type: "Signing", quantity: 1 }
     ],
     stats: {

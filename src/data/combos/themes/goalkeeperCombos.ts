@@ -1,3 +1,4 @@
+
 import { TrainingCombo } from '../../types';
 
 // Combos specifically for goalkeepers
@@ -6,7 +7,7 @@ export const goalkeeperCombos: TrainingCombo[] = [
     id: "combo-96",
     name: "Goalie Runs Up",
     cards: [
-      { type: "Set Plays", quantity: 1 },
+      { type: "Set Play", quantity: 1 },
       { type: "Running", quantity: 1 },
       { type: "Karaoke", quantity: 1 }
     ],

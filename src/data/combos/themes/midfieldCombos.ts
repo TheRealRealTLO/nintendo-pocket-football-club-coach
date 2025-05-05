@@ -1,4 +1,3 @@
-
 import { TrainingCombo } from '../../types';
 
 // Combos focused on midfield play, control and movement
@@ -232,7 +231,7 @@ export const midfieldCombos: TrainingCombo[] = [
     id: "combo-74",
     name: "Impulse Play",
     cards: [
-      { type: "Set Plays", quantity: 1 },
+      { type: "Set Play", quantity: 1 },
       { type: "Visualising", quantity: 1 }
     ],
     stats: {
