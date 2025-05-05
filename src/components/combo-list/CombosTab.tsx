@@ -20,8 +20,8 @@ const CombosTab: React.FC<CombosTabProps> = ({
     return (
       <div className="text-center p-6">
         <p className="font-pixel text-sm text-gray-500">
-          No combos match your filter.
-          {selectedStat && " Try selecting a different stat or position."}
+          No combos match your search or filter.
+          {selectedStat && " Try selecting a different stat or adjust your search."}
         </p>
       </div>
     );
