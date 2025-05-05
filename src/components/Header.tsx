@@ -7,16 +7,30 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex flex-col items-center">
         <div className="relative">
           <div className="flex items-center justify-center">
-            {/* Soccer ball icon on the left */}
-            <div className="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center mr-2">
-              <div className="w-10 h-10 relative">
-                {/* Soccer ball pentagon pattern */}
-                <div className="absolute inset-0 bg-white rounded-full border-2 border-black">
-                  <div className="absolute w-1 h-1 bg-black top-1 left-2"></div>
-                  <div className="absolute w-1 h-1 bg-black top-3 left-0"></div>
-                  <div className="absolute w-1 h-1 bg-black top-5 left-1"></div>
-                  <div className="absolute w-1 h-1 bg-black top-6 left-4"></div>
-                  <div className="absolute w-1 h-1 bg-black top-3 left-6"></div>
+            {/* Soccer ball icon on the left - pixelated version */}
+            <div className="w-12 h-12 bg-red-600 rounded-none border-2 border-black flex items-center justify-center mr-2">
+              <div className="w-8 h-8 bg-white">
+                {/* Pixelated soccer ball pattern */}
+                <div className="grid grid-cols-4 grid-rows-4">
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
                 </div>
               </div>
             </div>
@@ -28,16 +42,30 @@ const Header: React.FC = () => {
               </h1>
             </div>
 
-            {/* Soccer ball icon on the right */}
-            <div className="w-12 h-12 bg-white rounded-full border-2 border-black flex items-center justify-center ml-2">
-              <div className="w-10 h-10 relative">
-                {/* Soccer ball pentagon pattern */}
-                <div className="absolute inset-0 bg-white rounded-full border-2 border-black">
-                  <div className="absolute w-1 h-1 bg-black top-1 left-2"></div>
-                  <div className="absolute w-1 h-1 bg-black top-3 left-0"></div>
-                  <div className="absolute w-1 h-1 bg-black top-5 left-1"></div>
-                  <div className="absolute w-1 h-1 bg-black top-6 left-4"></div>
-                  <div className="absolute w-1 h-1 bg-black top-3 left-6"></div>
+            {/* Soccer ball icon on the right - pixelated version */}
+            <div className="w-12 h-12 bg-red-600 rounded-none border-2 border-black flex items-center justify-center ml-2">
+              <div className="w-8 h-8 bg-white">
+                {/* Pixelated soccer ball pattern */}
+                <div className="grid grid-cols-4 grid-rows-4">
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-white"></div>
+                  <div className="w-2 h-2 bg-black"></div>
+                  <div className="w-2 h-2 bg-white"></div>
                 </div>
               </div>
             </div>
