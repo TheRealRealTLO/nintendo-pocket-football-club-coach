@@ -45,13 +45,15 @@ export type CardType =
   | "Gaming" 
   | "Karaoke";
 
-// Stats that can be improved
+// Updated Stats that can be improved based on the screenshot
 export type StatType = 
+  | "Kicking" 
   | "Speed" 
-  | "Power" 
-  | "Technique" 
   | "Stamina" 
-  | "IQ";
+  | "Technique" 
+  | "Toughness" 
+  | "Jumping" 
+  | "Willpower";
 
 // Interface for card requirements of a combo
 export interface CardRequirement {
@@ -121,8 +123,8 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Shooting", quantity: 3 },
     ],
     stats: {
-      Technique: 1,
-      Power: 1,
+      Technique: 2,
+      Kicking: 1,
     }
   },
   {
@@ -133,6 +135,7 @@ export const trainingCombos: TrainingCombo[] = [
     ],
     stats: {
       Technique: 2,
+      Toughness: 1,
     }
   },
   {
@@ -155,7 +158,8 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Kicking", quantity: 1 },
     ],
     stats: {
-      Power: 3,
+      Kicking: 2,
+      Toughness: 1,
     }
   },
   {
@@ -166,8 +170,8 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Passing", quantity: 2 },
     ],
     stats: {
-      Technique: 3,
-      IQ: 1,
+      Technique: 2,
+      Willpower: 1,
     }
   },
   {
@@ -178,22 +182,22 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Sliding", quantity: 2 },
     ],
     stats: {
-      Power: 2,
-      Technique: 1,
-      IQ: 1,
+      Toughness: 2,
+      Jumping: 1,
     }
   },
   {
     id: "combo7",
     name: "Goalkeeper Skills",
     cards: [
-      { type: "Place Kicks", quantity: 2 },  // Changed from "Diving"
-      { type: "Agility", quantity: 1 },      // Changed from "Reflexes"
-      { type: "Analysis", quantity: 1 },     // Changed from "Positioning"
+      { type: "Place Kicks", quantity: 2 },
+      { type: "Agility", quantity: 1 },
+      { type: "Analysis", quantity: 1 },
     ],
     stats: {
-      Technique: 2,
-      IQ: 2,
+      Jumping: 2,
+      Technique: 1,
+      Willpower: 1,
     }
   },
   {
@@ -207,8 +211,8 @@ export const trainingCombos: TrainingCombo[] = [
     ],
     stats: {
       Speed: 1,
-      Power: 1,
       Stamina: 2,
+      Jumping: 1,
     }
   },
   {
@@ -219,8 +223,8 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Dribbling", quantity: 1 },
     ],
     stats: {
-      Technique: 3,
-      IQ: 2,
+      Technique: 2,
+      Willpower: 2,
     }
   },
   {
@@ -232,9 +236,9 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Heading", quantity: 1 },
     ],
     stats: {
-      Power: 2,
+      Kicking: 2,
       Speed: 1,
-      Technique: 1,
+      Jumping: 1,
     }
   },
   {
@@ -242,12 +246,12 @@ export const trainingCombos: TrainingCombo[] = [
     name: "Midfield Endurance",
     cards: [
       { type: "Aerobics", quantity: 2 },
-      { type: "Pressuring", quantity: 1 },  // Changed from "Pressing"
+      { type: "Pressuring", quantity: 1 },
       { type: "Passing", quantity: 1 },
     ],
     stats: {
-      Stamina: 3,
-      IQ: 1,
+      Stamina: 2,
+      Willpower: 1,
     }
   },
   {
@@ -262,7 +266,6 @@ export const trainingCombos: TrainingCombo[] = [
       Technique: 2,
     }
   },
-  // New combos based on the updated card types
   {
     id: "combo13",
     name: "Tactical Session",
@@ -271,7 +274,7 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Set Play", quantity: 2 },
     ],
     stats: {
-      IQ: 3,
+      Willpower: 2,
       Technique: 1,
     }
   },
@@ -284,7 +287,8 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Stretching", quantity: 1 },
     ],
     stats: {
-      Stamina: 3,
+      Stamina: 2,
+      Toughness: 1,
     }
   },
   {
@@ -295,8 +299,7 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Visualising", quantity: 2 },
     ],
     stats: {
-      IQ: 3,
-      Stamina: 1,
+      Willpower: 3,
     }
   },
 ];
@@ -348,11 +351,13 @@ export const allCategories: CardCategory[] = [
 ];
 
 export const allStatTypes: StatType[] = [
+  "Kicking", 
   "Speed", 
-  "Power", 
-  "Technique", 
   "Stamina", 
-  "IQ"
+  "Technique", 
+  "Toughness", 
+  "Jumping", 
+  "Willpower"
 ];
 
 export const categoryColors: Record<CardCategory, string> = {
@@ -367,11 +372,13 @@ export const cardColors: Record<CardType, string> = Object.fromEntries(
 ) as Record<CardType, string>;
 
 export const statColors: Record<StatType, string> = {
+  "Kicking": "stat-badge-kicking",
   "Speed": "stat-badge-speed",
-  "Power": "stat-badge-power",
-  "Technique": "stat-badge-technique",
   "Stamina": "stat-badge-stamina",
-  "IQ": "stat-badge-iq"
+  "Technique": "stat-badge-technique",
+  "Toughness": "stat-badge-toughness",
+  "Jumping": "stat-badge-jumping",
+  "Willpower": "stat-badge-willpower"
 };
 
 // Icons for card categories

@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
@@ -129,23 +128,31 @@
     @apply inline-block px-2 py-1 text-xs font-pixel text-black;
   }
   
-  .stat-badge-speed {
-    @apply bg-npfc-yellow;
-  }
-  
-  .stat-badge-power {
+  .stat-badge-kicking {
     @apply bg-npfc-red;
   }
   
-  .stat-badge-technique {
-    @apply bg-npfc-blue;
+  .stat-badge-speed {
+    @apply bg-npfc-yellow;
   }
   
   .stat-badge-stamina {
     @apply bg-npfc-green;
   }
   
-  .stat-badge-iq {
+  .stat-badge-technique {
+    @apply bg-npfc-blue;
+  }
+  
+  .stat-badge-toughness {
+    @apply bg-npfc-gray;
+  }
+  
+  .stat-badge-jumping {
     @apply bg-npfc-purple;
+  }
+  
+  .stat-badge-willpower {
+    @apply bg-orange-400;
   }
 }

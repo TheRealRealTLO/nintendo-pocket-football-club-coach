@@ -11,6 +11,20 @@ interface ComboItemProps {
   onApply: () => void;
 }
 
+// Helper function to get stat icon
+const getStatIcon = (stat: StatType) => {
+  switch(stat) {
+    case "Kicking": return "🦵";
+    case "Speed": return "⚡";
+    case "Stamina": return "🔋";
+    case "Technique": return "✨";
+    case "Toughness": return "💪";
+    case "Jumping": return "🦘";
+    case "Willpower": return "🧠";
+    default: return "";
+  }
+};
+
 const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) => {
   // Get icon component based on card type
   const getCardIcon = (type: CardType) => {
@@ -49,9 +63,9 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
             combo.stats[stat] ? (
               <Badge 
                 key={stat} 
-                className={`${statColors[stat]}`}
+                className={`${statColors[stat]} flex items-center gap-1`}
               >
-                {stat} +{combo.stats[stat]}
+                {getStatIcon(stat)} {stat} +{combo.stats[stat]}
               </Badge>
             ) : null
           ))}
