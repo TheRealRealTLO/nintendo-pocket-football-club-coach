@@ -110,12 +110,12 @@ const ComboList: React.FC<ComboListProps> = ({
     <div className="mb-4 grid grid-cols-2 gap-2">
       <div>
         <p className="font-pixel text-xs mb-1">Position:</p>
-        <Select value={positionFilter || ""} onValueChange={(val) => setPositionFilter(val === "" ? null : val as PositionFilter)}>
+        <Select value={positionFilter || undefined} onValueChange={(val) => setPositionFilter(val as PositionFilter)}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Any Position" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any Position</SelectItem>
+            <SelectItem value="null">Any Position</SelectItem>
             <SelectItem value="ALL">All Positions</SelectItem>
             <SelectItem value="GK">Goalkeeper</SelectItem>
             <SelectItem value="DF">Defender</SelectItem>
