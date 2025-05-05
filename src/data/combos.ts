@@ -187,9 +187,9 @@ export const trainingCombos: TrainingCombo[] = [
     id: "combo7",
     name: "Goalkeeper Skills",
     cards: [
-      { type: "Diving", quantity: 2 },
-      { type: "Reflexes", quantity: 1 },
-      { type: "Positioning", quantity: 1 },
+      { type: "Place Kicks", quantity: 2 },  // Changed from "Diving"
+      { type: "Agility", quantity: 1 },      // Changed from "Reflexes"
+      { type: "Analysis", quantity: 1 },     // Changed from "Positioning"
     ],
     stats: {
       Technique: 2,
@@ -242,7 +242,7 @@ export const trainingCombos: TrainingCombo[] = [
     name: "Midfield Endurance",
     cards: [
       { type: "Aerobics", quantity: 2 },
-      { type: "Pressing", quantity: 1 },
+      { type: "Pressuring", quantity: 1 },  // Changed from "Pressing"
       { type: "Passing", quantity: 1 },
     ],
     stats: {
