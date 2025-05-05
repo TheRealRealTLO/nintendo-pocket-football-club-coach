@@ -23,9 +23,10 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Filter combos based on search query
+  // Filter combos based on search query - make sure it's an exact match within the name
   const filterBySearch = (combos: TrainingCombo[]) => {
-    if (!searchQuery) return combos;
+    if (!searchQuery.trim()) return combos;
+    
     return combos.filter(combo => 
       combo.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -33,6 +34,14 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   
   const searchedAvailableCombos = filterBySearch(filteredCombos);
   const searchedAllCombos = filterBySearch(allFilteredCombos);
+  
+  // Ensure we use the correct key for each combo to prevent duplicate key warnings
+  const ensureUniqueKeys = (combos: TrainingCombo[]) => {
+    return combos.map(combo => ({
+      ...combo,
+      key: `combo-${combo.id}`
+    }));
+  };
 
   return (
     <div>
@@ -54,18 +63,18 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
           <CombosTab 
-            combos={searchedAvailableCombos}
+            combos={ensureUniqueKeys(searchedAvailableCombos)}
             availableCombos={availableCombos}
-            selectedStat={!!selectedStat}
+            selectedStat={selectedStat}
             onApplyCombo={onApplyCombo}
           />
         </TabsContent>
 
         <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
           <CombosTab 
-            combos={searchedAllCombos}
+            combos={ensureUniqueKeys(searchedAllCombos)}
             availableCombos={availableCombos}
-            selectedStat={!!selectedStat}
+            selectedStat={selectedStat}
             onApplyCombo={onApplyCombo}
           />
         </TabsContent>

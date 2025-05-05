@@ -4,7 +4,7 @@ import { TrainingCombo } from '../../data/combos';
 import ComboItem from '../ComboItem';
 
 interface CombosTabProps {
-  combos: TrainingCombo[];
+  combos: (TrainingCombo & { key?: string })[];
   availableCombos: TrainingCombo[];
   selectedStat: boolean;
   onApplyCombo: (combo: TrainingCombo) => void;
@@ -33,7 +33,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
         const isAvailable = availableCombos.some(c => c.id === combo.id);
         return (
           <ComboItem
-            key={combo.id}
+            key={combo.key || combo.id}
             combo={combo}
             isAvailable={isAvailable}
             onApply={() => onApplyCombo(combo)}
