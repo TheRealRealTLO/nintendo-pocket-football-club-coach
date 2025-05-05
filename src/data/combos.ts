@@ -1,16 +1,49 @@
 
+// All card categories
+export type CardCategory = 
+  | "Tactical" 
+  | "Technical" 
+  | "Physical" 
+  | "Support";
+
 // All available card types
 export type CardType = 
+  // Tactical cards
+  | "Analysis" 
+  | "Marking" 
+  | "Pressuring" 
+  | "Countering" 
+  | "Mini-Game" 
+  | "Line Control" 
+  | "Set Play"
+  // Technical cards
+  | "Dribbling" 
+  | "Place Kicks" 
   | "Shooting" 
   | "Passing" 
-  | "Dribbling" 
-  | "Speed" 
-  | "Stamina" 
-  | "Strength" 
-  | "Jumping" 
-  | "Tackling" 
-  | "Catching" 
-  | "Blocking";
+  | "Freestyle" 
+  | "Sliding" 
+  | "Heading"
+  // Physical cards
+  | "Running" 
+  | "Weights" 
+  | "Kicking" 
+  | "Sprinting" 
+  | "Agility" 
+  | "Aerobics" 
+  | "Stretching"
+  // Support cards
+  | "Oil Therapy" 
+  | "Meditation" 
+  | "Signing" 
+  | "PK Practice" 
+  | "Judo" 
+  | "Visualising" 
+  | "Meeting" 
+  | "Spa" 
+  | "Mini Camp" 
+  | "Gaming" 
+  | "Karaoke";
 
 // Stats that can be improved
 export type StatType = 
@@ -36,11 +69,54 @@ export interface TrainingCombo {
   };
 }
 
+// Map each card to its category
+export const cardToCategory: Record<CardType, CardCategory> = {
+  // Tactical cards
+  "Analysis": "Tactical",
+  "Marking": "Tactical",
+  "Pressuring": "Tactical",
+  "Countering": "Tactical",
+  "Mini-Game": "Tactical",
+  "Line Control": "Tactical",
+  "Set Play": "Tactical",
+  
+  // Technical cards
+  "Dribbling": "Technical",
+  "Place Kicks": "Technical",
+  "Shooting": "Technical",
+  "Passing": "Technical",
+  "Freestyle": "Technical",
+  "Sliding": "Technical",
+  "Heading": "Technical",
+  
+  // Physical cards
+  "Running": "Physical",
+  "Weights": "Physical",
+  "Kicking": "Physical",
+  "Sprinting": "Physical",
+  "Agility": "Physical",
+  "Aerobics": "Physical",
+  "Stretching": "Physical",
+  
+  // Support cards
+  "Oil Therapy": "Support",
+  "Meditation": "Support",
+  "Signing": "Support",
+  "PK Practice": "Support",
+  "Judo": "Support",
+  "Visualising": "Support",
+  "Meeting": "Support",
+  "Spa": "Support",
+  "Mini Camp": "Support",
+  "Gaming": "Support",
+  "Karaoke": "Support"
+};
+
 // Collection of all training combos
 export const trainingCombos: TrainingCombo[] = [
   {
     id: "combo1",
-    name: "Basic Shooting Drill",
+    name: "Basic Shooting Training",
     cards: [
       { type: "Shooting", quantity: 3 },
     ],
@@ -61,10 +137,10 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo3",
-    name: "Speed Training",
+    name: "Speed Development",
     cards: [
-      { type: "Speed", quantity: 2 },
-      { type: "Stamina", quantity: 1 },
+      { type: "Running", quantity: 2 },
+      { type: "Sprinting", quantity: 1 },
     ],
     stats: {
       Speed: 2,
@@ -73,10 +149,10 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo4",
-    name: "Power Development",
+    name: "Power Enhancement",
     cards: [
-      { type: "Strength", quantity: 2 },
-      { type: "Jumping", quantity: 1 },
+      { type: "Weights", quantity: 2 },
+      { type: "Kicking", quantity: 1 },
     ],
     stats: {
       Power: 3,
@@ -84,7 +160,7 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo5",
-    name: "Technical Mastery",
+    name: "Technical Skills",
     cards: [
       { type: "Dribbling", quantity: 2 },
       { type: "Passing", quantity: 2 },
@@ -96,10 +172,10 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo6",
-    name: "Defensive Block",
+    name: "Defensive Training",
     cards: [
-      { type: "Tackling", quantity: 2 },
-      { type: "Blocking", quantity: 2 },
+      { type: "Marking", quantity: 2 },
+      { type: "Sliding", quantity: 2 },
     ],
     stats: {
       Power: 2,
@@ -109,11 +185,11 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo7",
-    name: "Goalkeeper Training",
+    name: "Goalkeeper Skills",
     cards: [
-      { type: "Catching", quantity: 2 },
-      { type: "Blocking", quantity: 1 },
-      { type: "Jumping", quantity: 1 },
+      { type: "Diving", quantity: 2 },
+      { type: "Reflexes", quantity: 1 },
+      { type: "Positioning", quantity: 1 },
     ],
     stats: {
       Technique: 2,
@@ -122,12 +198,12 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo8",
-    name: "Complete Athlete",
+    name: "All-Round Fitness",
     cards: [
-      { type: "Speed", quantity: 1 },
-      { type: "Stamina", quantity: 1 },
-      { type: "Strength", quantity: 1 },
-      { type: "Jumping", quantity: 1 },
+      { type: "Sprinting", quantity: 1 },
+      { type: "Aerobics", quantity: 1 },
+      { type: "Weights", quantity: 1 },
+      { type: "Stretching", quantity: 1 },
     ],
     stats: {
       Speed: 1,
@@ -137,7 +213,7 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo9",
-    name: "Advanced Playmaker",
+    name: "Playmaker Development",
     cards: [
       { type: "Passing", quantity: 3 },
       { type: "Dribbling", quantity: 1 },
@@ -149,11 +225,11 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo10",
-    name: "Striker Training",
+    name: "Forward Training",
     cards: [
       { type: "Shooting", quantity: 2 },
-      { type: "Speed", quantity: 1 },
-      { type: "Strength", quantity: 1 },
+      { type: "Sprinting", quantity: 1 },
+      { type: "Heading", quantity: 1 },
     ],
     stats: {
       Power: 2,
@@ -163,10 +239,10 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo11",
-    name: "Box-to-Box Midfielder",
+    name: "Midfield Endurance",
     cards: [
-      { type: "Stamina", quantity: 2 },
-      { type: "Tackling", quantity: 1 },
+      { type: "Aerobics", quantity: 2 },
+      { type: "Pressing", quantity: 1 },
       { type: "Passing", quantity: 1 },
     ],
     stats: {
@@ -176,9 +252,9 @@ export const trainingCombos: TrainingCombo[] = [
   },
   {
     id: "combo12",
-    name: "Wing Play",
+    name: "Wing Play Development",
     cards: [
-      { type: "Speed", quantity: 2 },
+      { type: "Sprinting", quantity: 2 },
       { type: "Dribbling", quantity: 2 },
     ],
     stats: {
@@ -186,19 +262,89 @@ export const trainingCombos: TrainingCombo[] = [
       Technique: 2,
     }
   },
+  // New combos based on the updated card types
+  {
+    id: "combo13",
+    name: "Tactical Session",
+    cards: [
+      { type: "Analysis", quantity: 2 },
+      { type: "Set Play", quantity: 2 },
+    ],
+    stats: {
+      IQ: 3,
+      Technique: 1,
+    }
+  },
+  {
+    id: "combo14",
+    name: "Recovery Program",
+    cards: [
+      { type: "Oil Therapy", quantity: 1 },
+      { type: "Spa", quantity: 1 },
+      { type: "Stretching", quantity: 1 },
+    ],
+    stats: {
+      Stamina: 3,
+    }
+  },
+  {
+    id: "combo15",
+    name: "Mental Preparation",
+    cards: [
+      { type: "Meditation", quantity: 2 },
+      { type: "Visualising", quantity: 2 },
+    ],
+    stats: {
+      IQ: 3,
+      Stamina: 1,
+    }
+  },
 ];
 
 export const allCardTypes: CardType[] = [
-  "Shooting", 
-  "Passing", 
-  "Dribbling", 
-  "Speed", 
-  "Stamina", 
-  "Strength", 
-  "Jumping", 
-  "Tackling", 
-  "Catching", 
-  "Blocking"
+  // Tactical cards
+  "Analysis",
+  "Marking",
+  "Pressuring",
+  "Countering",
+  "Mini-Game",
+  "Line Control",
+  "Set Play",
+  // Technical cards
+  "Dribbling",
+  "Place Kicks",
+  "Shooting",
+  "Passing",
+  "Freestyle",
+  "Sliding",
+  "Heading",
+  // Physical cards
+  "Running",
+  "Weights",
+  "Kicking",
+  "Sprinting",
+  "Agility",
+  "Aerobics",
+  "Stretching",
+  // Support cards
+  "Oil Therapy",
+  "Meditation",
+  "Signing",
+  "PK Practice",
+  "Judo",
+  "Visualising",
+  "Meeting",
+  "Spa",
+  "Mini Camp",
+  "Gaming",
+  "Karaoke"
+];
+
+export const allCategories: CardCategory[] = [
+  "Tactical",
+  "Technical",
+  "Physical",
+  "Support"
 ];
 
 export const allStatTypes: StatType[] = [
@@ -209,18 +355,16 @@ export const allStatTypes: StatType[] = [
   "IQ"
 ];
 
-export const cardColors: Record<CardType, string> = {
-  "Shooting": "bg-npfc-red",
-  "Passing": "bg-npfc-blue",
-  "Dribbling": "bg-npfc-blue",
-  "Speed": "bg-npfc-yellow",
-  "Stamina": "bg-npfc-green",
-  "Strength": "bg-npfc-red",
-  "Jumping": "bg-npfc-yellow",
-  "Tackling": "bg-npfc-purple",
-  "Catching": "bg-npfc-blue",
-  "Blocking": "bg-npfc-purple"
+export const categoryColors: Record<CardCategory, string> = {
+  "Tactical": "bg-npfc-green",
+  "Technical": "bg-npfc-red",
+  "Physical": "bg-npfc-blue",
+  "Support": "bg-npfc-yellow"
 };
+
+export const cardColors: Record<CardType, string> = Object.fromEntries(
+  allCardTypes.map(type => [type, categoryColors[cardToCategory[type]]])
+) as Record<CardType, string>;
 
 export const statColors: Record<StatType, string> = {
   "Speed": "stat-badge-speed",
@@ -228,4 +372,12 @@ export const statColors: Record<StatType, string> = {
   "Technique": "stat-badge-technique",
   "Stamina": "stat-badge-stamina",
   "IQ": "stat-badge-iq"
+};
+
+// Icons for card categories
+export const categoryIcons = {
+  "Tactical": "star",
+  "Technical": "wrench",
+  "Physical": "activity", 
+  "Support": "users"
 };

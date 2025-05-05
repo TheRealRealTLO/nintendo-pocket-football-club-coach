@@ -14,7 +14,24 @@ export function useInventory() {
   const [inventory, setInventory] = useState<InventoryState>(() => {
     const savedInventory = localStorage.getItem('npfc-inventory');
     if (savedInventory) {
-      return JSON.parse(savedInventory);
+      try {
+        const parsed = JSON.parse(savedInventory);
+        
+        // Handle migration from old card types to new ones
+        if (parsed && parsed.cards) {
+          const updatedCards = allCardTypes.reduce((acc, type) => {
+            acc[type] = parsed.cards[type] || 0;
+            return acc;
+          }, {} as { [key in CardType]: number });
+          
+          return { 
+            cards: updatedCards, 
+            history: parsed.history || [] 
+          };
+        }
+      } catch (e) {
+        console.error("Error parsing saved inventory:", e);
+      }
     }
     
     // Initialize with empty inventory
