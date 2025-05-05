@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Save, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 
@@ -9,25 +9,21 @@ interface ActionButtonsProps {
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ onReset }) => {
-  const handleSave = () => {
-    toast({
-      title: "Inventory Saved",
-      description: "Your card inventory has been saved",
-    });
+  const handleReset = () => {
+    if (window.confirm('Are you sure you want to reset your inventory?')) {
+      onReset();
+      toast({
+        title: "Inventory Reset",
+        description: "Your card inventory has been reset",
+      });
+    }
   };
 
   return (
-    <div className="flex justify-center mt-4 gap-4">
-      <Button 
-        className="pixel-button-blue" 
-        onClick={handleSave}
-      >
-        <Save size={16} className="mr-2" />
-        Save
-      </Button>
+    <div className="flex justify-center mt-4">
       <Button 
         className="pixel-button-red" 
-        onClick={onReset}
+        onClick={handleReset}
       >
         <RefreshCw size={16} className="mr-2" />
         Reset

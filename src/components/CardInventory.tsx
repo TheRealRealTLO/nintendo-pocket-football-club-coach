@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { CardType, CardCategory, allCardTypes, allCategories, cardColors, categoryColors, cardToCategory } from '../data/combos';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './card-inventory/CustomTabs';
@@ -6,7 +7,6 @@ import CardGrid from './card-inventory/CardGrid';
 import TabsSelector from './card-inventory/TabsSelector';
 import DetailedCardView from './card-inventory/DetailedCardView';
 import ActionButtons from './card-inventory/ActionButtons';
-import { toast } from '@/components/ui/use-toast';
 
 interface CardInventoryProps {
   inventory: { [key in CardType]: number };
@@ -29,16 +29,6 @@ const CardInventory: React.FC<CardInventoryProps> = ({
   const handleDecrement = (type: CardType) => {
     if (inventory[type] > 0) {
       updateCardQuantity(type, inventory[type] - 1);
-    }
-  };
-  
-  const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset your inventory?')) {
-      resetInventory();
-      toast({
-        title: "Inventory Reset",
-        description: "Your card inventory has been reset",
-      });
     }
   };
 
@@ -91,7 +81,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
         </TabsContent>
       </Tabs>
       
-      <ActionButtons onReset={handleReset} />
+      <ActionButtons onReset={resetInventory} />
     </div>
   );
 };
