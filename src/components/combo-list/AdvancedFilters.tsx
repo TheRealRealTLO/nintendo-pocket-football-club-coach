@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./CustomTabs";
 import { StatType, allStatTypes, statColors } from '../../data/combos';
 import { FilterBadges } from './FilterBadges';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export type PositionFilter = "ALL" | "GK" | "DF" | "MF" | "FW" | null;
 
@@ -34,6 +35,8 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   sortDirection,
   setSelectedStat
 }) => {
+  const isMobile = useIsMobile();
+  
   // Helper function to get position badge styles
   const getPositionBadgeStyles = (position: PositionFilter) => {
     const baseColor = getPositionColor(position);
@@ -46,12 +49,18 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   return (
     <div className="mb-4">
       <Tabs defaultValue="stat" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="stat" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:font-bold">
-            Stat Filters
+        <TabsList className="grid w-full grid-cols-2 mb-4 bg-gray-100 p-1 rounded-md">
+          <TabsTrigger 
+            value="stat" 
+            className="font-pixel text-xs"
+          >
+            {isMobile ? "Stats" : "Stat Filters"}
           </TabsTrigger>
-          <TabsTrigger value="position" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:font-bold">
-            Position Filters
+          <TabsTrigger 
+            value="position" 
+            className="font-pixel text-xs"
+          >
+            {isMobile ? "Positions" : "Position Filters"}
           </TabsTrigger>
         </TabsList>
         
@@ -81,25 +90,25 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("GK")}`} 
               onClick={() => setPositionFilter("GK")}
             >
-              Goalkeeper
+              {isMobile ? "GK" : "Goalkeeper"}
             </Badge>
             <Badge 
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("DF")}`} 
               onClick={() => setPositionFilter("DF")}
             >
-              Defender
+              {isMobile ? "DF" : "Defender"}
             </Badge>
             <Badge 
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("MF")}`} 
               onClick={() => setPositionFilter("MF")}
             >
-              Midfielder
+              {isMobile ? "MF" : "Midfielder"}
             </Badge>
             <Badge 
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("FW")}`} 
               onClick={() => setPositionFilter("FW")}
             >
-              Forward
+              {isMobile ? "FW" : "Forward"}
             </Badge>
           </div>
         </TabsContent>

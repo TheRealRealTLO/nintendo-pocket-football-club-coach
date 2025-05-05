@@ -6,6 +6,7 @@ import CombosTab from './CombosTab';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, RotateCcw } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -27,6 +28,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
   const [searchedAllCombos, setSearchedAllCombos] = useState<TrainingCombo[]>(allFilteredCombos);
+  const isMobile = useIsMobile();
   
   // Filter combos based on search query
   useEffect(() => {
@@ -48,11 +50,6 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
     
     setSearchedAvailableCombos(filteredAvailable);
     setSearchedAllCombos(filteredAll);
-    
-    // For debugging
-    console.log(`Searching for: "${query}"`);
-    console.log(`Available matches: ${filteredAvailable.length}`);
-    console.log(`All matches: ${filteredAll.length}`);
   }, [searchQuery, filteredCombos, allFilteredCombos]);
   
   // Ensure we use the correct key for each combo to prevent duplicate key warnings
@@ -73,7 +70,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
       <div className="relative mb-4 flex gap-2">
         <div className="relative flex-grow">
           <Input
-            placeholder="Search combination name..."
+            placeholder={isMobile ? "Search combos..." : "Search combination name..."}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 pr-4"
@@ -93,11 +90,11 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
       
       <Tabs defaultValue="available">
         <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="available" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
+          <TabsTrigger value="available" className="font-pixel text-xs">
             Available ({searchedAvailableCombos.length})
           </TabsTrigger>
-          <TabsTrigger value="all" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
-            All Training Combinations
+          <TabsTrigger value="all" className="font-pixel text-xs">
+            {isMobile ? "All Combos" : "All Training Combinations"}
           </TabsTrigger>
         </TabsList>
         
