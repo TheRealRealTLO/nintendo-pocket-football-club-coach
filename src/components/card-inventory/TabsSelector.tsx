@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { CardCategory, CardType, allCategories, allCardTypes, categoryColors, cardColors } from '@/data/combos';
+import { CardCategory, CardType } from '@/data/types';
+import { allCategories, allCardTypes, categoryColors, cardColors } from '@/data/combos';
 import { getCategoryIcon } from './CategoryFilter';
 
 interface TabsSelectorProps {

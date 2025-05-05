@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { CardCategory, allCategories, categoryColors } from '@/data/combos';
+import { CardCategory } from '@/data/types';
+import { allCategories, categoryColors } from '@/data/combos';
 import { Star, Wrench, Activity, Users } from 'lucide-react';
 
 interface CategoryFilterProps {

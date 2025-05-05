@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardType } from '@/data/combos';
+import { CardType } from '@/data/types';
 import { Plus, Minus } from 'lucide-react';
 import { getCategoryIcon } from './CategoryFilter';
 import { cardToCategory, cardColors } from '@/data/combos';
