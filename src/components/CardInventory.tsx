@@ -97,23 +97,21 @@ const CardInventory: React.FC<CardInventoryProps> = ({
           <div className="mb-4">
             <p className="font-pixel text-xs mb-2">Filter by category:</p>
             <div className="flex flex-wrap gap-2 justify-start">
-              <TabsTrigger
-                value="All"
+              <button
                 onClick={() => setActiveCategory("All")}
                 className={`${activeCategory === "All" ? "bg-black text-white" : "bg-gray-200"} px-3 py-1 rounded-sm font-pixel text-xs`}
               >
                 All
-              </TabsTrigger>
+              </button>
               {allCategories.map(category => (
-                <TabsTrigger
+                <button
                   key={category}
-                  value={category}
                   onClick={() => setActiveCategory(category)}
                   className={`${categoryColors[category]} flex items-center gap-1 px-3 py-1 rounded-sm font-pixel text-xs ${activeCategory === category ? "ring-2 ring-black" : ""}`}
                 >
                   {getCategoryIcon(category)}
                   {category}
-                </TabsTrigger>
+                </button>
               ))}
             </div>
           </div>
@@ -123,7 +121,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
               {row.map((type) => (
                 <div 
                   key={type} 
-                  className={`${cardColors[type]} border-2 border-black p-2 rounded-sm`}
+                  className={`${cardColors[type]} border-2 border-black p-2 rounded-sm relative`}
                 >
                   <div className="text-center mb-1 flex items-center justify-center gap-1">
                     {getCategoryIcon(cardToCategory[type])}
@@ -154,39 +152,41 @@ const CardInventory: React.FC<CardInventoryProps> = ({
         </TabsContent>
         
         <TabsContent value="by-type">
-          <div className="mb-4">
-            <TabsList className="flex flex-wrap gap-2 bg-transparent justify-center">
+          <div className="mb-4 overflow-hidden">
+            <div className="flex flex-wrap gap-2 bg-transparent justify-center">
               {allCategories.map(category => (
-                <React.Fragment key={category}>
-                  <TabsTrigger 
-                    value={category}
-                    onClick={() => setActiveTab(category)}
-                    className={`${categoryColors[category]} flex items-center gap-1 text-black font-pixel text-xs`}
+                <button 
+                  key={category}
+                  onClick={() => setActiveTab(category)}
+                  className={`${categoryColors[category]} flex items-center gap-1 text-black font-pixel text-xs px-3 py-2 rounded-sm ${activeTab === category ? "ring-2 ring-black" : ""}`}
+                  style={{ minWidth: '90px' }}
+                >
+                  {getCategoryIcon(category)}
+                  {category}
+                </button>
+              ))}
+
+              <div className="w-full mt-3"></div> {/* Line break after categories */}
+
+              <div className="flex flex-wrap gap-2 justify-center">
+                {allCardTypes.map(cardType => (
+                  <button 
+                    key={cardType}
+                    onClick={() => setActiveTab(cardType)}
+                    className={`${cardColors[cardType]} text-black font-pixel text-xs px-3 py-2 rounded-sm ${activeTab === cardType ? "ring-2 ring-black" : ""}`}
                     style={{ minWidth: '90px' }}
                   >
-                    {getCategoryIcon(category)}
-                    {category}
-                  </TabsTrigger>
-                  {cardsByCategory[category].map(cardType => (
-                    <TabsTrigger 
-                      key={cardType}
-                      value={cardType}
-                      onClick={() => setActiveTab(cardType)}
-                      className={`${cardColors[cardType]} text-black font-pixel text-xs`}
-                      style={{ minWidth: '90px' }}
-                    >
-                      {cardType}
-                    </TabsTrigger>
-                  ))}
-                </React.Fragment>
-              ))}
-            </TabsList>
+                    {cardType}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
           
           <div className="flex flex-col items-center justify-center p-4">
             <div 
               className={`${cardColors[activeTab as CardType] || categoryColors[activeTab as CardCategory] || "bg-gray-200"} 
-                border-2 border-black p-4 rounded-sm mb-4 w-full max-w-xs`}
+                border-2 border-black p-4 rounded-sm mb-4 w-full max-w-xs relative z-10`}
             >
               <div className="text-center mb-4 flex items-center justify-center gap-2">
                 {allCategories.includes(activeTab as CardCategory) ? 
