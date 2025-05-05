@@ -5,11 +5,13 @@ import { StatType, allStatTypes, statColors } from '../../data/combos';
 
 interface FilterBadgesProps {
   selectedStat: StatType | null;
-  setSelectedStat: (stat: StatType | null) => void;
+  sortDirection: 'asc' | 'desc';
+  setSelectedStat: (stat: StatType | null, toggleSort?: boolean) => void;
 }
 
 const FilterBadges: React.FC<FilterBadgesProps> = ({
   selectedStat,
+  sortDirection,
   setSelectedStat
 }) => {
   return (
@@ -25,8 +27,12 @@ const FilterBadges: React.FC<FilterBadgesProps> = ({
         {allStatTypes.map((stat) => (
           <Badge
             key={stat}
-            className={`cursor-pointer ${statColors[stat]} ${selectedStat === stat ? 'ring-2 ring-black' : ''}`}
-            onClick={() => setSelectedStat(stat)}
+            className={`cursor-pointer ${statColors[stat]} ${
+              selectedStat === stat ? `ring-2 ring-black ${
+                sortDirection === 'desc' ? 'after:content-["↓"]' : 'after:content-["↑"]'
+              }` : ''
+            }`}
+            onClick={() => setSelectedStat(stat, true)}
           >
             {stat}
           </Badge>

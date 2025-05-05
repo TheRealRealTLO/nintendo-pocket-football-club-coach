@@ -2,15 +2,15 @@
 import { useState, useMemo } from 'react';
 import { TrainingCombo, StatType } from '../../data/combos';
 import { trainingCombos } from '../../data/combos';
-import { PositionFilter, SortOption } from './AdvancedFilters';
+import { PositionFilter } from './AdvancedFilters';
 
 export const useComboFiltering = (
   availableCombos: TrainingCombo[],
   filteredCombos: TrainingCombo[],
-  selectedStat: StatType | null
+  selectedStat: StatType | null,
+  sortDirection: 'asc' | 'desc' = 'desc'
 ) => {
   const [positionFilter, setPositionFilter] = useState<PositionFilter>(null);
-  const [sortOption, setSortOption] = useState<SortOption>("none");
 
   // Filter and sort combos based on selected filters
   const getFilteredAndSortedCombos = (combos: TrainingCombo[]) => {
@@ -32,12 +32,12 @@ export const useComboFiltering = (
       }
     }
     
-    // Then sort based on sort option
-    if (sortOption !== "none" && selectedStat) {
+    // Then sort based on selected stat and sort direction
+    if (selectedStat) {
       result = [...result].sort((a, b) => {
         const valueA = a.stats[selectedStat] || 0;
         const valueB = b.stats[selectedStat] || 0;
-        return sortOption === "stat-high" ? valueB - valueA : valueA - valueB;
+        return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
     }
     
@@ -47,12 +47,12 @@ export const useComboFiltering = (
   // Get filtered and sorted combos
   const processedAvailableCombos = useMemo(() => 
     getFilteredAndSortedCombos(availableCombos), 
-    [availableCombos, positionFilter, sortOption, selectedStat]
+    [availableCombos, positionFilter, selectedStat, sortDirection]
   );
   
   const processedFilteredCombos = useMemo(() => 
     getFilteredAndSortedCombos(filteredCombos),
-    [filteredCombos, positionFilter, sortOption, selectedStat]
+    [filteredCombos, positionFilter, selectedStat, sortDirection]
   );
   
   // Filter all combos by stat and position
@@ -81,23 +81,21 @@ export const useComboFiltering = (
       }
     }
     
-    // Apply sorting
-    if (sortOption !== "none" && selectedStat) {
+    // Apply sorting based on selected stat and direction
+    if (selectedStat) {
       result = [...result].sort((a, b) => {
         const valueA = a.stats[selectedStat] || 0;
         const valueB = b.stats[selectedStat] || 0;
-        return sortOption === "stat-high" ? valueB - valueA : valueA - valueB;
+        return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
     }
     
     return result;
-  }, [positionFilter, sortOption, selectedStat]);
+  }, [positionFilter, selectedStat, sortDirection]);
 
   return {
     positionFilter,
     setPositionFilter,
-    sortOption,
-    setSortOption,
     processedAvailableCombos,
     processedFilteredCombos,
     allFilteredCombos

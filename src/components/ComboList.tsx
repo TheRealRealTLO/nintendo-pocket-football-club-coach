@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { TrainingCombo, StatType } from '../data/combos';
 import { toast } from '@/components/ui/use-toast';
 import FilterBadges from './combo-list/FilterBadges';
@@ -22,20 +22,32 @@ const ComboList: React.FC<ComboListProps> = ({
   availableCombos,
   filteredCombos,
   selectedStat,
-  setSelectedStat,
+  setSelectedStat: originalSetSelectedStat,
   applyCombo,
   undoLastCombo,
   hasHistory
 }) => {
-  // Use the custom hook for filtering logic
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  
+  // Enhanced setSelectedStat that can also toggle sort direction
+  const setSelectedStatWithToggle = (stat: StatType | null, toggleSort = false) => {
+    if (toggleSort && stat === selectedStat) {
+      // Toggle sort direction if clicking the same stat again
+      setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc');
+    } else if (toggleSort && stat !== null) {
+      // Default to descending order when selecting a new stat
+      setSortDirection('desc');
+    }
+    originalSetSelectedStat(stat);
+  };
+
+  // Use the custom hook for filtering logic, now passing sort direction
   const {
     positionFilter,
     setPositionFilter,
-    sortOption,
-    setSortOption,
     processedFilteredCombos,
     allFilteredCombos
-  } = useComboFiltering(availableCombos, filteredCombos, selectedStat);
+  } = useComboFiltering(availableCombos, filteredCombos, selectedStat, sortDirection);
 
   // Handler for applying a combo
   const handleApplyCombo = (combo: TrainingCombo) => {
@@ -55,14 +67,13 @@ const ComboList: React.FC<ComboListProps> = ({
 
       <FilterBadges 
         selectedStat={selectedStat}
-        setSelectedStat={setSelectedStat}
+        sortDirection={sortDirection}
+        setSelectedStat={setSelectedStatWithToggle}
       />
 
       <AdvancedFilters
         positionFilter={positionFilter}
         setPositionFilter={setPositionFilter}
-        sortOption={sortOption}
-        setSortOption={setSortOption}
       />
 
       <ComboTabsContainer
