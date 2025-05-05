@@ -49,6 +49,12 @@ const ComboList: React.FC<ComboListProps> = ({
     allFilteredCombos
   } = useComboFiltering(availableCombos, filteredCombos, selectedStat, sortDirection);
 
+  // Reset all filters
+  const resetAllFilters = () => {
+    setSelectedStatWithToggle(null);
+    setPositionFilter(null);
+  };
+
   // Handler for applying a combo
   const handleApplyCombo = (combo: TrainingCombo) => {
     applyCombo(combo.id, combo.cards);
@@ -79,6 +85,7 @@ const ComboList: React.FC<ComboListProps> = ({
         allFilteredCombos={allFilteredCombos}
         selectedStat={!!selectedStat}
         onApplyCombo={handleApplyCombo}
+        onResetFilters={resetAllFilters}
       />
     </div>
   );

@@ -13,6 +13,7 @@ interface ComboTabsContainerProps {
   allFilteredCombos: TrainingCombo[];
   selectedStat: boolean;
   onApplyCombo: (combo: TrainingCombo) => void;
+  onResetFilters: () => void;
 }
 
 const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
@@ -20,7 +21,8 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   filteredCombos,
   allFilteredCombos,
   selectedStat,
-  onApplyCombo
+  onApplyCombo,
+  onResetFilters
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
@@ -63,6 +65,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 
   const resetSearch = () => {
     setSearchQuery('');
+    onResetFilters();
   };
 
   return (
@@ -81,7 +84,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
           variant="outline" 
           size="icon" 
           onClick={resetSearch} 
-          title="Reset search"
+          title="Reset search and filters"
           className="flex-shrink-0"
         >
           <RotateCcw className="h-4 w-4" />

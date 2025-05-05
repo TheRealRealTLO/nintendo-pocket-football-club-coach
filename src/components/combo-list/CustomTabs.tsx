@@ -77,6 +77,7 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, className = "",
           : "bg-transparent text-black hover:bg-gray-200"
       } ${className}`}
       onClick={() => setActiveTab(value)}
+      data-state={isActive ? "active" : "inactive"}
     >
       {children}
     </button>
