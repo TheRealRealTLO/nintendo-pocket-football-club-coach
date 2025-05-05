@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// 8-bit soccer theme colors
+				'npfc-green': '#4ade80',
+				'npfc-green-dark': '#22c55e',
+				'npfc-blue': '#60a5fa',
+				'npfc-blue-dark': '#3b82f6',
+				'npfc-red': '#f87171',
+				'npfc-yellow': '#facc15',
+				'npfc-purple': '#a78bfa',
+				'npfc-gray': '#9ca3af',
+			},
+			fontFamily: {
+				'pixel': ['"Press Start 2P"', 'cursive'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +97,20 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'pixel-pulse': {
+					'0%, 100%': { 
+						transform: 'scale(1)' 
+					},
+					'50%': { 
+						transform: 'scale(1.05)' 
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pixel-pulse': 'pixel-pulse 1s infinite'
 			}
 		}
 	},
