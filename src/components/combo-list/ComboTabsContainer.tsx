@@ -4,7 +4,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TrainingCombo } from '../../data/combos';
 import CombosTab from './CombosTab';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Search, RotateCcw } from 'lucide-react';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -60,9 +61,13 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
     }));
   };
 
+  const resetSearch = () => {
+    setSearchQuery('');
+  };
+
   return (
     <div>
-      <div className="relative mb-4">
+      <div className="relative mb-4 flex gap-2">
         <div className="relative flex-grow">
           <Input
             placeholder="Search combination name..."
@@ -72,6 +77,15 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
         </div>
+        <Button 
+          variant="outline" 
+          size="icon" 
+          onClick={resetSearch} 
+          title="Reset search"
+          className="flex-shrink-0"
+        >
+          <RotateCcw className="h-4 w-4" />
+        </Button>
       </div>
       
       <Tabs defaultValue="available">

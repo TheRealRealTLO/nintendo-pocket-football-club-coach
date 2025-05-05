@@ -47,10 +47,10 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
     <div className="mb-4">
       <Tabs defaultValue="stat" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="stat" className="font-pixel text-xs border-b-2 border-transparent">
+          <TabsTrigger value="stat" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
             Stat Filters
           </TabsTrigger>
-          <TabsTrigger value="position" className="font-pixel text-xs border-b-2 border-transparent">
+          <TabsTrigger value="position" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
             Position Filters
           </TabsTrigger>
         </TabsList>
@@ -69,7 +69,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${positionFilter === null ? "bg-black text-white" : "bg-gray-200"}`} 
               onClick={() => setPositionFilter(null)}
             >
-              Any Position
+              All
             </Badge>
             <Badge 
               className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("ALL")}`} 
