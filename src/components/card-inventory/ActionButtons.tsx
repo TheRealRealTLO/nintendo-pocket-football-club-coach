@@ -20,15 +20,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onReset }) => {
   };
 
   return (
-    <div className="flex justify-center mt-4">
-      <Button 
-        className="pixel-button-red" 
-        onClick={handleReset}
-      >
-        <RefreshCw size={16} className="mr-2" />
-        Reset
-      </Button>
-    </div>
+    <Button 
+      className="pixel-button-red" 
+      onClick={handleReset}
+    >
+      <RefreshCw size={16} className="mr-2" />
+      Reset
+    </Button>
   );
 };
 

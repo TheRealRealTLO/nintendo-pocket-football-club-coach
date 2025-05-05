@@ -39,9 +39,12 @@ const CardInventory: React.FC<CardInventoryProps> = ({
   
   return (
     <div className="pixel-card mb-6">
-      <h2 className="font-pixel text-lg mb-4 text-black text-center">
-        Card Inventory
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-pixel text-lg text-black">
+          Card Inventory
+        </h2>
+        <ActionButtons onReset={resetInventory} />
+      </div>
       
       <Tabs defaultValue="all-cards" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
@@ -80,8 +83,6 @@ const CardInventory: React.FC<CardInventoryProps> = ({
           />
         </TabsContent>
       </Tabs>
-      
-      <ActionButtons onReset={resetInventory} />
     </div>
   );
 };
