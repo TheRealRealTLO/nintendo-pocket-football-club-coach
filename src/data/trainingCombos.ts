@@ -1,3 +1,4 @@
+
 import { TrainingCombo, StatType, CardType } from './types';
 
 // Collection of all training combos
@@ -666,7 +667,7 @@ export const trainingCombos: TrainingCombo[] = [
     name: "Aerial Dominance",
     cards: [
       { type: "Heading", quantity: 2 },
-      { type: "Jumping", quantity: 1 },
+      { type: "Agility", quantity: 1 }, // Changed from "Jumping" to "Agility"
       { type: "Set Play", quantity: 1 },
     ],
     stats: {
