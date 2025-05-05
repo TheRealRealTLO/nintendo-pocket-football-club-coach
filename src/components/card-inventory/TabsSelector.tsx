@@ -11,8 +11,8 @@ interface TabsSelectorProps {
 
 const TabsSelector: React.FC<TabsSelectorProps> = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="mb-4 overflow-hidden">
-      <div className="flex flex-wrap gap-2 bg-transparent justify-center">
+    <div className="mb-4 overflow-visible">
+      <div className="flex flex-wrap gap-2 bg-transparent justify-center pt-2">
         {allCategories.map(category => (
           <button 
             key={category}

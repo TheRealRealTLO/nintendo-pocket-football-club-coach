@@ -55,7 +55,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
       </h2>
       
       <Tabs defaultValue="all-cards" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="all-cards" className="font-pixel text-xs">All Cards</TabsTrigger>
           <TabsTrigger value="by-type" className="font-pixel text-xs">By Type</TabsTrigger>
         </TabsList>
@@ -74,7 +74,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
           />
         </TabsContent>
         
-        <TabsContent value="by-type">
+        <TabsContent value="by-type" className="pt-2">
           <TabsSelector 
             activeTab={activeTab}
             setActiveTab={setActiveTab}
