@@ -7,31 +7,42 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex flex-col items-center">
         <div className="relative">
           <div className="flex items-center justify-center">
-            {/* Soccer ball icon on the left - pixelated version */}
-            <div className="w-12 h-12 bg-red-600 rounded-none border-2 border-black flex items-center justify-center mr-2">
-              <div className="w-8 h-8 bg-white">
-                {/* Pixelated soccer ball pattern */}
-                <div className="grid grid-cols-4 grid-rows-4">
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                </div>
+            {/* Soccer ball icon on the left - improved pixel art version */}
+            <div className="w-12 h-12 bg-white rounded-none border-2 border-black flex items-center justify-center mr-2">
+              {/* Pixel Art Soccer Ball */}
+              <div className="w-10 h-10 relative">
+                <div className="absolute top-0 left-1/2 w-4 h-1 bg-black transform -translate-x-1/2"></div>
+                <div className="absolute top-1 left-1/2 w-6 h-1 bg-black transform -translate-x-1/2"></div>
+                
+                {/* Top left pentagon */}
+                <div className="absolute top-2 left-0 w-4 h-3 bg-white border-r border-black"></div>
+                <div className="absolute top-5 left-0 w-1 h-1 bg-black"></div>
+                
+                {/* Top right pentagon */}
+                <div className="absolute top-2 right-0 w-4 h-3 bg-white border-l border-black"></div>
+                <div className="absolute top-5 right-0 w-1 h-1 bg-black"></div>
+                
+                {/* Middle hexagon */}
+                <div className="absolute top-3 left-1/2 w-4 h-4 bg-gray-800 transform -translate-x-1/2"></div>
+                
+                {/* Bottom left pentagon */}
+                <div className="absolute bottom-0 left-1 w-3 h-3 bg-white border-t border-r border-black"></div>
+                
+                {/* Bottom right pentagon */}
+                <div className="absolute bottom-0 right-1 w-3 h-3 bg-white border-t border-l border-black"></div>
+                
+                {/* Bottom middle connector */}
+                <div className="absolute bottom-1 left-1/2 w-2 h-2 bg-gray-800 transform -translate-x-1/2"></div>
+                
+                {/* Border outline */}
+                <div className="absolute top-0 left-0 w-1 h-1 bg-black"></div>
+                <div className="absolute top-0 right-0 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-0 left-0 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-0 right-0 w-1 h-1 bg-black"></div>
+                <div className="absolute top-1 left-1 w-1 h-1 bg-black"></div>
+                <div className="absolute top-1 right-1 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-1 left-1 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-1 right-1 w-1 h-1 bg-black"></div>
               </div>
             </div>
 
@@ -42,31 +53,42 @@ const Header: React.FC = () => {
               </h1>
             </div>
 
-            {/* Soccer ball icon on the right - pixelated version */}
-            <div className="w-12 h-12 bg-red-600 rounded-none border-2 border-black flex items-center justify-center ml-2">
-              <div className="w-8 h-8 bg-white">
-                {/* Pixelated soccer ball pattern */}
-                <div className="grid grid-cols-4 grid-rows-4">
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                  <div className="w-2 h-2 bg-black"></div>
-                  <div className="w-2 h-2 bg-white"></div>
-                </div>
+            {/* Soccer ball icon on the right - improved pixel art version */}
+            <div className="w-12 h-12 bg-white rounded-none border-2 border-black flex items-center justify-center ml-2">
+              {/* Pixel Art Soccer Ball */}
+              <div className="w-10 h-10 relative">
+                <div className="absolute top-0 left-1/2 w-4 h-1 bg-black transform -translate-x-1/2"></div>
+                <div className="absolute top-1 left-1/2 w-6 h-1 bg-black transform -translate-x-1/2"></div>
+                
+                {/* Top left pentagon */}
+                <div className="absolute top-2 left-0 w-4 h-3 bg-white border-r border-black"></div>
+                <div className="absolute top-5 left-0 w-1 h-1 bg-black"></div>
+                
+                {/* Top right pentagon */}
+                <div className="absolute top-2 right-0 w-4 h-3 bg-white border-l border-black"></div>
+                <div className="absolute top-5 right-0 w-1 h-1 bg-black"></div>
+                
+                {/* Middle hexagon */}
+                <div className="absolute top-3 left-1/2 w-4 h-4 bg-gray-800 transform -translate-x-1/2"></div>
+                
+                {/* Bottom left pentagon */}
+                <div className="absolute bottom-0 left-1 w-3 h-3 bg-white border-t border-r border-black"></div>
+                
+                {/* Bottom right pentagon */}
+                <div className="absolute bottom-0 right-1 w-3 h-3 bg-white border-t border-l border-black"></div>
+                
+                {/* Bottom middle connector */}
+                <div className="absolute bottom-1 left-1/2 w-2 h-2 bg-gray-800 transform -translate-x-1/2"></div>
+                
+                {/* Border outline */}
+                <div className="absolute top-0 left-0 w-1 h-1 bg-black"></div>
+                <div className="absolute top-0 right-0 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-0 left-0 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-0 right-0 w-1 h-1 bg-black"></div>
+                <div className="absolute top-1 left-1 w-1 h-1 bg-black"></div>
+                <div className="absolute top-1 right-1 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-1 left-1 w-1 h-1 bg-black"></div>
+                <div className="absolute bottom-1 right-1 w-1 h-1 bg-black"></div>
               </div>
             </div>
           </div>
