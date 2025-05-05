@@ -80,12 +80,8 @@ const ComboList: React.FC<ComboListProps> = ({
 
       <Tabs defaultValue="available">
         <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="available" className="font-pixel text-xs">
-            Available ({filteredCombos.length})
-          </TabsTrigger>
-          <TabsTrigger value="all" className="font-pixel text-xs">
-            All Combos
-          </TabsTrigger>
+          <TabsTrigger value="available">Available ({filteredCombos.length})</TabsTrigger>
+          <TabsTrigger value="all">All Combos</TabsTrigger>
         </TabsList>
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
