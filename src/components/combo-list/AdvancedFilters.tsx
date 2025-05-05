@@ -75,37 +75,37 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
         <TabsContent value="position" className="mt-0">
           <div className="flex flex-wrap gap-2">
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${positionFilter === null ? "bg-black text-white" : "bg-gray-200"}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${positionFilter === null ? "bg-black text-white border-2 border-white" : "bg-gray-200 border-2 border-black"}`} 
               onClick={() => setPositionFilter(null)}
             >
               All
             </Badge>
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("ALL")}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("ALL")} border-2 border-black`} 
               onClick={() => setPositionFilter("ALL")}
             >
               General
             </Badge>
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("GK")}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("GK")} border-2 border-black`} 
               onClick={() => setPositionFilter("GK")}
             >
               {isMobile ? "GK" : "Goalkeeper"}
             </Badge>
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("DF")}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("DF")} border-2 border-black`} 
               onClick={() => setPositionFilter("DF")}
             >
               {isMobile ? "DF" : "Defender"}
             </Badge>
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("MF")}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("MF")} border-2 border-black`} 
               onClick={() => setPositionFilter("MF")}
             >
               {isMobile ? "MF" : "Midfielder"}
             </Badge>
             <Badge 
-              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("FW")}`} 
+              className={`cursor-pointer font-pixel text-xs flex items-center gap-1 ${getPositionBadgeStyles("FW")} border-2 border-black`} 
               onClick={() => setPositionFilter("FW")}
             >
               {isMobile ? "FW" : "Forward"}

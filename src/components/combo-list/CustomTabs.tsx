@@ -53,7 +53,7 @@ export const Tabs: React.FC<TabsProps> = ({ defaultValue, className = "", childr
 
 export const TabsList: React.FC<TabsListProps> = ({ className = "", children }) => {
   return (
-    <div className={`inline-flex w-full items-center justify-center rounded-md bg-muted p-1 ${className}`}>
+    <div className={`inline-flex w-full items-center justify-center bg-muted p-1 ${className}`}>
       {children}
     </div>
   );
