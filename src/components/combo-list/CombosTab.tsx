@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { TrainingCombo } from '../../data/combos';
-import ComboTable from './ComboTable';
 import ComboItem from '../ComboItem';
 
 interface CombosTabProps {
@@ -9,15 +8,14 @@ interface CombosTabProps {
   availableCombos: TrainingCombo[];
   selectedStat: boolean;
   onApplyCombo: (combo: TrainingCombo) => void;
-  viewMode?: 'table' | 'grid';
+  viewMode?: 'grid';
 }
 
 const CombosTab: React.FC<CombosTabProps> = ({
   combos,
   availableCombos,
   selectedStat,
-  onApplyCombo,
-  viewMode = 'grid'
+  onApplyCombo
 }) => {
   if (combos.length === 0) {
     return (
@@ -30,17 +28,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
     );
   }
 
-  if (viewMode === 'table') {
-    return (
-      <ComboTable
-        combos={combos}
-        availableCombos={availableCombos}
-        onApplyCombo={onApplyCombo}
-      />
-    );
-  }
-
-  // Default grid view using ComboItem
+  // Grid view using ComboItem
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {combos.map(combo => {
