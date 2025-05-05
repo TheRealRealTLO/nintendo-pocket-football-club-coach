@@ -76,8 +76,12 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
       
       <Tabs defaultValue="available">
         <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="available">Available ({searchedAvailableCombos.length})</TabsTrigger>
-          <TabsTrigger value="all">All Training Combinations</TabsTrigger>
+          <TabsTrigger value="available" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
+            Available ({searchedAvailableCombos.length})
+          </TabsTrigger>
+          <TabsTrigger value="all" className="font-pixel text-xs border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-white data-[state=active]:font-bold">
+            All Training Combinations
+          </TabsTrigger>
         </TabsList>
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">

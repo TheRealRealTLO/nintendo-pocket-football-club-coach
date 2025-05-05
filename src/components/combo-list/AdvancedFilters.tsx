@@ -47,8 +47,12 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
     <div className="mb-4">
       <Tabs defaultValue="stat" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="stat" className="font-pixel text-xs">Stat Filters</TabsTrigger>
-          <TabsTrigger value="position" className="font-pixel text-xs">Position Filters</TabsTrigger>
+          <TabsTrigger value="stat" className="font-pixel text-xs border-b-2 border-transparent">
+            Stat Filters
+          </TabsTrigger>
+          <TabsTrigger value="position" className="font-pixel text-xs border-b-2 border-transparent">
+            Position Filters
+          </TabsTrigger>
         </TabsList>
         
         <TabsContent value="stat" className="mt-0">

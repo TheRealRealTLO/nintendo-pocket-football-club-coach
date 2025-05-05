@@ -53,7 +53,7 @@ export const Tabs: React.FC<TabsProps> = ({ defaultValue, className = "", childr
 
 export const TabsList: React.FC<TabsListProps> = ({ className = "", children }) => {
   return (
-    <div className={`grid h-10 items-center justify-center rounded-md ${className}`}>
+    <div className={`grid items-center justify-center ${className}`}>
       {children}
     </div>
   );
@@ -73,8 +73,8 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({ value, className = "",
     <button
       className={`inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 text-sm font-medium transition-all focus:outline-none disabled:opacity-50 ${
         isActive 
-          ? "bg-white text-black" 
-          : "hover:bg-white/50 hover:text-black"
+          ? "bg-black text-white font-bold" 
+          : "bg-transparent text-black hover:bg-gray-200"
       } ${className}`}
       onClick={() => setActiveTab(value)}
     >
