@@ -23,11 +23,20 @@ const getStatIcon = (stat: StatType) => {
 };
 
 const StatBadge: React.FC<StatBadgeProps> = ({ stat, value }) => {
+  // Make the badge background more intense based on value
+  const getIntensity = (value: number): string => {
+    const baseColor = statColors[stat];
+    if (value >= 3) {
+      return baseColor.replace('-300', '-400');
+    }
+    return baseColor;
+  };
+  
   return (
     <Badge 
-      className={`${statColors[stat]} flex items-center gap-1 ${value < 0 ? 'border-2 border-red-500' : ''}`}
+      className={`${getIntensity(value)} flex items-center gap-1 text-[10px] px-1.5 py-0.5 font-bold ${value < 0 ? 'border-2 border-red-500' : ''}`}
     >
-      {getStatIcon(stat)} {stat} {value > 0 ? `+${value}` : value}
+      {getStatIcon(stat)} {stat.substring(0, 3)} {value > 0 ? `+${value}` : value}
     </Badge>
   );
 };

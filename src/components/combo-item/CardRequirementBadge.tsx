@@ -15,18 +15,18 @@ const CardRequirementBadge: React.FC<CardRequirementBadgeProps> = ({ cardType, q
   const getCardIcon = (type: CardType) => {
     const category = cardToCategory[type];
     switch (category) {
-      case "Tactical": return <Shield size={14} className="text-black" />;
-      case "Technical": return <Wrench size={14} className="text-black" />;
-      case "Physical": return <Dumbbell size={14} className="text-black" />;
-      case "Support": return <Users size={14} className="text-black" />;
+      case "Tactical": return <Shield size={12} className="text-black" />;
+      case "Technical": return <Wrench size={12} className="text-black" />;
+      case "Physical": return <Dumbbell size={12} className="text-black" />;
+      case "Support": return <Users size={12} className="text-black" />;
       default: return null;
     }
   };
 
   return (
-    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1`}>
+    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1 text-[10px] px-1.5 py-0.5`}>
       {getCardIcon(cardType)}
-      {cardType} x{quantity}
+      {cardType.length > 8 ? cardType.substring(0, 7) + '...' : cardType} x{quantity}
     </Badge>
   );
 };

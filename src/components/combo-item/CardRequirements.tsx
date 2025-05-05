@@ -9,9 +9,9 @@ interface CardRequirementsProps {
 
 const CardRequirements: React.FC<CardRequirementsProps> = ({ cards }) => {
   return (
-    <div className="mb-3">
-      <p className="font-pixel text-xs mb-1">Requirements:</p>
-      <div className="flex flex-wrap gap-2">
+    <div>
+      <p className="font-pixel text-xs mb-1 text-left">Requires:</p>
+      <div className="flex flex-wrap gap-1">
         {cards.map((card, index) => (
           <CardRequirementBadge 
             key={index} 

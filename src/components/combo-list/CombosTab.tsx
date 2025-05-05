@@ -28,7 +28,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
   }
 
   return (
-    <>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
       {combos.map((combo) => {
         const isAvailable = availableCombos.some(c => c.id === combo.id);
         return (
@@ -40,7 +40,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
           />
         );
       })}
-    </>
+    </div>
   );
 };
 

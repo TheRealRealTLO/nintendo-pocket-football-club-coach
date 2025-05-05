@@ -11,9 +11,9 @@ interface StatImprovementsProps {
 
 const StatImprovements: React.FC<StatImprovementsProps> = ({ stats }) => {
   return (
-    <div className="mb-3">
-      <p className="font-pixel text-xs mb-1">Stat Improvements:</p>
-      <div className="flex flex-wrap gap-2">
+    <div>
+      <p className="font-pixel text-xs mb-1 text-right">Improves:</p>
+      <div className="flex flex-wrap gap-1 justify-end">
         {allStatTypes.map((stat) => (
           stats[stat] ? (
             <StatBadge 
