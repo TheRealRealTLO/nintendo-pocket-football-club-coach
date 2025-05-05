@@ -4,7 +4,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TrainingCombo } from '../../data/combos';
 import CombosTab from './CombosTab';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Search, Table, LayoutGrid } from 'lucide-react';
+import { Toggle } from '@/components/ui/toggle';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -24,6 +26,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
   const [searchedAllCombos, setSearchedAllCombos] = useState<TrainingCombo[]>(allFilteredCombos);
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
   
   // Filter combos based on search query
   useEffect(() => {
@@ -62,14 +65,44 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 
   return (
     <div>
-      <div className="relative mb-4">
-        <Input
-          placeholder="Search combination name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 pr-4"
-        />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+      <div className="relative mb-4 flex items-center gap-2">
+        <div className="relative flex-grow">
+          <Input
+            placeholder="Search combination name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 pr-4"
+          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+        </div>
+        
+        <div className="flex items-center border rounded-md">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Toggle 
+                pressed={viewMode === 'table'} 
+                onPressedChange={() => setViewMode('table')}
+                className="rounded-r-none border-r"
+              >
+                <Table size={16} />
+              </Toggle>
+            </TooltipTrigger>
+            <TooltipContent>Table View</TooltipContent>
+          </Tooltip>
+          
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Toggle 
+                pressed={viewMode === 'grid'} 
+                onPressedChange={() => setViewMode('grid')}
+                className="rounded-l-none"
+              >
+                <LayoutGrid size={16} />
+              </Toggle>
+            </TooltipTrigger>
+            <TooltipContent>Grid View</TooltipContent>
+          </Tooltip>
+        </div>
       </div>
       
       <Tabs defaultValue="available">

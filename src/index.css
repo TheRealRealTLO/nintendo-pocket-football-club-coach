@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
@@ -154,5 +155,26 @@
   
   .stat-badge-willpower {
     @apply bg-orange-400;
+  }
+  
+  /* Table styling for combo display */
+  .combo-table {
+    @apply bg-white border-2 border-black shadow-[4px_4px_0_rgba(0,0,0,0.8)];
+  }
+  
+  .combo-table th {
+    @apply bg-gray-100 font-pixel text-sm text-black border-b-2 border-black px-3 py-2;
+  }
+  
+  .combo-table td {
+    @apply border-b border-gray-200 px-3 py-2;
+  }
+  
+  .combo-table tr:last-child td {
+    @apply border-b-0;
+  }
+  
+  .combo-table-header {
+    @apply sticky top-0 bg-white z-10;
   }
 }

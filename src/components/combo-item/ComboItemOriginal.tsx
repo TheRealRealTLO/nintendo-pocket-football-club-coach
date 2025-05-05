@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { TrainingCombo } from '../data/combos';
+import { TrainingCombo } from '../../data/combos';
 import { Button } from '@/components/ui/button';
-import PositionBadge from './combo-item/PositionBadge';
-import CardRequirements from './combo-item/CardRequirements';
-import StatImprovements from './combo-item/StatImprovements';
+import PositionBadge from './PositionBadge';
+import CardRequirements from './CardRequirements';
+import StatImprovements from './StatImprovements';
 
 interface ComboItemProps {
   combo: TrainingCombo;
@@ -12,8 +12,7 @@ interface ComboItemProps {
   onApply: () => void;
 }
 
-// This component preserves the original grid view of combos
-const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) => {
+const ComboItemOriginal: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) => {
   return (
     <div className={`pixel-card p-3 ${isAvailable ? '' : 'opacity-50'}`}>
       <div className="flex justify-between items-center mb-2">
@@ -39,4 +38,4 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
   );
 };
 
-export default ComboItem;
+export default ComboItemOriginal;
