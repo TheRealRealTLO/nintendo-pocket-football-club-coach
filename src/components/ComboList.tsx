@@ -69,54 +69,6 @@ const ComboList: React.FC<ComboListProps> = ({
     </div>
   );
 
-  // Render available combos tab content
-  const renderAvailableCombosTab = () => (
-    <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
-      {filteredCombos.length > 0 ? (
-        filteredCombos.map((combo) => (
-          <ComboItem
-            key={combo.id}
-            combo={combo}
-            isAvailable={true}
-            onApply={() => handleApplyCombo(combo)}
-          />
-        ))
-      ) : (
-        <div className="text-center p-6">
-          <p className="font-pixel text-sm text-gray-500">
-            No available combos match your filter.
-            {selectedStat && " Try selecting a different stat."}
-          </p>
-        </div>
-      )}
-    </TabsContent>
-  );
-
-  // Render all combos tab content
-  const renderAllCombosTab = () => (
-    <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
-      {filteredCombos.length > 0 ? (
-        filteredCombos.map((combo) => {
-          const isAvailable = availableCombos.some(c => c.id === combo.id);
-          return (
-            <ComboItem
-              key={combo.id}
-              combo={combo}
-              isAvailable={isAvailable}
-              onApply={() => handleApplyCombo(combo)}
-            />
-          );
-        })
-      ) : (
-        <div className="text-center p-6">
-          <p className="font-pixel text-sm text-gray-500">
-            No combos match your filter.
-          </p>
-        </div>
-      )}
-    </TabsContent>
-  );
-
   return (
     <div className="pixel-card">
       <div className="flex justify-between items-center mb-4">
@@ -139,8 +91,47 @@ const ComboList: React.FC<ComboListProps> = ({
           <TabsTrigger value="all">All Combos</TabsTrigger>
         </TabsList>
         
-        {renderAvailableCombosTab()}
-        {renderAllCombosTab()}
+        <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
+          {filteredCombos.length > 0 ? (
+            filteredCombos.map((combo) => (
+              <ComboItem
+                key={combo.id}
+                combo={combo}
+                isAvailable={true}
+                onApply={() => handleApplyCombo(combo)}
+              />
+            ))
+          ) : (
+            <div className="text-center p-6">
+              <p className="font-pixel text-sm text-gray-500">
+                No available combos match your filter.
+                {selectedStat && " Try selecting a different stat."}
+              </p>
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
+          {filteredCombos.length > 0 ? (
+            filteredCombos.map((combo) => {
+              const isAvailable = availableCombos.some(c => c.id === combo.id);
+              return (
+                <ComboItem
+                  key={combo.id}
+                  combo={combo}
+                  isAvailable={isAvailable}
+                  onApply={() => handleApplyCombo(combo)}
+                />
+              );
+            })
+          ) : (
+            <div className="text-center p-6">
+              <p className="font-pixel text-sm text-gray-500">
+                No combos match your filter.
+              </p>
+            </div>
+          )}
+        </TabsContent>
       </Tabs>
     </div>
   );
