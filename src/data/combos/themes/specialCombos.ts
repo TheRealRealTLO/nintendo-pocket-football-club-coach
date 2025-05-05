@@ -47,7 +47,7 @@ export const specialCombos: TrainingCombo[] = [
     recommendedPosition: "FW"
   },
   {
-    id: "combo-96",
+    id: "combo-208",
     name: "Goal Sniffer",
     cards: [
       { type: "Oil Therapy", quantity: 1 },

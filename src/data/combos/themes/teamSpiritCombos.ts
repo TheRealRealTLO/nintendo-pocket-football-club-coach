@@ -165,7 +165,7 @@ export const teamSpiritCombos: TrainingCombo[] = [
     recommendedPosition: "DF"
   },
   {
-    id: "combo-83",
+    id: "combo-206",
     name: "Superior Numbers",
     cards: [
       { type: "Line Control", quantity: 1 },
@@ -180,7 +180,7 @@ export const teamSpiritCombos: TrainingCombo[] = [
     recommendedPosition: "MF"
   },
   {
-    id: "combo-94",
+    id: "combo-207",
     name: "Captaincy",
     cards: [
       { type: "Running", quantity: 1 },

@@ -100,19 +100,7 @@ export const attackingCombos: TrainingCombo[] = [
     },
     recommendedPosition: "FW"
   },
-  {
-    id: "combo-43",
-    name: "Volley Shot",
-    cards: [
-      { type: "Shooting", quantity: 1 },
-      { type: "Stretching", quantity: 1 }
-    ],
-    stats: {
-      Kicking: 9,
-      Technique: 2
-    },
-    recommendedPosition: "FW"
-  },
+  // Removing the duplicate "Volley Shot" with ID "combo-43", as it's identical to "combo-17"
   {
     id: "combo-44",
     name: "Blind Shot",
@@ -172,7 +160,7 @@ export const attackingCombos: TrainingCombo[] = [
     recommendedPosition: "FW"
   },
   {
-    id: "combo-84",
+    id: "combo-203", // Changed from "combo-84" to avoid conflict with "Dogged Marker" in defenseAerialCombos
     name: "FK Master",
     cards: [
       { type: "Set Play", quantity: 1 },
@@ -200,7 +188,7 @@ export const attackingCombos: TrainingCombo[] = [
     recommendedPosition: "FW"
   },
   {
-    id: "combo-89",
+    id: "combo-204", // Changed from "combo-89" to avoid conflict with "Relentless Pressure" in midfieldCombos
     name: "Ball Magician",
     cards: [
       { type: "Freestyle", quantity: 1 },
@@ -214,7 +202,7 @@ export const attackingCombos: TrainingCombo[] = [
     recommendedPosition: "FW"
   },
   {
-    id: "combo-99",
+    id: "combo-205", // Changed from "combo-99" to avoid conflicts
     name: "Hand of God",
     cards: [
       { type: "Pressuring", quantity: 1 },

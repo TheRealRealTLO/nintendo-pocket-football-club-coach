@@ -7,6 +7,32 @@ import { midfieldCombos } from './midfieldCombos';
 import { specialCombos } from './specialCombos';
 import { teamSpiritCombos } from './teamSpiritCombos';
 import { goalkeeperCombos } from './goalkeeperCombos';
+import { validateComboId } from './utils/comboValidator';
+
+// Validate all combo IDs to catch any duplicates or conflicts
+function validateAllCombos() {
+  const allSourceFiles = {
+    'attackingCombos.ts': attackingCombos,
+    'dribblePassCombos.ts': dribblePassCombos,
+    'defenseAerialCombos.ts': defenseAerialCombos,
+    'midfieldCombos.ts': midfieldCombos,
+    'specialCombos.ts': specialCombos,
+    'teamSpiritCombos.ts': teamSpiritCombos,
+    'goalkeeperCombos.ts': goalkeeperCombos
+  };
+
+  // Check for duplicate IDs across all files
+  Object.entries(allSourceFiles).forEach(([sourceFile, combos]) => {
+    combos.forEach(combo => {
+      validateComboId(combo, sourceFile);
+    });
+  });
+}
+
+// Run validation in development environment
+if (process.env.NODE_ENV !== 'production') {
+  validateAllCombos();
+}
 
 // Export all themed combo arrays
 export {
