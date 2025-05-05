@@ -1,7 +1,7 @@
 
 import { useState, useMemo } from 'react';
 import { StatType, TrainingCombo, CardType, allStatTypes } from '../data/combos';
-import { trainingCombos } from '../data/trainingCombos';
+import { trainingCombos } from '../data/combos';
 import { InventoryState } from './useInventory';
 
 export function useCombos(inventory: InventoryState) {
