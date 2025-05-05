@@ -105,17 +105,25 @@ const ComboList: React.FC<ComboListProps> = ({
         </TabsContent>
         
         <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
-          {filteredCombos.map((combo) => {
-            const isAvailable = availableCombos.some(c => c.id === combo.id);
-            return (
-              <ComboItem
-                key={combo.id}
-                combo={combo}
-                isAvailable={isAvailable}
-                onApply={() => handleApplyCombo(combo)}
-              />
-            );
-          })}
+          {availableCombos.length > 0 ? (
+            filteredCombos.map((combo) => {
+              const isAvailable = availableCombos.some(c => c.id === combo.id);
+              return (
+                <ComboItem
+                  key={combo.id}
+                  combo={combo}
+                  isAvailable={isAvailable}
+                  onApply={() => handleApplyCombo(combo)}
+                />
+              );
+            })
+          ) : (
+            <div className="text-center p-6">
+              <p className="font-pixel text-sm text-gray-500">
+                No combos available.
+              </p>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>
