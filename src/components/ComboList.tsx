@@ -69,6 +69,32 @@ const ComboList: React.FC<ComboListProps> = ({
     </div>
   );
 
+  // Helper to display combos list
+  const renderCombosList = (combos: TrainingCombo[], showUnavailable = false) => {
+    if (combos.length > 0) {
+      return combos.map((combo) => {
+        const isAvailable = availableCombos.some(c => c.id === combo.id) || !showUnavailable;
+        return (
+          <ComboItem
+            key={combo.id}
+            combo={combo}
+            isAvailable={isAvailable}
+            onApply={() => handleApplyCombo(combo)}
+          />
+        );
+      });
+    }
+    
+    return (
+      <div className="text-center p-6">
+        <p className="font-pixel text-sm text-gray-500">
+          No {showUnavailable ? "" : "available "}combos match your filter.
+          {selectedStat && " Try selecting a different stat."}
+        </p>
+      </div>
+    );
+  };
+
   return (
     <div className="pixel-card">
       <div className="flex justify-between items-center mb-4">
@@ -92,45 +118,11 @@ const ComboList: React.FC<ComboListProps> = ({
         </TabsList>
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
-          {filteredCombos.length > 0 ? (
-            filteredCombos.map((combo) => (
-              <ComboItem
-                key={combo.id}
-                combo={combo}
-                isAvailable={true}
-                onApply={() => handleApplyCombo(combo)}
-              />
-            ))
-          ) : (
-            <div className="text-center p-6">
-              <p className="font-pixel text-sm text-gray-500">
-                No available combos match your filter.
-                {selectedStat && " Try selecting a different stat."}
-              </p>
-            </div>
-          )}
+          {renderCombosList(filteredCombos)}
         </TabsContent>
 
         <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
-          {filteredCombos.length > 0 ? (
-            filteredCombos.map((combo) => {
-              const isAvailable = availableCombos.some(c => c.id === combo.id);
-              return (
-                <ComboItem
-                  key={combo.id}
-                  combo={combo}
-                  isAvailable={isAvailable}
-                  onApply={() => handleApplyCombo(combo)}
-                />
-              );
-            })
-          ) : (
-            <div className="text-center p-6">
-              <p className="font-pixel text-sm text-gray-500">
-                No combos match your filter.
-              </p>
-            </div>
-          )}
+          {renderCombosList(filteredCombos, true)}
         </TabsContent>
       </Tabs>
     </div>
