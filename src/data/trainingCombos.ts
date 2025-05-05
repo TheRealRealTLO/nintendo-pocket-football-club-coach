@@ -1,4 +1,3 @@
-
 import { TrainingCombo, StatType, CardType } from './types';
 
 // Collection of all training combos
@@ -526,7 +525,7 @@ export const trainingCombos: TrainingCombo[] = [
       { type: "Marking", quantity: 1 },
       { type: "Sliding", quantity: 1 },
       { type: "Heading", quantity: 1 },
-      { type: "Toughness", quantity: 1 },
+      { type: "Weights", quantity: 1 },
     ],
     stats: {
       Toughness: 2,
@@ -841,4 +840,3 @@ export const trainingCombos: TrainingCombo[] = [
     recommendedPosition: "ALL"
   }
 ];
-

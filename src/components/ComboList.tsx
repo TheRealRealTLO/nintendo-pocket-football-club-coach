@@ -6,7 +6,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import ComboItem from './ComboItem';
-import { Undo2, Filter, SortAscending } from 'lucide-react';
+import { Undo2, Filter, ArrowDownAZ, ArrowUpAZ } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ComboListProps {
