@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardType, CardCategory, allCardTypes, allCategories, cardColors, categoryColors, cardToCategory } from '../data/combos';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './card-inventory/CustomTabs';
 import CategoryFilter from './card-inventory/CategoryFilter';
@@ -21,6 +21,18 @@ const CardInventory: React.FC<CardInventoryProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<string>("All");
   const [activeCategory, setActiveCategory] = useState<CardCategory | "All">("All");
+  const [currentView, setCurrentView] = useState<string>("all-cards");
+  
+  // Set Tactical category when "By Category" tab is selected
+  useEffect(() => {
+    if (currentView === "by-type" && activeTab === "All") {
+      setActiveTab("Tactical");
+    }
+  }, [currentView]);
+
+  const handleTabChange = (value: string) => {
+    setCurrentView(value);
+  };
   
   const handleIncrement = (type: CardType) => {
     updateCardQuantity(type, inventory[type] + 1);
@@ -46,7 +58,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
         <ActionButtons onReset={resetInventory} />
       </div>
       
-      <Tabs defaultValue="all-cards" className="w-full">
+      <Tabs defaultValue="all-cards" className="w-full" onValueChange={handleTabChange}>
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="all-cards" className="font-pixel text-xs">All Cards</TabsTrigger>
           <TabsTrigger value="by-type" className="font-pixel text-xs">By Category</TabsTrigger>

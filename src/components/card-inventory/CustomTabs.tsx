@@ -5,6 +5,7 @@ interface TabsProps {
   defaultValue: string;
   className?: string;
   children: React.ReactNode;
+  onValueChange?: (value: string) => void;
 }
 
 interface TabsListProps {
@@ -31,11 +32,18 @@ interface TabsContextType {
 
 const TabsContext = React.createContext<TabsContextType | undefined>(undefined);
 
-export const Tabs: React.FC<TabsProps> = ({ defaultValue, className = "", children }) => {
+export const Tabs: React.FC<TabsProps> = ({ defaultValue, className = "", children, onValueChange }) => {
   const [activeTab, setActiveTab] = useState<string>(defaultValue);
   
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    if (onValueChange) {
+      onValueChange(value);
+    }
+  };
+  
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+    <TabsContext.Provider value={{ activeTab, setActiveTab: handleTabChange }}>
       <div className={`w-full ${className}`}>
         {children}
       </div>
