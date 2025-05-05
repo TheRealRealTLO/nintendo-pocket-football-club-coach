@@ -1,4 +1,3 @@
-
 import { TrainingCombo, StatType, CardType } from './types';
 
 // Collection of all training combos
