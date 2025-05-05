@@ -14,43 +14,43 @@ export const categoryColors: Record<CardCategory, string> = {
 // Card colors (for each specific card type)
 export const cardColors: Record<CardType, string> = {
   // Tactical cards
-  "Analysis": "bg-yellow-200",
+  "Analysis": "bg-yellow-300",
   "Marking": "bg-yellow-300",
-  "Pressuring": "bg-yellow-400",
-  "Countering": "bg-yellow-200",
+  "Pressuring": "bg-yellow-300",
+  "Countering": "bg-yellow-300",
   "Mini-Game": "bg-yellow-300",
-  "Line Control": "bg-yellow-400",
-  "Set Play": "bg-yellow-200",
+  "Line Control": "bg-yellow-300",
+  "Set Play": "bg-yellow-300",
   
   // Technical cards
-  "Dribbling": "bg-blue-200",
+  "Dribbling": "bg-blue-300",
   "Place Kicks": "bg-blue-300",
-  "Shooting": "bg-blue-400",
-  "Passing": "bg-blue-200",
+  "Shooting": "bg-blue-300",
+  "Passing": "bg-blue-300",
   "Freestyle": "bg-blue-300",
-  "Sliding": "bg-blue-400",
-  "Heading": "bg-blue-200",
+  "Sliding": "bg-blue-300",
+  "Heading": "bg-blue-300",
   
   // Physical cards
-  "Running": "bg-green-200",
+  "Running": "bg-green-300",
   "Weights": "bg-green-300",
-  "Kicking": "bg-green-400",
-  "Sprinting": "bg-green-200",
+  "Kicking": "bg-green-300",
+  "Sprinting": "bg-green-300",
   "Agility": "bg-green-300",
-  "Aerobics": "bg-green-400",
-  "Stretching": "bg-green-200",
+  "Aerobics": "bg-green-300",
+  "Stretching": "bg-green-300",
   
   // Support cards
-  "Oil Therapy": "bg-purple-200",
+  "Oil Therapy": "bg-purple-300",
   "Meditation": "bg-purple-300",
-  "Signing": "bg-purple-400",
-  "PK Practice": "bg-purple-200",
+  "Signing": "bg-purple-300",
+  "PK Practice": "bg-purple-300",
   "Judo": "bg-purple-300",
-  "Visualising": "bg-purple-400",
-  "Meeting": "bg-purple-200",
+  "Visualising": "bg-purple-300",
+  "Meeting": "bg-purple-300",
   "Spa": "bg-purple-300",
-  "Mini Camp": "bg-purple-400",
-  "Gaming": "bg-purple-200",
+  "Mini Camp": "bg-purple-300",
+  "Gaming": "bg-purple-300",
   "Karaoke": "bg-purple-300"
 };
 
