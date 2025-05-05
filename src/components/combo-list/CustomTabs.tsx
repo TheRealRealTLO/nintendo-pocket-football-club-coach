@@ -53,7 +53,7 @@ export const Tabs: React.FC<TabsProps> = ({ defaultValue, className = "", childr
 
 export const TabsList: React.FC<TabsListProps> = ({ className = "", children }) => {
   return (
-    <div className={`grid h-10 items-center justify-center bg-gray-100 rounded-md ${className}`}>
+    <div className={`grid h-10 items-center justify-center rounded-md ${className}`}>
       {children}
     </div>
   );

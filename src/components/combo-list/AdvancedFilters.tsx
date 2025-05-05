@@ -45,8 +45,6 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
 
   return (
     <div className="mb-4 pixel-card p-3">
-      <h3 className="font-pixel text-sm mb-3">Filters</h3>
-      
       <Tabs defaultValue="stat" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="stat" className="font-pixel text-xs">Stat Filters</TabsTrigger>
