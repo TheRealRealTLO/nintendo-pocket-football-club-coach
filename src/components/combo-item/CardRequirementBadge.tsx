@@ -24,7 +24,7 @@ const CardRequirementBadge: React.FC<CardRequirementBadgeProps> = ({ cardType, q
   };
 
   return (
-    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1 text-[10px] px-1.5 py-0.5`}>
+    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1 text-[12px] px-1.5 py-0.5`}>
       {getCardIcon(cardType)}
       {cardType} x{quantity}
     </Badge>
