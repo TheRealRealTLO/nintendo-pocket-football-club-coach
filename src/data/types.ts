@@ -47,7 +47,7 @@ export type CardType =
   | "Gaming" 
   | "Karaoke";
 
-// Updated Stats that can be improved based on the screenshot
+// Stats that can be improved based on the data
 export type StatType = 
   | "Kicking" 
   | "Speed" 

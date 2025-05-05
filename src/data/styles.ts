@@ -1,90 +1,77 @@
 
+// Define colors for the categories, cards, and stats
+
 import { CardCategory, CardType, StatType } from './types';
-import { allCardTypes } from './cardRelations';
-import { cardToCategory } from './cardRelations';
 
-// Color mapping for categories
+// Category colors
 export const categoryColors: Record<CardCategory, string> = {
-  "Tactical": "bg-npfc-green",
-  "Technical": "bg-npfc-red",
-  "Physical": "bg-npfc-blue",
-  "Support": "bg-npfc-yellow"
+  "Tactical": "bg-yellow-200",
+  "Technical": "bg-blue-200",
+  "Physical": "bg-green-200",
+  "Support": "bg-purple-200"
 };
 
-// Color mapping for individual cards based on their category
-export const cardColors: Record<CardType, string> = Object.fromEntries(
-  allCardTypes.map(type => [type, categoryColors[cardToCategory[type]]])
-) as Record<CardType, string>;
+// Card colors (for each specific card type)
+export const cardColors: Record<CardType, string> = {
+  // Tactical cards
+  "Analysis": "bg-yellow-200",
+  "Marking": "bg-yellow-300",
+  "Pressuring": "bg-yellow-400",
+  "Countering": "bg-yellow-200",
+  "Mini-Game": "bg-yellow-300",
+  "Line Control": "bg-yellow-400",
+  "Set Play": "bg-yellow-200",
+  
+  // Technical cards
+  "Dribbling": "bg-blue-200",
+  "Place Kicks": "bg-blue-300",
+  "Shooting": "bg-blue-400",
+  "Passing": "bg-blue-200",
+  "Freestyle": "bg-blue-300",
+  "Sliding": "bg-blue-400",
+  "Heading": "bg-blue-200",
+  
+  // Physical cards
+  "Running": "bg-green-200",
+  "Weights": "bg-green-300",
+  "Kicking": "bg-green-400",
+  "Sprinting": "bg-green-200",
+  "Agility": "bg-green-300",
+  "Aerobics": "bg-green-400",
+  "Stretching": "bg-green-200",
+  
+  // Support cards
+  "Oil Therapy": "bg-purple-200",
+  "Meditation": "bg-purple-300",
+  "Signing": "bg-purple-400",
+  "PK Practice": "bg-purple-200",
+  "Judo": "bg-purple-300",
+  "Visualising": "bg-purple-400",
+  "Meeting": "bg-purple-200",
+  "Spa": "bg-purple-300",
+  "Mini Camp": "bg-purple-400",
+  "Gaming": "bg-purple-200",
+  "Karaoke": "bg-purple-300"
+};
 
-// Color mapping for stats
+// Stat colors
 export const statColors: Record<StatType, string> = {
-  "Kicking": "stat-badge-kicking",
-  "Speed": "stat-badge-speed",
-  "Stamina": "stat-badge-stamina",
-  "Technique": "stat-badge-technique",
-  "Toughness": "stat-badge-toughness",
-  "Jumping": "stat-badge-jumping",
-  "Willpower": "stat-badge-willpower"
-};
-
-// Icons for card categories
-export const categoryIcons = {
-  "Tactical": "star",
-  "Technical": "wrench",
-  "Physical": "activity", 
-  "Support": "users"
+  "Kicking": "bg-red-300",
+  "Speed": "bg-blue-300",
+  "Stamina": "bg-green-300",
+  "Technique": "bg-yellow-300",
+  "Toughness": "bg-purple-300",
+  "Jumping": "bg-orange-300",
+  "Willpower": "bg-pink-300"
 };
 
 // All stat types array
 export const allStatTypes: StatType[] = [
-  "Kicking", 
+  "Kicking",
   "Speed", 
   "Stamina", 
   "Technique", 
-  "Toughness", 
-  "Jumping", 
+  "Toughness",
+  "Jumping",
   "Willpower"
 ];
-
-// Position label colors and descriptions
-export const positionLabels = {
-  "GK": {
-    color: "bg-orange-400",
-    label: "Goalkeeper",
-    description: "Best for goalkeepers"
-  },
-  "DF": {
-    color: "bg-blue-400",
-    label: "Defender",
-    description: "Best for defensive players"
-  },
-  "MF": {
-    color: "bg-green-400",
-    label: "Midfielder",
-    description: "Best for midfield players"
-  },
-  "FW": {
-    color: "bg-red-400",
-    label: "Forward",
-    description: "Best for attacking players"
-  },
-  "ALL": {
-    color: "bg-purple-400",
-    label: "All Positions",
-    description: "Suitable for any position"
-  }
-};
-
-// Helper function to get stat description
-export const getStatDescription = (stat: StatType): string => {
-  switch(stat) {
-    case "Kicking": return "Power in shots and passes";
-    case "Speed": return "How quickly a player can move";
-    case "Stamina": return "Energy and endurance during matches";
-    case "Technique": return "Ball control and skill";
-    case "Toughness": return "Physical strength and resistance";
-    case "Jumping": return "Aerial ability";
-    case "Willpower": return "Mental strength and decision making";
-    default: return "";
-  }
-};
