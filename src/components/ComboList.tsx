@@ -1,12 +1,13 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { TrainingCombo, allStatTypes, statColors, StatType } from '../data/combos';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import ComboItem from './ComboItem';
-import { Undo2 } from 'lucide-react';
+import { Undo2, Filter, SortAscending } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ComboListProps {
   availableCombos: TrainingCombo[];
@@ -18,6 +19,9 @@ interface ComboListProps {
   hasHistory: boolean;
 }
 
+type PositionFilter = "ALL" | "GK" | "DF" | "MF" | "FW" | null;
+type SortOption = "none" | "stat-high" | "stat-low";
+
 const ComboList: React.FC<ComboListProps> = ({
   availableCombos,
   filteredCombos,
@@ -27,6 +31,10 @@ const ComboList: React.FC<ComboListProps> = ({
   undoLastCombo,
   hasHistory
 }) => {
+  // Additional filters
+  const [positionFilter, setPositionFilter] = useState<PositionFilter>(null);
+  const [sortOption, setSortOption] = useState<SortOption>("none");
+
   // Handler for applying a combo
   const handleApplyCombo = (combo: TrainingCombo) => {
     applyCombo(combo.id, combo.cards);
@@ -44,6 +52,34 @@ const ComboList: React.FC<ComboListProps> = ({
       description: "Your last combo has been reversed and cards have been returned to your inventory."
     });
   };
+
+  // Filter and sort combos based on selected filters
+  const getFilteredAndSortedCombos = (combos: TrainingCombo[]) => {
+    // First apply position filter if selected
+    let result = combos;
+    if (positionFilter) {
+      result = result.filter(combo => 
+        combo.recommendedPosition === positionFilter || 
+        combo.recommendedPosition === "ALL" ||
+        !combo.recommendedPosition
+      );
+    }
+    
+    // Then sort based on sort option
+    if (sortOption !== "none" && selectedStat) {
+      result = [...result].sort((a, b) => {
+        const valueA = a.stats[selectedStat] || 0;
+        const valueB = b.stats[selectedStat] || 0;
+        return sortOption === "stat-high" ? valueB - valueA : valueA - valueB;
+      });
+    }
+    
+    return result;
+  };
+
+  // Get filtered and sorted combos
+  const processedAvailableCombos = getFilteredAndSortedCombos(availableCombos);
+  const processedFilteredCombos = getFilteredAndSortedCombos(filteredCombos);
 
   // Render filter badges
   const renderStatFilters = () => (
@@ -69,6 +105,42 @@ const ComboList: React.FC<ComboListProps> = ({
     </div>
   );
 
+  // Render position and sort filters
+  const renderAdvancedFilters = () => (
+    <div className="mb-4 grid grid-cols-2 gap-2">
+      <div>
+        <p className="font-pixel text-xs mb-1">Position:</p>
+        <Select value={positionFilter || ""} onValueChange={(val) => setPositionFilter(val === "" ? null : val as PositionFilter)}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Any Position" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">Any Position</SelectItem>
+            <SelectItem value="ALL">All Positions</SelectItem>
+            <SelectItem value="GK">Goalkeeper</SelectItem>
+            <SelectItem value="DF">Defender</SelectItem>
+            <SelectItem value="MF">Midfielder</SelectItem>
+            <SelectItem value="FW">Forward</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      
+      <div>
+        <p className="font-pixel text-xs mb-1">Sort by:</p>
+        <Select value={sortOption} onValueChange={(val) => setSortOption(val as SortOption)}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="No Sorting" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">No Sorting</SelectItem>
+            <SelectItem value="stat-high">Highest Stat First</SelectItem>
+            <SelectItem value="stat-low">Lowest Stat First</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  );
+
   // Helper to display combos list
   const renderCombosList = (combos: TrainingCombo[], showUnavailable = false) => {
     if (combos.length > 0) {
@@ -89,7 +161,7 @@ const ComboList: React.FC<ComboListProps> = ({
       <div className="text-center p-6">
         <p className="font-pixel text-sm text-gray-500">
           No {showUnavailable ? "" : "available "}combos match your filter.
-          {selectedStat && " Try selecting a different stat."}
+          {selectedStat && " Try selecting a different stat or position."}
         </p>
       </div>
     );
@@ -110,19 +182,20 @@ const ComboList: React.FC<ComboListProps> = ({
       </div>
 
       {renderStatFilters()}
+      {renderAdvancedFilters()}
 
       <Tabs defaultValue="available">
         <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="available">Available ({filteredCombos.length})</TabsTrigger>
+          <TabsTrigger value="available">Available ({processedFilteredCombos.length})</TabsTrigger>
           <TabsTrigger value="all">All Combos</TabsTrigger>
         </TabsList>
         
         <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
-          {renderCombosList(filteredCombos)}
+          {renderCombosList(processedFilteredCombos)}
         </TabsContent>
 
         <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
-          {renderCombosList(filteredCombos, true)}
+          {renderCombosList(processedFilteredCombos, true)}
         </TabsContent>
       </Tabs>
     </div>

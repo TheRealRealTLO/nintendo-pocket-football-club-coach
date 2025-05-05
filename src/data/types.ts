@@ -71,4 +71,6 @@ export interface TrainingCombo {
   stats: {
     [key in StatType]?: number;
   };
+  // Position recommendation (optional)
+  recommendedPosition?: "GK" | "DF" | "MF" | "FW" | "ALL";
 }

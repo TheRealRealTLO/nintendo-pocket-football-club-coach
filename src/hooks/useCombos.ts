@@ -28,6 +28,11 @@ export function useCombos(inventory: InventoryState) {
     });
   }, [availableCombos, selectedStat]);
 
+  // Get all combos that would improve a specific stat
+  const getCombosByStat = (stat: StatType): TrainingCombo[] => {
+    return trainingCombos.filter(combo => combo.stats[stat] && combo.stats[stat]! > 0);
+  };
+
   // Check if a specific combo is available
   const isComboAvailable = (combo: TrainingCombo): boolean => {
     return combo.cards.every(requirement => {
@@ -55,6 +60,15 @@ export function useCombos(inventory: InventoryState) {
     }, {} as Record<CardType, number>);
   };
 
+  // Get best combo for a specific stat
+  const getBestComboForStat = (stat: StatType): TrainingCombo | null => {
+    const statCombos = trainingCombos
+      .filter(combo => combo.stats[stat] && combo.stats[stat]! > 0)
+      .sort((a, b) => (b.stats[stat] || 0) - (a.stats[stat] || 0));
+    
+    return statCombos.length > 0 ? statCombos[0] : null;
+  };
+
   return {
     availableCombos,
     filteredCombos,
@@ -62,6 +76,8 @@ export function useCombos(inventory: InventoryState) {
     setSelectedStat,
     isComboAvailable,
     getStatImprovements,
-    getRequiredCards
+    getRequiredCards,
+    getCombosByStat,
+    getBestComboForStat
   };
 }

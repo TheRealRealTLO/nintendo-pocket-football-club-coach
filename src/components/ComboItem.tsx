@@ -25,6 +25,18 @@ const getStatIcon = (stat: StatType) => {
   }
 };
 
+// Helper function to get position badge color
+const getPositionColor = (position?: string) => {
+  switch(position) {
+    case "GK": return "bg-orange-400 text-black";
+    case "DF": return "bg-blue-400 text-black";
+    case "MF": return "bg-green-400 text-black";
+    case "FW": return "bg-red-400 text-black";
+    case "ALL": return "bg-purple-400 text-black";
+    default: return "bg-gray-400 text-black";
+  }
+};
+
 const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) => {
   // Get icon component based on card type
   const getCardIcon = (type: CardType) => {
@@ -42,6 +54,11 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
     <div className={`pixel-card mb-4 ${isAvailable ? '' : 'opacity-50'}`}>
       <div className="flex justify-between items-start mb-3">
         <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
+        {combo.recommendedPosition && (
+          <Badge className={`${getPositionColor(combo.recommendedPosition)} ml-2`}>
+            {combo.recommendedPosition}
+          </Badge>
+        )}
       </div>
       
       <div className="mb-3">
@@ -63,9 +80,9 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
             combo.stats[stat] ? (
               <Badge 
                 key={stat} 
-                className={`${statColors[stat]} flex items-center gap-1`}
+                className={`${statColors[stat]} flex items-center gap-1 ${combo.stats[stat]! < 0 ? 'border-2 border-red-500' : ''}`}
               >
-                {getStatIcon(stat)} {stat} +{combo.stats[stat]}
+                {getStatIcon(stat)} {stat} {combo.stats[stat]! > 0 ? `+${combo.stats[stat]}` : combo.stats[stat]}
               </Badge>
             ) : null
           ))}
