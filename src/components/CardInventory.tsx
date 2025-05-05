@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { CardType, CardCategory, allCardTypes, allCategories, cardColors, categoryColors, cardToCategory } from '../data/combos';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './card-inventory/CustomTabs';
@@ -57,7 +56,7 @@ const CardInventory: React.FC<CardInventoryProps> = ({
       <Tabs defaultValue="all-cards" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="all-cards" className="font-pixel text-xs">All Cards</TabsTrigger>
-          <TabsTrigger value="by-type" className="font-pixel text-xs">By Type</TabsTrigger>
+          <TabsTrigger value="by-type" className="font-pixel text-xs">By Category</TabsTrigger>
         </TabsList>
         
         <TabsContent value="all-cards" className="space-y-4">

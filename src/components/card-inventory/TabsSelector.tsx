@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { CardCategory, CardType } from '@/data/types';
-import { allCategories, allCardTypes, categoryColors, cardColors } from '@/data/combos';
+import { CardCategory } from '@/data/types';
+import { allCategories, categoryColors } from '@/data/combos';
 import { getCategoryIcon } from './CategoryFilter';
 
 interface TabsSelectorProps {
@@ -24,21 +24,6 @@ const TabsSelector: React.FC<TabsSelectorProps> = ({ activeTab, setActiveTab }) 
             {category}
           </button>
         ))}
-
-        <div className="w-full mt-3"></div> {/* Line break after categories */}
-
-        <div className="flex flex-wrap gap-2 justify-center">
-          {allCardTypes.map(cardType => (
-            <button 
-              key={cardType}
-              onClick={() => setActiveTab(cardType)}
-              className={`${cardColors[cardType]} text-black font-pixel text-xs px-3 py-2 rounded-sm ${activeTab === cardType ? "ring-2 ring-black" : ""}`}
-              style={{ minWidth: '90px' }}
-            >
-              {cardType}
-            </button>
-          ))}
-        </div>
       </div>
     </div>
   );
