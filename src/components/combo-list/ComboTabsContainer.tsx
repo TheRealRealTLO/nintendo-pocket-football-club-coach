@@ -98,7 +98,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
           </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="available" className="max-h-[60vh] overflow-y-auto py-2">
+        <TabsContent value="available">
           <CombosTab 
             combos={ensureUniqueKeys(searchedAvailableCombos)}
             availableCombos={availableCombos}
@@ -108,7 +108,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
           />
         </TabsContent>
 
-        <TabsContent value="all" className="max-h-[60vh] overflow-y-auto py-2">
+        <TabsContent value="all">
           <CombosTab 
             combos={ensureUniqueKeys(searchedAllCombos)}
             availableCombos={availableCombos}
