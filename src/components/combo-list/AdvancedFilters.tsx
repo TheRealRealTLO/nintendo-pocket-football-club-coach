@@ -37,13 +37,13 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
-  // Helper function to get position badge styles
+  // Helper function to get position badge styles - updated to match stat filter style
   const getPositionBadgeStyles = (position: PositionFilter) => {
     const baseColor = getPositionColor(position);
     if (positionFilter === position) {
       return `${baseColor}`;
     }
-    return `${baseColor} opacity-70`;
+    return `${baseColor} opacity-60`; // Match the stat filter opacity
   };
 
   return (
