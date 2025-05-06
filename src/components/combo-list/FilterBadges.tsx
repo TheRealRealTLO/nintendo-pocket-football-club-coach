@@ -26,7 +26,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
         <Badge
           key={stat}
           className={`cursor-pointer font-pixel text-xs ${
-            selectedStat === stat ? 'bg-npfc-' + stat.toLowerCase() : 'bg-gray-200'
+            selectedStat === stat ? statColors[stat] : 'bg-gray-200'
           }`}
           onClick={() => setSelectedStat(stat, true)}
         >

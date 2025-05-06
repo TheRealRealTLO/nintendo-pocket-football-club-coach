@@ -54,14 +54,14 @@ export const cardColors: Record<CardType, string> = {
   "Karaoke": "bg-yellow-300"
 };
 
-// Stat colors
+// Stat colors - updated to ensure all stats have distinct colors
 export const statColors: Record<StatType, string> = {
   "Kicking": "bg-red-300",
   "Speed": "bg-blue-300",
   "Stamina": "bg-green-300",
   "Technique": "bg-yellow-300",
-  "Toughness": "bg-purple-300",
-  "Jumping": "bg-orange-300",
+  "Toughness": "bg-purple-400", // Updated from white/default
+  "Jumping": "bg-orange-300",   // Updated from white/default
   "Willpower": "bg-pink-300"
 };
 
