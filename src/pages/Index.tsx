@@ -47,7 +47,7 @@ const Index = () => {
       <footer className="border-t-4 border-black bg-npfc-green-dark p-4 mt-auto">
         <div className="container mx-auto text-center">
           <p className="font-pixel text-xs text-black">
-            Pocket Football Combo Coach | © 2025
+            Nintendo Pocket Football Club Coach | © 2025
           </p>
         </div>
       </footer>
