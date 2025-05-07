@@ -20,7 +20,7 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-1">
           {combo.recommended && (
-            <Trophy className="h-4 w-4 text-amber-500" title="Top stat-boosting combo" />
+            <Trophy className="h-4 w-4 text-amber-500" aria-label="Top stat-boosting combo" />
           )}
           <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
         </div>
