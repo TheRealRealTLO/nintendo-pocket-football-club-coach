@@ -24,7 +24,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
         variant="outline"
         className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} border-2
           ${!selectedStat 
-            ? 'bg-purple-500 text-black ' + tokens.badge.selected
+            ? 'bg-purple-300 text-black ' + tokens.badge.selected
             : 'bg-gray-200 ' + tokens.badge.unselected}`}
         size="sm"
         onClick={() => setSelectedStat(null)}

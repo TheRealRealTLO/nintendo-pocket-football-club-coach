@@ -54,15 +54,15 @@ export const cardColors: Record<CardType, string> = {
   "Karaoke": "bg-yellow-300"
 };
 
-// Stat colors - updated to more solid colors for better visibility
+// Stat colors - updated to 300 values for a more muted appearance
 export const statColors: Record<StatType, string> = {
-  "Kicking": "bg-red-500",
-  "Speed": "bg-blue-500",
-  "Stamina": "bg-green-500",
-  "Technique": "bg-yellow-500",
-  "Toughness": "bg-purple-500",
-  "Jumping": "bg-orange-500",
-  "Willpower": "bg-pink-500"
+  "Kicking": "bg-red-300",
+  "Speed": "bg-blue-300",
+  "Stamina": "bg-green-300",
+  "Technique": "bg-yellow-300",
+  "Toughness": "bg-purple-300",
+  "Jumping": "bg-orange-300",
+  "Willpower": "bg-pink-300"
 };
 
 // All stat types array
