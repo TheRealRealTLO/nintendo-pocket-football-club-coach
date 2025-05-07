@@ -15,6 +15,7 @@ interface ComboTabsContainerProps {
   selectedStat: boolean;
   onApplyCombo: (combo: TrainingCombo) => void;
   onResetFilters: () => void;
+  showAllCombos?: boolean;
 }
 
 const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
@@ -23,7 +24,8 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   allFilteredCombos,
   selectedStat,
   onApplyCombo,
-  onResetFilters
+  onResetFilters,
+  showAllCombos = false
 }) => {
   const [view, setView] = useState<'grid' | 'table'>('grid');
   const recommendedCount = filteredCombos.filter(combo => combo.recommended).length;
@@ -36,7 +38,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
           <div className="flex flex-col">
             <h3 className="text-lg font-pixel">
-              Available Combos ({filteredCombos.length})
+              {showAllCombos ? "All Training Combos" : "Available Combos"} ({filteredCombos.length})
               {isShowingRecommended && (
                 <span className="text-sm text-yellow-600 flex items-center gap-1 mt-1">
                   <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" /> 
@@ -54,10 +56,10 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             >
               Reset Filters
             </Button>
-            <Tabs defaultValue="grid" className="w-[180px]" onValueChange={(value) => setView(value as 'grid' | 'table')}>
+            <Tabs defaultValue="grid" className="w-auto" onValueChange={(value) => setView(value as 'grid' | 'table')}>
               <TabsList className="font-pixel text-xs">
-                <TabsTrigger value="grid" className="font-pixel text-xs">Grid View</TabsTrigger>
-                <TabsTrigger value="table" className="font-pixel text-xs">Table View</TabsTrigger>
+                <TabsTrigger value="grid" className="font-pixel text-xs">Grid</TabsTrigger>
+                <TabsTrigger value="table" className="font-pixel text-xs">Table</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>

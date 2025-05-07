@@ -28,6 +28,19 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
 }) => {
   const positions = ["ALL", "GK", "DF", "MF", "FW"];
   const isMobile = useIsMobile();
+
+  const getPositionColor = (position: string, isSelected: boolean) => {
+    if (!isSelected) return "bg-gray-200 hover:bg-gray-300 text-gray-700";
+    
+    switch(position) {
+      case "GK": return "bg-orange-400 text-black";
+      case "DF": return "bg-blue-400 text-black";
+      case "MF": return "bg-green-400 text-black";
+      case "FW": return "bg-red-400 text-black";
+      case "ALL": return "bg-purple-400 text-black";
+      default: return "bg-gray-400 text-black";
+    }
+  };
   
   return (
     <div className="p-4 bg-gray-50 rounded-lg mb-4">
@@ -37,9 +50,10 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           {positions.map(position => (
             <Button
               key={position}
-              variant={positionFilter === position ? "default" : "outline"}
+              variant="outline"
               onClick={() => setPositionFilter(positionFilter === position ? null : position)}
-              className="h-8 px-3 text-xs font-pixel"
+              className={`h-8 px-3 text-xs font-pixel border-2 
+                ${getPositionColor(position, positionFilter === position)}`}
               size="sm"
             >
               {position}
@@ -54,11 +68,10 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           {allStatTypes.map(stat => (
             <Badge
               key={stat}
-              variant={selectedStat === stat ? "default" : "outline"}
               className={`cursor-pointer font-pixel py-1 px-3 flex items-center gap-1 ${
                 selectedStat === stat 
                   ? statColors[stat] 
-                  : `${statColors[stat]} opacity-60`
+                  : `bg-gray-200 text-gray-700 hover:bg-gray-300`
               }`}
               onClick={() => setSelectedStat(stat, true)}
             >

@@ -18,6 +18,7 @@ interface ComboListProps {
   applyCombo: (comboId: string, cards: any[]) => void;
   undoLastCombo: () => void;
   hasHistory: boolean;
+  allCombos: TrainingCombo[]; // New prop for all combos
 }
 
 const ComboList: React.FC<ComboListProps> = ({
@@ -27,9 +28,11 @@ const ComboList: React.FC<ComboListProps> = ({
   setSelectedStat: originalSetSelectedStat,
   applyCombo,
   undoLastCombo,
-  hasHistory
+  hasHistory,
+  allCombos
 }) => {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [showAllCombos, setShowAllCombos] = useState<boolean>(false); // Toggle between all combos and available combos
   const isMobile = useIsMobile();
   
   // Enhanced setSelectedStat that can also toggle sort direction
@@ -52,7 +55,12 @@ const ComboList: React.FC<ComboListProps> = ({
     setRecommendedOnly,
     processedFilteredCombos,
     allFilteredCombos
-  } = useComboFiltering(availableCombos, filteredCombos, selectedStat, sortDirection);
+  } = useComboFiltering(
+    showAllCombos ? allCombos : availableCombos, 
+    showAllCombos ? allCombos.filter(c => selectedStat ? c.stats[selectedStat] : true) : filteredCombos, 
+    selectedStat, 
+    sortDirection
+  );
 
   // Reset all filters
   const resetAllFilters = () => {
@@ -63,6 +71,16 @@ const ComboList: React.FC<ComboListProps> = ({
 
   // Handler for applying a combo
   const handleApplyCombo = (combo: TrainingCombo) => {
+    const isAvailable = availableCombos.some(c => c.id === combo.id);
+    if (!isAvailable) {
+      toast({
+        title: "Missing Cards",
+        description: "You don't have all the required cards for this combo.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     applyCombo(combo.id, combo.cards);
     toast({
       title: "Combo Applied",
@@ -70,11 +88,26 @@ const ComboList: React.FC<ComboListProps> = ({
     });
   };
 
+  const getPositionColor = (position: string, isSelected: boolean) => {
+    if (!isSelected) return "bg-gray-200 hover:bg-gray-300 text-gray-700";
+    
+    switch(position) {
+      case "GK": return "bg-orange-400 text-black";
+      case "DF": return "bg-blue-400 text-black";
+      case "MF": return "bg-green-400 text-black";
+      case "FW": return "bg-red-400 text-black";
+      case "ALL": return "bg-purple-400 text-black";
+      default: return "bg-gray-400 text-black";
+    }
+  };
+
   return (
     <div className="pixel-card">
       <HeaderSection 
         hasHistory={hasHistory} 
-        onUndo={undoLastCombo} 
+        onUndo={undoLastCombo}
+        showAllCombos={showAllCombos}
+        setShowAllCombos={setShowAllCombos}
       />
 
       {isMobile ? (
@@ -94,9 +127,10 @@ const ComboList: React.FC<ComboListProps> = ({
                 {["ALL", "GK", "DF", "MF", "FW"].map(position => (
                   <Button
                     key={position}
-                    variant={positionFilter === position ? "default" : "outline"}
+                    variant="outline"
                     onClick={() => setPositionFilter(positionFilter === position ? null : position)}
-                    className="h-7 px-2 text-xs font-pixel"
+                    className={`h-7 px-2 text-xs font-pixel border-2 
+                      ${getPositionColor(position, positionFilter === position)}`}
                     size="sm"
                   >
                     {position}
@@ -135,6 +169,7 @@ const ComboList: React.FC<ComboListProps> = ({
         selectedStat={!!selectedStat}
         onApplyCombo={handleApplyCombo}
         onResetFilters={resetAllFilters}
+        showAllCombos={showAllCombos}
       />
     </div>
   );

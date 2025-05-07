@@ -5,6 +5,7 @@ import CardInventory from '@/components/CardInventory';
 import ComboList from '@/components/ComboList';
 import { useInventory } from '@/hooks/useInventory';
 import { useCombos } from '@/hooks/useCombos';
+import { trainingCombos } from '@/data/combos';
 
 const Index = () => {
   const { 
@@ -41,6 +42,7 @@ const Index = () => {
           applyCombo={applyCombo}
           undoLastCombo={undoLastCombo}
           hasHistory={inventory.history.length > 0}
+          allCombos={trainingCombos} // Pass all combos
         />
       </main>
       

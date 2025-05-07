@@ -8,11 +8,15 @@ import { useIsMobile } from '../../hooks/use-mobile';
 interface HeaderSectionProps {
   hasHistory: boolean;
   onUndo: () => void;
+  showAllCombos?: boolean;
+  setShowAllCombos?: (show: boolean) => void;
 }
 
 const HeaderSection: React.FC<HeaderSectionProps> = ({
   hasHistory,
-  onUndo
+  onUndo,
+  showAllCombos = false,
+  setShowAllCombos = () => {}
 }) => {
   const isMobile = useIsMobile();
   
@@ -24,17 +28,31 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
     });
   };
 
+  const toggleShowAllCombos = () => {
+    setShowAllCombos(!showAllCombos);
+  };
+
   return (
-    <div className="flex justify-between items-center mb-4">
-      <h2 className="font-pixel text-lg text-black">Available Combos</h2>
-      <Button
-        className="pixel-button-red px-3 py-1 h-auto"
-        disabled={!hasHistory}
-        onClick={handleUndo}
-      >
-        <Undo2 size={16} className={isMobile ? "" : "mr-2"} />
-        {!isMobile && "Undo"}
-      </Button>
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+      <h2 className="font-pixel text-lg text-black">Training Combos</h2>
+      <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <Button
+          variant="outline"
+          size="sm"
+          className={`font-pixel text-xs ${showAllCombos ? 'bg-yellow-100' : ''}`}
+          onClick={toggleShowAllCombos}
+        >
+          {showAllCombos ? "Show Available Only" : "Show All Combos"}
+        </Button>
+        <Button
+          className="pixel-button-red px-3 py-1 h-auto"
+          disabled={!hasHistory}
+          onClick={handleUndo}
+        >
+          <Undo2 size={16} className={isMobile ? "" : "mr-2"} />
+          {!isMobile && "Undo"}
+        </Button>
+      </div>
     </div>
   );
 };
