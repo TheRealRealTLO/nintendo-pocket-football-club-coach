@@ -19,10 +19,10 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
     <div className={`pixel-card p-3 flex flex-col h-full ${isAvailable ? '' : 'opacity-50'}`}>
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-1">
-          <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
           {combo.recommended && (
             <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
           )}
+          <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
         </div>
         {combo.recommendedPosition && (
           <PositionBadge position={combo.recommendedPosition} />

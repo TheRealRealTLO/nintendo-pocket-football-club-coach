@@ -48,13 +48,14 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
               variant="outline"
               size="sm"
               onClick={onResetFilters}
+              className="font-pixel text-xs"
             >
               Reset Filters
             </Button>
             <Tabs defaultValue="grid" className="w-[180px]" onValueChange={(value) => setView(value as 'grid' | 'table')}>
-              <TabsList>
-                <TabsTrigger value="grid">Grid View</TabsTrigger>
-                <TabsTrigger value="table">Table View</TabsTrigger>
+              <TabsList className="font-pixel text-xs">
+                <TabsTrigger value="grid" className="font-pixel text-xs">Grid View</TabsTrigger>
+                <TabsTrigger value="table" className="font-pixel text-xs">Table View</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
@@ -77,9 +78,9 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 
         {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
           <div className="text-center p-6">
-            <p className="text-gray-600">No combos match your current filters.</p>
+            <p className="text-gray-600 font-pixel">No combos match your current filters.</p>
             <Button 
-              className="mt-2"
+              className="mt-2 font-pixel text-xs"
               onClick={onResetFilters}
               variant="outline"
             >

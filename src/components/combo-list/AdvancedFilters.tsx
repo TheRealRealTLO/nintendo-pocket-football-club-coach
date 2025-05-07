@@ -36,7 +36,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
             key={position}
             variant={positionFilter === position ? "default" : "outline"}
             onClick={() => setPositionFilter(positionFilter === position ? null : position)}
-            className="h-8 px-3 text-xs"
+            className="h-8 px-3 text-xs font-pixel"
           >
             {position}
           </Button>
@@ -67,7 +67,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
         <Button
           variant={recommendedOnly ? "default" : "outline"}
           onClick={() => setRecommendedOnly(!recommendedOnly)}
-          className="h-8 px-3 text-xs"
+          className="h-8 px-3 text-xs font-pixel"
         >
           {recommendedOnly ? "Showing Recommended Only" : "Show All Combos"}
         </Button>

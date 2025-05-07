@@ -43,10 +43,10 @@ const ComboTable: React.FC<ComboTableProps> = ({
               >
                 <TableCell className="font-pixel text-sm py-2">
                   <div className="flex items-center gap-1">
-                    {combo.name}
                     {combo.recommended && (
                       <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                     )}
+                    {combo.name}
                   </div>
                 </TableCell>
                 <TableCell className="py-2">
