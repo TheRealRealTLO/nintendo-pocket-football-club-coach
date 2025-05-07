@@ -13,7 +13,7 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({
   searchTerm,
   setSearchTerm,
-  placeholder = "Search combos by name..."
+  placeholder = "Search combos by name or card..."
 }) => {
   return (
     <div className="relative mb-2">
