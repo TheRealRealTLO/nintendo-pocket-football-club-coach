@@ -17,10 +17,21 @@ export const useComboFiltering = (
 
     // Apply position filter
     if (positionFilter) {
-      result = result.filter(combo => 
-        combo.recommendedPosition === positionFilter ||
-        (positionFilter === 'ALL' && combo.recommendedPosition === 'ALL')
-      );
+      if (positionFilter === 'ALL') {
+        // Show all combos when ALL is selected
+      } else if (positionFilter === 'GENERAL') {
+        // Filter for combos without a specific position or marked as ALL
+        result = result.filter(combo => 
+          !combo.recommendedPosition || 
+          combo.recommendedPosition === 'ALL'
+        );
+      } else {
+        // Filter for specific positions
+        result = result.filter(combo => 
+          combo.recommendedPosition === positionFilter || 
+          combo.recommendedPosition === 'ALL'
+        );
+      }
     }
 
     // Apply recommended filter
@@ -46,10 +57,21 @@ export const useComboFiltering = (
 
     // Apply position filter
     if (positionFilter) {
-      result = result.filter(combo => 
-        combo.recommendedPosition === positionFilter ||
-        (positionFilter === 'ALL' && combo.recommendedPosition === 'ALL')
-      );
+      if (positionFilter === 'ALL') {
+        // Show all combos when ALL is selected
+      } else if (positionFilter === 'GENERAL') {
+        // Filter for combos without a specific position or marked as ALL
+        result = result.filter(combo => 
+          !combo.recommendedPosition || 
+          combo.recommendedPosition === 'ALL'
+        );
+      } else {
+        // Filter for specific positions
+        result = result.filter(combo => 
+          combo.recommendedPosition === positionFilter || 
+          combo.recommendedPosition === 'ALL'
+        );
+      }
     }
 
     // Apply recommended filter

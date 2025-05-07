@@ -26,19 +26,20 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   recommendedOnly = false,
   setRecommendedOnly = () => {}
 }) => {
-  const positions = ["ALL", "GK", "DF", "MF", "FW"];
+  const positions = ["ALL", "GENERAL", "GK", "DF", "MF", "FW"];
   const isMobile = useIsMobile();
 
   const getPositionColor = (position: string, isSelected: boolean) => {
     if (!isSelected) return tokens.badge.unselected;
     
     switch(position) {
-      case "GK": return "bg-orange-500 text-black " + tokens.badge.selected;
-      case "DF": return "bg-blue-500 text-black " + tokens.badge.selected;
-      case "MF": return "bg-green-500 text-black " + tokens.badge.selected;
-      case "FW": return "bg-red-500 text-black " + tokens.badge.selected;
-      case "ALL": return "bg-purple-500 text-black " + tokens.badge.selected;
-      default: return "bg-gray-400 text-black " + tokens.badge.selected;
+      case "GK": return "bg-orange-300 text-black " + tokens.badge.selected;
+      case "DF": return "bg-blue-300 text-black " + tokens.badge.selected;
+      case "MF": return "bg-green-300 text-black " + tokens.badge.selected;
+      case "FW": return "bg-red-300 text-black " + tokens.badge.selected;
+      case "ALL": return "bg-purple-300 text-black " + tokens.badge.selected;
+      case "GENERAL": return "bg-gray-300 text-black " + tokens.badge.selected;
+      default: return "bg-gray-300 text-black " + tokens.badge.selected;
     }
   };
   

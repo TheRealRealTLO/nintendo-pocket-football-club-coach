@@ -92,12 +92,13 @@ const ComboList: React.FC<ComboListProps> = ({
     if (!isSelected) return "bg-gray-200 hover:bg-gray-300 text-gray-700";
     
     switch(position) {
-      case "GK": return "bg-orange-500 text-black";
-      case "DF": return "bg-blue-500 text-black";
-      case "MF": return "bg-green-500 text-black";
-      case "FW": return "bg-red-500 text-black";
-      case "ALL": return "bg-purple-500 text-black";
-      default: return "bg-gray-400 text-black";
+      case "GK": return "bg-orange-300 text-black";
+      case "DF": return "bg-blue-300 text-black";
+      case "MF": return "bg-green-300 text-black";
+      case "FW": return "bg-red-300 text-black";
+      case "ALL": return "bg-purple-300 text-black";
+      case "GENERAL": return "bg-gray-300 text-black";
+      default: return "bg-gray-300 text-black";
     }
   };
 
@@ -124,7 +125,7 @@ const ComboList: React.FC<ComboListProps> = ({
             <div className="flex flex-wrap gap-2 mb-3">
               <h3 className="text-sm font-pixel w-full mb-1">Position:</h3>
               <div className="flex flex-wrap gap-1">
-                {["ALL", "GK", "DF", "MF", "FW"].map(position => (
+                {["ALL", "GENERAL", "GK", "DF", "MF", "FW"].map(position => (
                   <Button
                     key={position}
                     variant="outline"
