@@ -8,7 +8,7 @@ export const useComboFiltering = (
   selectedStat: StatType | null,
   sortDirection: 'asc' | 'desc' = 'desc'
 ) => {
-  const [positionFilter, setPositionFilter] = useState<string | null>(null);
+  const [positionFilter, setPositionFilter] = useState<string | null>("ALL"); // Default to "ALL" instead of null
   const [recommendedOnly, setRecommendedOnly] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
