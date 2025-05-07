@@ -56,23 +56,18 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             >
               Reset Filters
             </Button>
-            <Tabs defaultValue="grid" className="w-auto" onValueChange={(value) => setView(value as 'grid' | 'table')}>
-              <TabsList className="font-pixel text-xs">
-                <TabsTrigger value="grid" className="font-pixel text-xs">Grid</TabsTrigger>
-                <TabsTrigger value="table" className="font-pixel text-xs">Table</TabsTrigger>
-              </TabsList>
-            </Tabs>
+            {!isMobile && (
+              <Tabs defaultValue="grid" className="w-auto" onValueChange={(value) => setView(value as 'grid' | 'table')}>
+                <TabsList className="font-pixel text-xs">
+                  <TabsTrigger value="grid" className="font-pixel text-xs">Grid</TabsTrigger>
+                  <TabsTrigger value="table" className="font-pixel text-xs">Table</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            )}
           </div>
         </div>
         
-        {view === 'grid' ? (
-          <CombosTab 
-            combos={filteredCombos}
-            availableCombos={availableCombos}
-            selectedStat={selectedStat}
-            onApplyCombo={onApplyCombo}
-          />
-        ) : (
+        {(!isMobile && view === 'table') ? (
           <div className="overflow-x-auto">
             <ComboTable 
               combos={filteredCombos}
@@ -80,6 +75,13 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
               onApplyCombo={onApplyCombo}
             />
           </div>
+        ) : (
+          <CombosTab 
+            combos={filteredCombos}
+            availableCombos={availableCombos}
+            selectedStat={selectedStat}
+            onApplyCombo={onApplyCombo}
+          />
         )}
 
         {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
