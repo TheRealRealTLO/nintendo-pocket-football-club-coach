@@ -7,6 +7,7 @@ import AdvancedFilters from './combo-list/AdvancedFilters';
 import ComboTabsContainer from './combo-list/ComboTabsContainer';
 import HeaderSection from './combo-list/HeaderSection';
 import { useComboFiltering } from './combo-list/useComboFiltering';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface ComboListProps {
   availableCombos: TrainingCombo[];
@@ -28,6 +29,7 @@ const ComboList: React.FC<ComboListProps> = ({
   hasHistory
 }) => {
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const isMobile = useIsMobile();
   
   // Enhanced setSelectedStat that can also toggle sort direction
   const setSelectedStatWithToggle = (stat: StatType | null, toggleSort = false) => {
@@ -74,15 +76,56 @@ const ComboList: React.FC<ComboListProps> = ({
         onUndo={undoLastCombo} 
       />
 
-      <AdvancedFilters
-        positionFilter={positionFilter}
-        setPositionFilter={setPositionFilter}
-        selectedStat={selectedStat}
-        sortDirection={sortDirection}
-        setSelectedStat={setSelectedStatWithToggle}
-        recommendedOnly={recommendedOnly}
-        setRecommendedOnly={setRecommendedOnly}
-      />
+      {isMobile ? (
+        <div className="mb-4">
+          <div className="p-3 bg-gray-50 rounded-lg mb-2">
+            <h3 className="text-sm font-pixel mb-2">Filters:</h3>
+            <FilterBadges
+              selectedStat={selectedStat}
+              sortDirection={sortDirection}
+              setSelectedStat={setSelectedStatWithToggle}
+            />
+          </div>
+          <div className="p-3 bg-gray-50 rounded-lg">
+            <div className="flex flex-wrap gap-2 mb-3">
+              <h3 className="text-sm font-pixel w-full mb-1">Position:</h3>
+              <div className="flex flex-wrap gap-1">
+                {["ALL", "GK", "DF", "MF", "FW"].map(position => (
+                  <Button
+                    key={position}
+                    variant={positionFilter === position ? "default" : "outline"}
+                    onClick={() => setPositionFilter(positionFilter === position ? null : position)}
+                    className="h-7 px-2 text-xs font-pixel"
+                    size="sm"
+                  >
+                    {position}
+                  </Button>
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant={recommendedOnly ? "default" : "outline"}
+                onClick={() => setRecommendedOnly(!recommendedOnly)}
+                className="h-7 px-2 text-xs font-pixel w-full"
+                size="sm"
+              >
+                {recommendedOnly ? "Recommended Only" : "Show All Combos"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <AdvancedFilters
+          positionFilter={positionFilter}
+          setPositionFilter={setPositionFilter}
+          selectedStat={selectedStat}
+          sortDirection={sortDirection}
+          setSelectedStat={setSelectedStatWithToggle}
+          recommendedOnly={recommendedOnly}
+          setRecommendedOnly={setRecommendedOnly}
+        />
+      )}
 
       <ComboTabsContainer
         availableCombos={availableCombos}

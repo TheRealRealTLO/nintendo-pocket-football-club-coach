@@ -4,7 +4,8 @@ import { StatType } from '../../data/combos';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowUpDown } from 'lucide-react';
-import { allStatTypes } from '@/data/types';
+import { allStatTypes, statColors } from '@/data/combos';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 interface AdvancedFiltersProps {
   positionFilter: string | null;
@@ -26,48 +27,57 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   setRecommendedOnly = () => {}
 }) => {
   const positions = ["ALL", "GK", "DF", "MF", "FW"];
+  const isMobile = useIsMobile();
   
   return (
     <div className="p-4 bg-gray-50 rounded-lg mb-4">
-      <div className="flex flex-wrap gap-3 mb-3">
+      <div className="flex flex-wrap gap-2 mb-3">
         <h3 className="text-sm font-pixel w-full mb-2">Position Filter:</h3>
-        {positions.map(position => (
-          <Button
-            key={position}
-            variant={positionFilter === position ? "default" : "outline"}
-            onClick={() => setPositionFilter(positionFilter === position ? null : position)}
-            className="h-8 px-3 text-xs font-pixel"
-          >
-            {position}
-          </Button>
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {positions.map(position => (
+            <Button
+              key={position}
+              variant={positionFilter === position ? "default" : "outline"}
+              onClick={() => setPositionFilter(positionFilter === position ? null : position)}
+              className="h-8 px-3 text-xs font-pixel"
+              size="sm"
+            >
+              {position}
+            </Button>
+          ))}
+        </div>
       </div>
       
-      <div className="flex flex-wrap gap-3 mb-3">
+      <div className="flex flex-wrap gap-2 mb-3">
         <h3 className="text-sm font-pixel w-full mb-2">Stat Filter:</h3>
-        {allStatTypes.map(stat => (
-          <Badge
-            key={stat}
-            variant={selectedStat === stat ? "default" : "outline"}
-            className={`cursor-pointer font-pixel py-1 px-3 flex items-center gap-1 ${
-              selectedStat === stat ? 'bg-npfc-green-dark text-white' : 'hover:bg-gray-100'
-            }`}
-            onClick={() => setSelectedStat(stat, true)}
-          >
-            {stat}
-            {selectedStat === stat && (
-              <ArrowUpDown className="h-3 w-3 ml-1" data-direction={sortDirection} />
-            )}
-          </Badge>
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {allStatTypes.map(stat => (
+            <Badge
+              key={stat}
+              variant={selectedStat === stat ? "default" : "outline"}
+              className={`cursor-pointer font-pixel py-1 px-3 flex items-center gap-1 ${
+                selectedStat === stat 
+                  ? statColors[stat] 
+                  : `${statColors[stat]} opacity-60`
+              }`}
+              onClick={() => setSelectedStat(stat, true)}
+            >
+              {isMobile && stat === 'Willpower' ? 'Will' : stat}
+              {selectedStat === stat && (
+                <ArrowUpDown className="h-3 w-3 ml-1" data-direction={sortDirection} />
+              )}
+            </Badge>
+          ))}
+        </div>
       </div>
 
-      <div className="flex items-center gap-3 mt-4">
+      <div className="flex flex-wrap items-center gap-3 mt-4">
         <h3 className="text-sm font-pixel">Recommended Combos:</h3>
         <Button
           variant={recommendedOnly ? "default" : "outline"}
           onClick={() => setRecommendedOnly(!recommendedOnly)}
           className="h-8 px-3 text-xs font-pixel"
+          size="sm"
         >
           {recommendedOnly ? "Showing Recommended Only" : "Show All Combos"}
         </Button>

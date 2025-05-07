@@ -2,6 +2,7 @@
 import React from 'react';
 import { TrainingCombo } from '../../data/combos';
 import ComboItem from '../ComboItem';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 interface CombosTabProps {
   combos: (TrainingCombo & { key?: string })[];
@@ -17,6 +18,8 @@ const CombosTab: React.FC<CombosTabProps> = ({
   selectedStat,
   onApplyCombo
 }) => {
+  const isMobile = useIsMobile();
+
   if (combos.length === 0) {
     return (
       <div className="text-center p-6">
@@ -30,7 +33,7 @@ const CombosTab: React.FC<CombosTabProps> = ({
 
   // Grid view using ComboItem
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {combos.map(combo => {
         const isAvailable = availableCombos.some(c => c.id === combo.id);
         return (

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import CombosTab from './CombosTab';
 import ComboTable from './ComboTable';
 import { Star } from 'lucide-react';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -27,11 +28,12 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   const [view, setView] = useState<'grid' | 'table'>('grid');
   const recommendedCount = filteredCombos.filter(combo => combo.recommended).length;
   const isShowingRecommended = filteredCombos.every(combo => combo.recommended) && filteredCombos.length > 0;
+  const isMobile = useIsMobile();
   
   return (
     <div>
       <div className="p-4 border-t">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
           <div className="flex flex-col">
             <h3 className="text-lg font-pixel">
               Available Combos ({filteredCombos.length})
@@ -43,7 +45,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
               )}
             </h3>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full md:w-auto justify-between md:justify-end">
             <Button
               variant="outline"
               size="sm"
@@ -69,11 +71,13 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             onApplyCombo={onApplyCombo}
           />
         ) : (
-          <ComboTable 
-            combos={filteredCombos}
-            availableCombos={availableCombos}
-            onApplyCombo={onApplyCombo}
-          />
+          <div className="overflow-x-auto">
+            <ComboTable 
+              combos={filteredCombos}
+              availableCombos={availableCombos}
+              onApplyCombo={onApplyCombo}
+            />
+          </div>
         )}
 
         {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
