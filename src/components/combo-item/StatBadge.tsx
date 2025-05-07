@@ -12,7 +12,7 @@ interface StatBadgeProps {
 const StatBadge: React.FC<StatBadgeProps> = ({ stat, value }) => {
   return (
     <Badge 
-      className={`${statColors[stat]} ${tokens.badge.card} text-black ${value < 0 ? 'ring-2 ring-red-500' : ''}`}
+      className={`${statColors[stat]} text-black font-semibold ${tokens.badge.card} ${value < 0 ? 'ring-2 ring-red-500' : ''}`}
     >
       {stat} {value > 0 ? `+${value}` : value}
     </Badge>
