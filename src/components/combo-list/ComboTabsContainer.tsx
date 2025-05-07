@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrainingCombo } from '../../data/combos';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -31,6 +31,13 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   const recommendedCount = filteredCombos.filter(combo => combo.recommended).length;
   const isShowingRecommended = filteredCombos.every(combo => combo.recommended) && filteredCombos.length > 0;
   const isMobile = useIsMobile();
+  
+  // Force grid view on mobile
+  useEffect(() => {
+    if (isMobile && view === 'table') {
+      setView('grid');
+    }
+  }, [isMobile, view]);
   
   return (
     <div>
@@ -67,7 +74,15 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
           </div>
         </div>
         
-        {(!isMobile && view === 'table') ? (
+        {/* Always show grid view on mobile, regardless of the view state */}
+        {(isMobile || view === 'grid') ? (
+          <CombosTab 
+            combos={filteredCombos}
+            availableCombos={availableCombos}
+            selectedStat={selectedStat}
+            onApplyCombo={onApplyCombo}
+          />
+        ) : (
           <div className="overflow-x-auto">
             <ComboTable 
               combos={filteredCombos}
@@ -75,13 +90,6 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
               onApplyCombo={onApplyCombo}
             />
           </div>
-        ) : (
-          <CombosTab 
-            combos={filteredCombos}
-            availableCombos={availableCombos}
-            selectedStat={selectedStat}
-            onApplyCombo={onApplyCombo}
-          />
         )}
 
         {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
