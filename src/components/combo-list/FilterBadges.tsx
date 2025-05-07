@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { StatType, allStatTypes, statColors } from '../../data/combos';
 import { useIsMobile } from '../../hooks/use-mobile';
 
@@ -19,24 +19,29 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
   
   return (
     <div className="flex flex-wrap gap-2 justify-start">
-      <Badge 
-        className={`${!selectedStat ? 'bg-black text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'} cursor-pointer font-pixel text-xs`}
+      <Button
+        variant="outline"
+        className={`h-8 px-3 py-1 text-xs font-pixel border-2 
+          ${!selectedStat ? 'bg-purple-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+        size="sm"
         onClick={() => setSelectedStat(null)}
       >
-        All
-      </Badge>
+        ALL
+      </Button>
       {allStatTypes.map((stat) => (
-        <Badge
+        <Button
           key={stat}
-          className={`cursor-pointer font-pixel text-xs ${
-            selectedStat === stat 
-              ? statColors[stat] 
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
+          variant="outline"
+          className={`h-8 px-3 py-1 text-xs font-pixel border-2 
+            ${selectedStat === stat 
+              ? statColors[stat] + ' text-black'
+              : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+            }`}
+          size="sm"
           onClick={() => setSelectedStat(stat, true)}
         >
           {isMobile && stat === 'Willpower' ? 'Will' : stat}
-        </Badge>
+        </Button>
       ))}
     </div>
   );

@@ -92,11 +92,11 @@ const ComboList: React.FC<ComboListProps> = ({
     if (!isSelected) return "bg-gray-200 hover:bg-gray-300 text-gray-700";
     
     switch(position) {
-      case "GK": return "bg-orange-400 text-black";
-      case "DF": return "bg-blue-400 text-black";
-      case "MF": return "bg-green-400 text-black";
-      case "FW": return "bg-red-400 text-black";
-      case "ALL": return "bg-purple-400 text-black";
+      case "GK": return "bg-orange-500 text-black";
+      case "DF": return "bg-blue-500 text-black";
+      case "MF": return "bg-green-500 text-black";
+      case "FW": return "bg-red-500 text-black";
+      case "ALL": return "bg-purple-500 text-black";
       default: return "bg-gray-400 text-black";
     }
   };
