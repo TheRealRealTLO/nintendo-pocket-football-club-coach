@@ -39,29 +39,12 @@ export const useComboFiltering = (
       result = result.filter(combo => combo.recommended);
     }
 
-    // Apply search term filter - IMPROVED VERSION
+    // Apply search term filter - ONLY search by combo name
     if (searchTerm.trim()) {
       const searchTermLower = searchTerm.toLowerCase().trim();
-      result = result.filter(combo => {
-        // Check if combo name contains the search term
-        const nameMatch = combo.name.toLowerCase().includes(searchTermLower);
-        
-        // Check if any card type specifically contains the search term (not partial words)
-        const cardTypeMatch = combo.cards.some(card => {
-          const cardTypeLower = card.type.toLowerCase();
-          // Check for exact card type match or a word that starts with the search term
-          return cardTypeLower === searchTermLower || 
-                 cardTypeLower.startsWith(searchTermLower + " ") || 
-                 cardTypeLower.includes(" " + searchTermLower);
-        });
-        
-        // Check if the combo contains the exact card that matches the search term
-        const exactCardMatch = combo.cards.some(card => 
-          card.type.toLowerCase().startsWith(searchTermLower)
-        );
-        
-        return nameMatch || cardTypeMatch || exactCardMatch;
-      });
+      result = result.filter(combo => 
+        combo.name.toLowerCase().includes(searchTermLower)
+      );
     }
 
     // Sort by stat value if a stat is selected
@@ -103,29 +86,12 @@ export const useComboFiltering = (
       result = result.filter(combo => combo.recommended);
     }
 
-    // Apply search term filter - IMPROVED VERSION (same as above)
+    // Apply search term filter - ONLY search by combo name (same as above)
     if (searchTerm.trim()) {
       const searchTermLower = searchTerm.toLowerCase().trim();
-      result = result.filter(combo => {
-        // Check if combo name contains the search term
-        const nameMatch = combo.name.toLowerCase().includes(searchTermLower);
-        
-        // Check if any card type specifically contains the search term (not partial words)
-        const cardTypeMatch = combo.cards.some(card => {
-          const cardTypeLower = card.type.toLowerCase();
-          // Check for exact card type match or a word that starts with the search term
-          return cardTypeLower === searchTermLower || 
-                 cardTypeLower.startsWith(searchTermLower + " ") || 
-                 cardTypeLower.includes(" " + searchTermLower);
-        });
-        
-        // Check if the combo contains the exact card that matches the search term
-        const exactCardMatch = combo.cards.some(card => 
-          card.type.toLowerCase().startsWith(searchTermLower)
-        );
-        
-        return nameMatch || cardTypeMatch || exactCardMatch;
-      });
+      result = result.filter(combo => 
+        combo.name.toLowerCase().includes(searchTermLower)
+      );
     }
 
     // Sort by stat value if a stat is selected
