@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { TrainingCombo, StatType } from '../data/combos';
 import { toast } from '@/components/ui/use-toast';
+import { Button } from '@/components/ui/button';
 import FilterBadges from './combo-list/FilterBadges';
 import AdvancedFilters from './combo-list/AdvancedFilters';
 import ComboTabsContainer from './combo-list/ComboTabsContainer';
