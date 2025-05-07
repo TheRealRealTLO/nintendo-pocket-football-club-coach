@@ -10,8 +10,9 @@ export const useComboFiltering = (
 ) => {
   const [positionFilter, setPositionFilter] = useState<string | null>(null);
   const [recommendedOnly, setRecommendedOnly] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // Filter combos by position and recommended flag
+  // Filter combos by position, recommended flag, and search term
   const processedFilteredCombos = useMemo(() => {
     let result = [...filteredCombos];
 
@@ -38,6 +39,15 @@ export const useComboFiltering = (
       result = result.filter(combo => combo.recommended);
     }
 
+    // Apply search term filter
+    if (searchTerm.trim()) {
+      const searchTermLower = searchTerm.toLowerCase().trim();
+      result = result.filter(combo => 
+        combo.name.toLowerCase().includes(searchTermLower) ||
+        combo.cards.some(card => card.type.toLowerCase().includes(searchTermLower))
+      );
+    }
+
     // Sort by stat value if a stat is selected
     if (selectedStat) {
       result.sort((a, b) => {
@@ -48,7 +58,7 @@ export const useComboFiltering = (
     }
 
     return result;
-  }, [filteredCombos, positionFilter, recommendedOnly, selectedStat, sortDirection]);
+  }, [filteredCombos, positionFilter, recommendedOnly, searchTerm, selectedStat, sortDirection]);
 
   // Same filtering but for all combos
   const allFilteredCombos = useMemo(() => {
@@ -77,6 +87,15 @@ export const useComboFiltering = (
       result = result.filter(combo => combo.recommended);
     }
 
+    // Apply search term filter
+    if (searchTerm.trim()) {
+      const searchTermLower = searchTerm.toLowerCase().trim();
+      result = result.filter(combo => 
+        combo.name.toLowerCase().includes(searchTermLower) ||
+        combo.cards.some(card => card.type.toLowerCase().includes(searchTermLower))
+      );
+    }
+
     // Sort by stat value if a stat is selected
     if (selectedStat) {
       result.sort((a, b) => {
@@ -87,13 +106,15 @@ export const useComboFiltering = (
     }
 
     return result;
-  }, [availableCombos, positionFilter, recommendedOnly, selectedStat, sortDirection]);
+  }, [availableCombos, positionFilter, recommendedOnly, searchTerm, selectedStat, sortDirection]);
 
   return {
     positionFilter,
     setPositionFilter,
     recommendedOnly,
     setRecommendedOnly,
+    searchTerm,
+    setSearchTerm,
     processedFilteredCombos,
     allFilteredCombos
   };

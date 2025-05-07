@@ -3,7 +3,7 @@ import React from 'react';
 import { TrainingCombo } from '../../data/combos';
 import { Button } from '@/components/ui/button';
 import CombosTab from './CombosTab';
-import { Trophy } from 'lucide-react';
+import { Trophy, Search } from 'lucide-react';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -26,6 +26,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 }) => {
   const recommendedCount = filteredCombos.filter(combo => combo.recommended).length;
   const isShowingRecommended = filteredCombos.every(combo => combo.recommended) && filteredCombos.length > 0;
+  const isFiltered = filteredCombos.length !== (showAllCombos ? allFilteredCombos.length : availableCombos.length);
   
   return (
     <div>
@@ -38,6 +39,12 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
                 <span className="text-sm text-amber-700 flex items-center gap-1 mt-1">
                   <Trophy className="h-4 w-4 text-amber-500" /> 
                   Top stat-boosting combos only ({recommendedCount})
+                </span>
+              )}
+              {isFiltered && filteredCombos.length > 0 && (
+                <span className="text-sm text-purple-700 flex items-center gap-1 mt-1">
+                  <Search className="h-4 w-4 text-purple-500" /> 
+                  Filtered results
                 </span>
               )}
             </h3>
@@ -63,7 +70,7 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
 
         {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
           <div className="text-center p-6">
-            <p className="text-gray-600 font-pixel">No combos match your current filters.</p>
+            <p className="text-gray-600 font-pixel">No combos match your current filters or search.</p>
             <Button 
               className="mt-2 font-pixel text-xs"
               onClick={onResetFilters}

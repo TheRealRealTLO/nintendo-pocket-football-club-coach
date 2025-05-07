@@ -9,6 +9,7 @@ import ComboTabsContainer from './combo-list/ComboTabsContainer';
 import HeaderSection from './combo-list/HeaderSection';
 import { useComboFiltering } from './combo-list/useComboFiltering';
 import { useIsMobile } from '../hooks/use-mobile';
+import SearchBar from './combo-list/SearchBar';
 
 interface ComboListProps {
   availableCombos: TrainingCombo[];
@@ -53,6 +54,8 @@ const ComboList: React.FC<ComboListProps> = ({
     setPositionFilter,
     recommendedOnly,
     setRecommendedOnly,
+    searchTerm,
+    setSearchTerm,
     processedFilteredCombos,
     allFilteredCombos
   } = useComboFiltering(
@@ -67,6 +70,7 @@ const ComboList: React.FC<ComboListProps> = ({
     setSelectedStatWithToggle(null);
     setPositionFilter(null);
     setRecommendedOnly(false);
+    setSearchTerm('');
   };
 
   // Handler for applying a combo
@@ -110,6 +114,14 @@ const ComboList: React.FC<ComboListProps> = ({
         showAllCombos={showAllCombos}
         setShowAllCombos={setShowAllCombos}
       />
+
+      {/* Add search bar */}
+      <div className="px-4 pt-2 pb-0">
+        <SearchBar 
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+      </div>
 
       {isMobile ? (
         <div className="mb-4">
