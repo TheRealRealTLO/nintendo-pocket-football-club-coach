@@ -1,118 +1,77 @@
 
 import React from 'react';
+import { StatType } from '../../data/combos';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./CustomTabs";
-import { StatType, allStatTypes, statColors } from '../../data/combos';
-import { FilterBadges } from './FilterBadges';
-import { useIsMobile } from '@/hooks/use-mobile';
-
-export type PositionFilter = "ALL" | "GK" | "DF" | "MF" | "FW" | null;
+import { ArrowUpDown } from 'lucide-react';
+import { allStatTypes } from '@/data/types';
 
 interface AdvancedFiltersProps {
-  positionFilter: PositionFilter;
-  setPositionFilter: (position: PositionFilter) => void;
+  positionFilter: string | null;
+  setPositionFilter: (position: string | null) => void;
   selectedStat: StatType | null;
   sortDirection: 'asc' | 'desc';
   setSelectedStat: (stat: StatType | null, toggleSort?: boolean) => void;
+  recommendedOnly?: boolean;
+  setRecommendedOnly?: (value: boolean) => void;
 }
-
-// Helper function to get position badge color
-const getPositionColor = (position: PositionFilter) => {
-  switch(position) {
-    case "GK": return "bg-orange-400 text-black";
-    case "DF": return "bg-blue-400 text-black";
-    case "MF": return "bg-green-400 text-black";
-    case "FW": return "bg-red-400 text-black";
-    case "ALL": return "bg-purple-400 text-black";
-    default: return "bg-gray-400 text-black";
-  }
-};
 
 const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   positionFilter,
   setPositionFilter,
   selectedStat,
   sortDirection,
-  setSelectedStat
+  setSelectedStat,
+  recommendedOnly = false,
+  setRecommendedOnly = () => {}
 }) => {
-  const isMobile = useIsMobile();
+  const positions = ["ALL", "GK", "DF", "MF", "FW"];
   
-  // Helper function to get position badge styles - updated to match stat filter style
-  const getPositionBadgeStyles = (position: PositionFilter) => {
-    const baseColor = getPositionColor(position);
-    if (positionFilter === position) {
-      return `${baseColor}`;
-    }
-    return `${baseColor} opacity-60`; // Match the stat filter opacity
-  };
-
   return (
-    <div className="mb-4">
-      <Tabs defaultValue="stat" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-4 bg-gray-100 p-1 rounded-md">
-          <TabsTrigger 
-            value="stat" 
-            className="font-pixel text-xs"
+    <div className="p-4 bg-gray-50 rounded-lg mb-4">
+      <div className="flex flex-wrap gap-3 mb-3">
+        <h3 className="text-sm font-pixel w-full mb-2">Position Filter:</h3>
+        {positions.map(position => (
+          <Button
+            key={position}
+            variant={positionFilter === position ? "default" : "outline"}
+            onClick={() => setPositionFilter(positionFilter === position ? null : position)}
+            className="h-8 px-3 text-xs"
           >
-            {isMobile ? "Stats" : "Stat Filters"}
-          </TabsTrigger>
-          <TabsTrigger 
-            value="position" 
-            className="font-pixel text-xs"
+            {position}
+          </Button>
+        ))}
+      </div>
+      
+      <div className="flex flex-wrap gap-3 mb-3">
+        <h3 className="text-sm font-pixel w-full mb-2">Stat Filter:</h3>
+        {allStatTypes.map(stat => (
+          <Badge
+            key={stat}
+            variant={selectedStat === stat ? "default" : "outline"}
+            className={`cursor-pointer font-pixel py-1 px-3 flex items-center gap-1 ${
+              selectedStat === stat ? 'bg-npfc-green-dark text-white' : 'hover:bg-gray-100'
+            }`}
+            onClick={() => setSelectedStat(stat, true)}
           >
-            {isMobile ? "Positions" : "Position Filters"}
-          </TabsTrigger>
-        </TabsList>
-        
-        <TabsContent value="stat" className="mt-0">
-          <FilterBadges 
-            selectedStat={selectedStat}
-            sortDirection={sortDirection}
-            setSelectedStat={setSelectedStat}
-          />
-        </TabsContent>
-        
-        <TabsContent value="position" className="mt-0">
-          <div className="flex flex-wrap gap-2">
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${positionFilter === null ? "bg-black text-white" : "bg-gray-200"}`} 
-              onClick={() => setPositionFilter(null)}
-            >
-              All
-            </Badge>
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${getPositionBadgeStyles("ALL")}`} 
-              onClick={() => setPositionFilter("ALL")}
-            >
-              General
-            </Badge>
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${getPositionBadgeStyles("GK")}`} 
-              onClick={() => setPositionFilter("GK")}
-            >
-              {isMobile ? "GK" : "Goalkeeper"}
-            </Badge>
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${getPositionBadgeStyles("DF")}`} 
-              onClick={() => setPositionFilter("DF")}
-            >
-              {isMobile ? "DF" : "Defender"}
-            </Badge>
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${getPositionBadgeStyles("MF")}`} 
-              onClick={() => setPositionFilter("MF")}
-            >
-              {isMobile ? "MF" : "Midfielder"}
-            </Badge>
-            <Badge 
-              className={`cursor-pointer font-pixel text-xs ${getPositionBadgeStyles("FW")}`} 
-              onClick={() => setPositionFilter("FW")}
-            >
-              {isMobile ? "FW" : "Forward"}
-            </Badge>
-          </div>
-        </TabsContent>
-      </Tabs>
+            {stat}
+            {selectedStat === stat && (
+              <ArrowUpDown className="h-3 w-3 ml-1" data-direction={sortDirection} />
+            )}
+          </Badge>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-3 mt-4">
+        <h3 className="text-sm font-pixel">Recommended Combos:</h3>
+        <Button
+          variant={recommendedOnly ? "default" : "outline"}
+          onClick={() => setRecommendedOnly(!recommendedOnly)}
+          className="h-8 px-3 text-xs"
+        >
+          {recommendedOnly ? "Showing Recommended Only" : "Show All Combos"}
+        </Button>
+      </div>
     </div>
   );
 };

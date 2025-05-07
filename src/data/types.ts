@@ -57,6 +57,11 @@ export type StatType =
   | "Jumping" 
   | "Willpower";
 
+// All available stats for easy reference
+export const allStatTypes: StatType[] = [
+  "Kicking", "Speed", "Stamina", "Technique", "Toughness", "Jumping", "Willpower"
+];
+
 // Interface for card requirements of a combo
 export interface CardRequirement {
   type: CardType;
@@ -73,4 +78,6 @@ export interface TrainingCombo {
   };
   // Position recommendation (optional)
   recommendedPosition?: "GK" | "DF" | "MF" | "FW" | "ALL";
+  // Flag for best combos (new field)
+  recommended?: boolean;
 }

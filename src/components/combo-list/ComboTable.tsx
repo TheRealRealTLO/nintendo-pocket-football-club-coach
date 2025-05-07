@@ -7,6 +7,7 @@ import CardRequirementBadge from '../combo-item/CardRequirementBadge';
 import StatBadge from '../combo-item/StatBadge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { allStatTypes } from '@/data/combos';
+import { Star } from 'lucide-react';
 
 interface ComboTableProps {
   combos: (TrainingCombo & { key?: string })[];
@@ -40,7 +41,14 @@ const ComboTable: React.FC<ComboTableProps> = ({
                 key={combo.key || `combo-${combo.id}`}
                 className={`border-b ${isAvailable ? '' : 'opacity-50'}`}
               >
-                <TableCell className="font-pixel text-sm py-2">{combo.name}</TableCell>
+                <TableCell className="font-pixel text-sm py-2">
+                  <div className="flex items-center gap-1">
+                    {combo.name}
+                    {combo.recommended && (
+                      <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                    )}
+                  </div>
+                </TableCell>
                 <TableCell className="py-2">
                   {combo.recommendedPosition && (
                     <PositionBadge position={combo.recommendedPosition} />

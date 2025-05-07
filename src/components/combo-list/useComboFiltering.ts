@@ -1,8 +1,6 @@
 
 import { useState, useMemo } from 'react';
 import { TrainingCombo, StatType } from '../../data/combos';
-import { trainingCombos } from '../../data/combos';
-import { PositionFilter } from './AdvancedFilters';
 
 export const useComboFiltering = (
   availableCombos: TrainingCombo[],
@@ -10,99 +8,72 @@ export const useComboFiltering = (
   selectedStat: StatType | null,
   sortDirection: 'asc' | 'desc' = 'desc'
 ) => {
-  const [positionFilter, setPositionFilter] = useState<PositionFilter>(null);
+  const [positionFilter, setPositionFilter] = useState<string | null>(null);
+  const [recommendedOnly, setRecommendedOnly] = useState<boolean>(false);
 
-  // Filter and sort combos based on selected filters
-  const getFilteredAndSortedCombos = (combos: TrainingCombo[]) => {
-    // First apply position filter if selected
-    let result = combos;
+  // Filter combos by position and recommended flag
+  const processedFilteredCombos = useMemo(() => {
+    let result = [...filteredCombos];
+
+    // Apply position filter
     if (positionFilter) {
-      // When a specific position (not null or "ALL") is selected, only show combos for that position
-      // Exclude "ALL" position combos when a specific position filter is applied
-      if (positionFilter !== "ALL") {
-        result = result.filter(combo => 
-          combo.recommendedPosition === positionFilter
-        );
-      } else {
-        // When "ALL" position filter is selected, show both "ALL" position combos and those without position
-        result = result.filter(combo => 
-          combo.recommendedPosition === "ALL" || 
-          !combo.recommendedPosition
-        );
-      }
+      result = result.filter(combo => 
+        combo.recommendedPosition === positionFilter ||
+        (positionFilter === 'ALL' && combo.recommendedPosition === 'ALL')
+      );
     }
-    
-    // Then sort based on selected stat and sort direction
+
+    // Apply recommended filter
+    if (recommendedOnly) {
+      result = result.filter(combo => combo.recommended);
+    }
+
+    // Sort by stat value if a stat is selected
     if (selectedStat) {
-      result = [...result].sort((a, b) => {
+      result.sort((a, b) => {
         const valueA = a.stats[selectedStat] || 0;
         const valueB = b.stats[selectedStat] || 0;
         return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
-    } else {
-      // If no stat is selected, sort alphabetically by name
-      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
-    
-    return result;
-  };
 
-  // Get filtered and sorted combos
-  const processedAvailableCombos = useMemo(() => 
-    getFilteredAndSortedCombos(availableCombos), 
-    [availableCombos, positionFilter, selectedStat, sortDirection]
-  );
-  
-  const processedFilteredCombos = useMemo(() => 
-    getFilteredAndSortedCombos(filteredCombos),
-    [filteredCombos, positionFilter, selectedStat, sortDirection]
-  );
-  
-  // Filter all combos by stat and position
+    return result;
+  }, [filteredCombos, positionFilter, recommendedOnly, selectedStat, sortDirection]);
+
+  // Same filtering but for all combos
   const allFilteredCombos = useMemo(() => {
-    let result = trainingCombos;
-    
-    // Apply stat filter if selected
-    if (selectedStat) {
-      result = result.filter(combo => combo.stats[selectedStat] !== undefined && combo.stats[selectedStat]! > 0);
-    }
-    
-    // Apply position filter if selected
+    let result = [...availableCombos];
+
+    // Apply position filter
     if (positionFilter) {
-      // When a specific position (not null or "ALL") is selected, only show combos for that position
-      // Exclude "ALL" position combos when a specific position filter is applied
-      if (positionFilter !== "ALL") {
-        result = result.filter(combo => 
-          combo.recommendedPosition === positionFilter
-        );
-      } else {
-        // When "ALL" position filter is selected, show both "ALL" position combos and those without position
-        result = result.filter(combo => 
-          combo.recommendedPosition === "ALL" || 
-          !combo.recommendedPosition
-        );
-      }
+      result = result.filter(combo => 
+        combo.recommendedPosition === positionFilter ||
+        (positionFilter === 'ALL' && combo.recommendedPosition === 'ALL')
+      );
     }
-    
-    // Apply sorting based on selected stat and direction
+
+    // Apply recommended filter
+    if (recommendedOnly) {
+      result = result.filter(combo => combo.recommended);
+    }
+
+    // Sort by stat value if a stat is selected
     if (selectedStat) {
-      result = [...result].sort((a, b) => {
+      result.sort((a, b) => {
         const valueA = a.stats[selectedStat] || 0;
         const valueB = b.stats[selectedStat] || 0;
         return sortDirection === 'desc' ? valueB - valueA : valueA - valueB;
       });
-    } else {
-      // If no stat is selected, sort alphabetically by name
-      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
     }
-    
+
     return result;
-  }, [positionFilter, selectedStat, sortDirection]);
+  }, [availableCombos, positionFilter, recommendedOnly, selectedStat, sortDirection]);
 
   return {
     positionFilter,
     setPositionFilter,
-    processedAvailableCombos,
+    recommendedOnly,
+    setRecommendedOnly,
     processedFilteredCombos,
     allFilteredCombos
   };

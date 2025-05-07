@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import PositionBadge from './combo-item/PositionBadge';
 import CardRequirements from './combo-item/CardRequirements';
 import StatImprovements from './combo-item/StatImprovements';
+import { Star } from 'lucide-react';
 
 interface ComboItemProps {
   combo: TrainingCombo;
@@ -17,7 +18,12 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
   return (
     <div className={`pixel-card p-3 flex flex-col h-full ${isAvailable ? '' : 'opacity-50'}`}>
       <div className="flex justify-between items-center mb-2">
-        <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
+        <div className="flex items-center gap-1">
+          <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
+          {combo.recommended && (
+            <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+          )}
+        </div>
         {combo.recommendedPosition && (
           <PositionBadge position={combo.recommendedPosition} />
         )}

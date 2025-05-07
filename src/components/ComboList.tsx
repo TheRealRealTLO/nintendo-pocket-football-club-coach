@@ -45,6 +45,8 @@ const ComboList: React.FC<ComboListProps> = ({
   const {
     positionFilter,
     setPositionFilter,
+    recommendedOnly,
+    setRecommendedOnly,
     processedFilteredCombos,
     allFilteredCombos
   } = useComboFiltering(availableCombos, filteredCombos, selectedStat, sortDirection);
@@ -53,6 +55,7 @@ const ComboList: React.FC<ComboListProps> = ({
   const resetAllFilters = () => {
     setSelectedStatWithToggle(null);
     setPositionFilter(null);
+    setRecommendedOnly(false);
   };
 
   // Handler for applying a combo
@@ -77,6 +80,8 @@ const ComboList: React.FC<ComboListProps> = ({
         selectedStat={selectedStat}
         sortDirection={sortDirection}
         setSelectedStat={setSelectedStatWithToggle}
+        recommendedOnly={recommendedOnly}
+        setRecommendedOnly={setRecommendedOnly}
       />
 
       <ComboTabsContainer

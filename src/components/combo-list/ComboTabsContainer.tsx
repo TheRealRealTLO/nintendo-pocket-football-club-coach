@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import React, { useState } from 'react';
 import { TrainingCombo } from '../../data/combos';
-import CombosTab from './CombosTab';
-import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Search, RotateCcw } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import CombosTab from './CombosTab';
+import ComboTable from './ComboTable';
+import { Star } from 'lucide-react';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -25,99 +24,70 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
   onApplyCombo,
   onResetFilters
 }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchedAvailableCombos, setSearchedAvailableCombos] = useState<TrainingCombo[]>(filteredCombos);
-  const [searchedAllCombos, setSearchedAllCombos] = useState<TrainingCombo[]>(allFilteredCombos);
-  const isMobile = useIsMobile();
+  const [view, setView] = useState<'grid' | 'table'>('grid');
+  const recommendedCount = filteredCombos.filter(combo => combo.recommended).length;
+  const isShowingRecommended = filteredCombos.every(combo => combo.recommended) && filteredCombos.length > 0;
   
-  // Filter combos based on search query
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setSearchedAvailableCombos(filteredCombos);
-      setSearchedAllCombos(allFilteredCombos);
-      return;
-    }
-    
-    const query = searchQuery.toLowerCase().trim();
-    
-    const filteredAvailable = filteredCombos.filter(combo => 
-      combo.name.toLowerCase().includes(query)
-    );
-    
-    const filteredAll = allFilteredCombos.filter(combo => 
-      combo.name.toLowerCase().includes(query)
-    );
-    
-    setSearchedAvailableCombos(filteredAvailable);
-    setSearchedAllCombos(filteredAll);
-  }, [searchQuery, filteredCombos, allFilteredCombos]);
-  
-  // Ensure we use the correct key for each combo to prevent duplicate key warnings
-  const ensureUniqueKeys = (combos: TrainingCombo[]) => {
-    return combos.map(combo => ({
-      ...combo,
-      key: `combo-${combo.id}-${combo.name.replace(/\s+/g, '')}`
-    }));
-  };
-
-  const resetSearch = () => {
-    setSearchQuery('');
-    onResetFilters();
-  };
-
   return (
     <div>
-      <div className="relative mb-4 flex gap-2">
-        <div className="relative flex-grow">
-          <Input
-            placeholder={isMobile ? "Search combos..." : "Search combination name..."}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4"
-          />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+      <div className="p-4 border-t">
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col">
+            <h3 className="text-lg font-pixel">
+              Available Combos ({filteredCombos.length})
+              {isShowingRecommended && (
+                <span className="text-sm text-yellow-600 flex items-center gap-1 mt-1">
+                  <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" /> 
+                  Showing recommended combos ({recommendedCount})
+                </span>
+              )}
+            </h3>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onResetFilters}
+            >
+              Reset Filters
+            </Button>
+            <Tabs defaultValue="grid" className="w-[180px]" onValueChange={(value) => setView(value as 'grid' | 'table')}>
+              <TabsList>
+                <TabsTrigger value="grid">Grid View</TabsTrigger>
+                <TabsTrigger value="table">Table View</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
         </div>
-        <Button 
-          variant="outline" 
-          size="icon" 
-          onClick={resetSearch} 
-          title="Reset search and filters"
-          className="flex-shrink-0"
-        >
-          <RotateCcw className="h-4 w-4" />
-        </Button>
-      </div>
-      
-      <Tabs defaultValue="available">
-        <TabsList className="grid w-full grid-cols-2 mb-4">
-          <TabsTrigger value="available" className="font-pixel text-xs">
-            Available ({searchedAvailableCombos.length})
-          </TabsTrigger>
-          <TabsTrigger value="all" className="font-pixel text-xs">
-            {isMobile ? "All Combos" : "All Training Combinations"}
-          </TabsTrigger>
-        </TabsList>
         
-        <TabsContent value="available">
+        {view === 'grid' ? (
           <CombosTab 
-            combos={ensureUniqueKeys(searchedAvailableCombos)}
+            combos={filteredCombos}
             availableCombos={availableCombos}
             selectedStat={selectedStat}
             onApplyCombo={onApplyCombo}
-            viewMode="grid"
           />
-        </TabsContent>
+        ) : (
+          <ComboTable 
+            combos={filteredCombos}
+            availableCombos={availableCombos}
+            onApplyCombo={onApplyCombo}
+          />
+        )}
 
-        <TabsContent value="all">
-          <CombosTab 
-            combos={ensureUniqueKeys(searchedAllCombos)}
-            availableCombos={availableCombos}
-            selectedStat={selectedStat}
-            onApplyCombo={onApplyCombo}
-            viewMode="grid"
-          />
-        </TabsContent>
-      </Tabs>
+        {filteredCombos.length === 0 && allFilteredCombos.length > 0 && (
+          <div className="text-center p-6">
+            <p className="text-gray-600">No combos match your current filters.</p>
+            <Button 
+              className="mt-2"
+              onClick={onResetFilters}
+              variant="outline"
+            >
+              Reset Filters
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
