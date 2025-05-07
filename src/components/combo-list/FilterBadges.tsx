@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { StatType, allStatTypes, statColors } from '../../data/combos';
 import { useIsMobile } from '../../hooks/use-mobile';
+import { tokens } from '@/styles/tokens';
 
 interface FilterBadgesProps {
   selectedStat: StatType | null;
@@ -21,8 +22,10 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
     <div className="flex flex-wrap gap-2 justify-start">
       <Button
         variant="outline"
-        className={`h-8 px-3 py-1 text-xs font-pixel border-2 
-          ${!selectedStat ? 'bg-purple-400 text-black' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+        className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} border-2
+          ${!selectedStat 
+            ? 'bg-purple-500 text-black ' + tokens.badge.selected
+            : 'bg-gray-200 ' + tokens.badge.unselected}`}
         size="sm"
         onClick={() => setSelectedStat(null)}
       >
@@ -32,10 +35,10 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
         <Button
           key={stat}
           variant="outline"
-          className={`h-8 px-3 py-1 text-xs font-pixel border-2 
+          className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} border-2
             ${selectedStat === stat 
-              ? statColors[stat] + ' text-black'
-              : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+              ? statColors[stat] + ' text-black ' + tokens.badge.selected
+              : 'bg-gray-200 ' + tokens.badge.unselected
             }`}
           size="sm"
           onClick={() => setSelectedStat(stat, true)}

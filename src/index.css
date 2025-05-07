@@ -104,6 +104,7 @@
 }
 
 @layer components {
+  /* Pixel style components */
   .pixel-border {
     @apply border-4 border-black relative;
     box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
@@ -125,36 +126,83 @@
     @apply bg-white border-2 border-black p-4 shadow-[4px_4px_0_rgba(0,0,0,0.8)];
   }
   
+  /* Badge styling */
+  .badge-base {
+    @apply inline-flex items-center justify-center rounded-sm px-2.5 py-1 text-xs font-semibold transition-colors;
+  }
+
+  .badge-selectable {
+    @apply badge-base cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+
+  .badge-selected {
+    @apply badge-selectable border-2 border-black;
+  }
+
+  .badge-unselected {
+    @apply badge-selectable bg-opacity-60 hover:bg-opacity-80 border-2 border-gray-300 text-gray-700;
+  }
+  
+  .badge-card {
+    @apply badge-base text-black font-bold px-1.5 py-0.5;
+  }
+  
+  /* Stat badge colors */
   .stat-badge {
     @apply inline-block px-2 py-1 text-xs font-pixel text-black;
   }
   
   .stat-badge-kicking {
-    @apply bg-npfc-red;
+    @apply bg-red-500;
   }
   
   .stat-badge-speed {
-    @apply bg-npfc-yellow;
+    @apply bg-blue-500;
   }
   
   .stat-badge-stamina {
-    @apply bg-npfc-green;
+    @apply bg-green-500;
   }
   
   .stat-badge-technique {
-    @apply bg-npfc-blue;
+    @apply bg-yellow-500;
   }
   
   .stat-badge-toughness {
-    @apply bg-npfc-gray;
+    @apply bg-purple-500;
   }
   
   .stat-badge-jumping {
-    @apply bg-npfc-purple;
+    @apply bg-orange-500;
   }
   
   .stat-badge-willpower {
-    @apply bg-orange-400;
+    @apply bg-pink-500;
+  }
+  
+  /* Button styling */
+  .button-base {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50;
+  }
+
+  .button-pixel {
+    @apply button-base font-pixel border-2 border-black relative hover:translate-y-0 active:translate-y-1 active:shadow-none transition-all duration-100 shadow-[4px_4px_0_rgba(0,0,0,0.8)];
+  }
+
+  .button-primary {
+    @apply button-pixel bg-npfc-green text-black hover:bg-npfc-green-dark;
+  }
+
+  .button-secondary {
+    @apply button-pixel bg-npfc-blue text-black hover:bg-npfc-blue-dark;
+  }
+
+  .button-danger {
+    @apply button-pixel bg-npfc-red text-black hover:bg-red-500;
+  }
+
+  .button-outline {
+    @apply button-base bg-gray-200 text-gray-700 hover:bg-gray-300 border border-gray-300;
   }
   
   /* Table styling for combo display */
@@ -176,5 +224,31 @@
   
   .combo-table-header {
     @apply sticky top-0 bg-white z-10;
+  }
+  
+  /* Headings */
+  .heading-lg {
+    @apply font-pixel text-lg text-black;
+  }
+  
+  .heading-md {
+    @apply font-pixel text-base text-black;
+  }
+  
+  .heading-sm {
+    @apply font-pixel text-sm text-black;
+  }
+  
+  /* Spacing */
+  .section-spacing {
+    @apply mb-6;
+  }
+  
+  .item-spacing {
+    @apply mb-4;
+  }
+  
+  .inner-spacing {
+    @apply mb-2;
   }
 }

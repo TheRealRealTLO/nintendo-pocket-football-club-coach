@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
+import { tokens } from '@/styles/tokens';
 
 interface PositionBadgeProps {
   position: string;
@@ -25,7 +26,7 @@ const getPositionLabel = (position: string) => {
 
 const PositionBadge: React.FC<PositionBadgeProps> = ({ position }) => {
   return (
-    <Badge className={`${getPositionColor(position)} ml-2 font-bold`}>
+    <Badge className={`${getPositionColor(position)} ml-2 ${tokens.badge.card} ${tokens.fontWeight.bold}`}>
       {getPositionLabel(position)}
     </Badge>
   );

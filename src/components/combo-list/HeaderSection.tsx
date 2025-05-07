@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Undo2 } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { useIsMobile } from '../../hooks/use-mobile';
+import { tokens } from '@/styles/tokens';
 
 interface HeaderSectionProps {
   hasHistory: boolean;
@@ -34,18 +35,17 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
 
   return (
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-      <h2 className="font-pixel text-lg text-black">Training Combos</h2>
+      <h2 className={`${tokens.fontWeight.pixel} ${tokens.fontSize.lg} text-black`}>Training Combos</h2>
       <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
         <Button
           variant="outline"
-          size="sm"
-          className={`font-pixel text-xs ${showAllCombos ? 'bg-yellow-100' : ''}`}
+          className={`${tokens.fontWeight.pixel} ${tokens.fontSize.xs} ${showAllCombos ? 'bg-yellow-100' : ''}`}
           onClick={toggleShowAllCombos}
         >
           {showAllCombos ? "Show Available Only" : "Show All Combos"}
         </Button>
         <Button
-          className="pixel-button-red px-3 py-1 h-auto"
+          className={`${tokens.button.pixel} ${tokens.button.variants.danger} px-3 py-1 h-auto`}
           disabled={!hasHistory}
           onClick={handleUndo}
         >

@@ -4,6 +4,7 @@ import { CardType } from '@/data/types';
 import { Plus, Minus } from 'lucide-react';
 import { getCategoryIcon } from './CategoryFilter';
 import { cardToCategory, cardColors } from '@/data/combos';
+import { tokens } from '@/styles/tokens';
 
 interface CardItemProps {
   type: CardType;
@@ -19,7 +20,7 @@ const CardItem: React.FC<CardItemProps> = ({ type, quantity, onIncrement, onDecr
     >
       <div className="text-center mb-1 flex items-center justify-center gap-1 w-full">
         {getCategoryIcon(cardToCategory[type])}
-        <span className="font-pixel text-xs text-black truncate">{type}</span>
+        <span className={`${tokens.fontWeight.pixel} ${tokens.fontSize.xs} text-black truncate`}>{type}</span>
       </div>
       <div className="flex items-center justify-center space-x-2 w-full">
         <button 
@@ -29,7 +30,7 @@ const CardItem: React.FC<CardItemProps> = ({ type, quantity, onIncrement, onDecr
         >
           <Minus size={16} className="text-black" />
         </button>
-        <span className="font-pixel text-sm w-6 text-center text-black">
+        <span className={`${tokens.fontWeight.pixel} ${tokens.fontSize.sm} w-6 text-center text-black`}>
           {quantity}
         </span>
         <button 

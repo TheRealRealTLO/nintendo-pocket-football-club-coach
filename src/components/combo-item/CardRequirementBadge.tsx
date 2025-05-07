@@ -3,7 +3,8 @@ import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { CardType, cardColors } from '../../data/combos';
 import { Shield, Wrench, Dumbbell, Users } from 'lucide-react';
-import { cardToCategory } from '@/data/cardRelations';
+import { cardToCategory } from '@/data/combos';
+import { tokens } from '@/styles/tokens';
 
 interface CardRequirementBadgeProps {
   cardType: CardType;
@@ -24,7 +25,7 @@ const CardRequirementBadge: React.FC<CardRequirementBadgeProps> = ({ cardType, q
   };
 
   return (
-    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1 text-[12px] px-1.5 py-0.5`}>
+    <Badge className={`${cardColors[cardType]} text-black flex items-center gap-1 ${tokens.badge.card}`}>
       {getCardIcon(cardType)}
       {cardType} x{quantity}
     </Badge>

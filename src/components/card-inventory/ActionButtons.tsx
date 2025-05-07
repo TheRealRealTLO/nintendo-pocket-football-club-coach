@@ -3,6 +3,7 @@ import React from 'react';
 import { RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import { tokens } from '@/styles/tokens';
 
 interface ActionButtonsProps {
   onReset: () => void;
@@ -21,7 +22,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onReset }) => {
 
   return (
     <Button 
-      className="pixel-button-red" 
+      className={`${tokens.button.pixel} ${tokens.button.variants.danger}`} 
       onClick={handleReset}
     >
       <RefreshCw size={16} className="mr-2" />

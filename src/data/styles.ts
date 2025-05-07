@@ -54,7 +54,7 @@ export const cardColors: Record<CardType, string> = {
   "Karaoke": "bg-yellow-300"
 };
 
-// Stat colors - updated to match card badges with more vibrant colors
+// Stat colors - updated to match card badges with more vibrant colors that are consistent
 export const statColors: Record<StatType, string> = {
   "Kicking": "bg-red-500",
   "Speed": "bg-blue-500",

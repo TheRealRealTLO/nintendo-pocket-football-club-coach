@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowUpDown } from 'lucide-react';
 import { allStatTypes, statColors } from '@/data/combos';
 import { useIsMobile } from '../../hooks/use-mobile';
+import { tokens } from '@/styles/tokens';
 
 interface AdvancedFiltersProps {
   positionFilter: string | null;
@@ -29,30 +30,29 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   const isMobile = useIsMobile();
 
   const getPositionColor = (position: string, isSelected: boolean) => {
-    if (!isSelected) return "bg-gray-200 hover:bg-gray-300 text-gray-700";
+    if (!isSelected) return tokens.badge.unselected;
     
     switch(position) {
-      case "GK": return "bg-orange-500 text-black";
-      case "DF": return "bg-blue-500 text-black";
-      case "MF": return "bg-green-500 text-black";
-      case "FW": return "bg-red-500 text-black";
-      case "ALL": return "bg-purple-500 text-black";
-      default: return "bg-gray-400 text-black";
+      case "GK": return "bg-orange-500 text-black " + tokens.badge.selected;
+      case "DF": return "bg-blue-500 text-black " + tokens.badge.selected;
+      case "MF": return "bg-green-500 text-black " + tokens.badge.selected;
+      case "FW": return "bg-red-500 text-black " + tokens.badge.selected;
+      case "ALL": return "bg-purple-500 text-black " + tokens.badge.selected;
+      default: return "bg-gray-400 text-black " + tokens.badge.selected;
     }
   };
   
   return (
     <div className="p-4 bg-gray-50 rounded-lg mb-4">
       <div className="flex flex-wrap gap-2 mb-3">
-        <h3 className="text-sm font-pixel w-full mb-2">Position Filter:</h3>
+        <h3 className={`${tokens.fontSize.sm} ${tokens.fontWeight.pixel} w-full mb-2`}>Position Filter:</h3>
         <div className="flex flex-wrap gap-2">
           {positions.map(position => (
             <Button
               key={position}
               variant="outline"
               onClick={() => setPositionFilter(positionFilter === position ? null : position)}
-              className={`h-8 px-3 text-xs font-pixel border-2 
-                ${getPositionColor(position, positionFilter === position)}`}
+              className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} ${getPositionColor(position, positionFilter === position)}`}
               size="sm"
             >
               {position}
@@ -62,12 +62,12 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
       </div>
       
       <div className="flex flex-wrap gap-2 mb-3">
-        <h3 className="text-sm font-pixel w-full mb-2">Stat Filter:</h3>
+        <h3 className={`${tokens.fontSize.sm} ${tokens.fontWeight.pixel} w-full mb-2`}>Stat Filter:</h3>
         <div className="flex flex-wrap gap-2">
           <Button
             variant="outline"
-            className={`h-8 px-3 text-xs font-pixel border-2 
-              ${!selectedStat ? 'bg-purple-500 text-black' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+            className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel}
+              ${!selectedStat ? 'bg-purple-500 text-black ' + tokens.badge.selected : tokens.badge.unselected}`}
             size="sm"
             onClick={() => setSelectedStat(null, false)}
           >
@@ -77,10 +77,10 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
             <Button
               key={stat}
               variant="outline"
-              className={`h-8 px-3 text-xs font-pixel border-2 flex items-center gap-1
+              className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} flex items-center gap-1
                 ${selectedStat === stat 
-                  ? statColors[stat] + ' text-black' 
-                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                  ? statColors[stat] + ' text-black ' + tokens.badge.selected
+                  : tokens.badge.unselected
                 }`}
               size="sm"
               onClick={() => setSelectedStat(stat, true)}
@@ -95,11 +95,11 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
       </div>
 
       <div className="flex flex-wrap items-center gap-3 mt-4">
-        <h3 className="text-sm font-pixel">Recommended Combos:</h3>
+        <h3 className={`${tokens.fontSize.sm} ${tokens.fontWeight.pixel}`}>Recommended Combos:</h3>
         <Button
           variant={recommendedOnly ? "default" : "outline"}
           onClick={() => setRecommendedOnly(!recommendedOnly)}
-          className="h-8 px-3 text-xs font-pixel"
+          className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel}`}
           size="sm"
         >
           {recommendedOnly ? "Showing Recommended Only" : "Show All Combos"}
