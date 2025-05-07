@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import PositionBadge from './combo-item/PositionBadge';
 import CardRequirements from './combo-item/CardRequirements';
 import StatImprovements from './combo-item/StatImprovements';
-import { Star } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 interface ComboItemProps {
   combo: TrainingCombo;
@@ -20,7 +20,7 @@ const ComboItem: React.FC<ComboItemProps> = ({ combo, isAvailable, onApply }) =>
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-1">
           {combo.recommended && (
-            <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+            <Trophy className="h-4 w-4 text-amber-500" title="Top stat-boosting combo" />
           )}
           <h3 className="font-pixel text-sm text-black">{combo.name}</h3>
         </div>

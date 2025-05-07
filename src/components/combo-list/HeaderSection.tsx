@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Undo2 } from 'lucide-react';
+import { Undo2, ListFilter } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { useIsMobile } from '../../hooks/use-mobile';
 import { tokens } from '@/styles/tokens';
@@ -39,10 +39,11 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
       <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
         <Button
           variant="outline"
-          className={`${tokens.fontWeight.pixel} ${tokens.fontSize.xs} ${showAllCombos ? 'bg-yellow-100' : ''}`}
+          className={`${tokens.fontWeight.pixel} ${tokens.fontSize.xs} ${showAllCombos ? 'bg-yellow-100' : ''} flex items-center gap-1`}
           onClick={toggleShowAllCombos}
         >
-          {showAllCombos ? "Show Available Only" : "Show All Combos"}
+          <ListFilter size={16} />
+          {showAllCombos ? "Show Available Only" : "Show All 132 Combos"}
         </Button>
         <Button
           className={`${tokens.button.pixel} ${tokens.button.variants.danger} px-3 py-1 h-auto`}

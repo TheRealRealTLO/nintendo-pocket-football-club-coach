@@ -3,7 +3,7 @@ import React from 'react';
 import { TrainingCombo } from '../../data/combos';
 import { Button } from '@/components/ui/button';
 import CombosTab from './CombosTab';
-import { Star } from 'lucide-react';
+import { Trophy } from 'lucide-react';
 
 interface ComboTabsContainerProps {
   availableCombos: TrainingCombo[];
@@ -35,9 +35,9 @@ const ComboTabsContainer: React.FC<ComboTabsContainerProps> = ({
             <h3 className="text-lg font-pixel">
               {showAllCombos ? "All Training Combos" : "Available Combos"} ({filteredCombos.length})
               {isShowingRecommended && (
-                <span className="text-sm text-yellow-600 flex items-center gap-1 mt-1">
-                  <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" /> 
-                  Showing recommended combos ({recommendedCount})
+                <span className="text-sm text-amber-700 flex items-center gap-1 mt-1">
+                  <Trophy className="h-4 w-4 text-amber-500" /> 
+                  Top stat-boosting combos only ({recommendedCount})
                 </span>
               )}
             </h3>
