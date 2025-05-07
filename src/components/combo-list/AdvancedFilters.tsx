@@ -29,17 +29,28 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
   const positions = ["ALL", "GENERAL", "GK", "DF", "MF", "FW"];
   const isMobile = useIsMobile();
 
+  // Helper function to get position color for both selected and unselected states
   const getPositionColor = (position: string, isSelected: boolean) => {
-    if (!isSelected) return tokens.badge.unselected;
-    
-    switch(position) {
-      case "GK": return "bg-orange-300 text-black " + tokens.badge.selected;
-      case "DF": return "bg-blue-300 text-black " + tokens.badge.selected;
-      case "MF": return "bg-green-300 text-black " + tokens.badge.selected;
-      case "FW": return "bg-red-300 text-black " + tokens.badge.selected;
-      case "ALL": return "bg-purple-300 text-black " + tokens.badge.selected;
-      case "GENERAL": return "bg-gray-300 text-black " + tokens.badge.selected;
-      default: return "bg-gray-300 text-black " + tokens.badge.selected;
+    if (!isSelected) {
+      switch(position) {
+        case "GK": return "bg-orange-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        case "DF": return "bg-blue-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        case "MF": return "bg-green-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        case "FW": return "bg-red-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        case "ALL": return "bg-purple-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        case "GENERAL": return "bg-gray-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+        default: return "bg-gray-300 bg-opacity-50 text-gray-700 " + tokens.badge.unselected;
+      }
+    } else {
+      switch(position) {
+        case "GK": return "bg-orange-300 text-black " + tokens.badge.selected;
+        case "DF": return "bg-blue-300 text-black " + tokens.badge.selected;
+        case "MF": return "bg-green-300 text-black " + tokens.badge.selected;
+        case "FW": return "bg-red-300 text-black " + tokens.badge.selected;
+        case "ALL": return "bg-purple-300 text-black " + tokens.badge.selected;
+        case "GENERAL": return "bg-gray-300 text-black " + tokens.badge.selected;
+        default: return "bg-gray-300 text-black " + tokens.badge.selected;
+      }
     }
   };
   
@@ -68,7 +79,9 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
           <Button
             variant="outline"
             className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel}
-              ${!selectedStat ? 'bg-purple-500 text-black ' + tokens.badge.selected : tokens.badge.unselected}`}
+              ${!selectedStat 
+                ? 'bg-purple-300 text-black ' + tokens.badge.selected 
+                : 'bg-purple-300 bg-opacity-50 text-gray-700 ' + tokens.badge.unselected}`}
             size="sm"
             onClick={() => setSelectedStat(null, false)}
           >
@@ -81,7 +94,7 @@ const AdvancedFilters: React.FC<AdvancedFiltersProps> = ({
               className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} flex items-center gap-1
                 ${selectedStat === stat 
                   ? statColors[stat] + ' text-black ' + tokens.badge.selected
-                  : tokens.badge.unselected
+                  : statColors[stat] + ' bg-opacity-50 text-gray-700 ' + tokens.badge.unselected
                 }`}
               size="sm"
               onClick={() => setSelectedStat(stat, true)}

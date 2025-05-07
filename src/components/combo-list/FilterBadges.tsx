@@ -25,7 +25,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
         className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} border-2
           ${!selectedStat 
             ? 'bg-purple-300 text-black ' + tokens.badge.selected
-            : 'bg-gray-200 ' + tokens.badge.unselected}`}
+            : 'bg-purple-300 bg-opacity-50 ' + tokens.badge.unselected}`}
         size="sm"
         onClick={() => setSelectedStat(null)}
       >
@@ -38,7 +38,7 @@ export const FilterBadges: React.FC<FilterBadgesProps> = ({
           className={`${tokens.button.sizes.sm} ${tokens.fontWeight.pixel} border-2
             ${selectedStat === stat 
               ? statColors[stat] + ' text-black ' + tokens.badge.selected
-              : 'bg-gray-200 ' + tokens.badge.unselected
+              : statColors[stat] + ' bg-opacity-50 ' + tokens.badge.unselected
             }`}
           size="sm"
           onClick={() => setSelectedStat(stat, true)}
