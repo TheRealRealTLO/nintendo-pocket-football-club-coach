@@ -1,9 +1,13 @@
 
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
   const isMobile = useIsMobile();
+  const location = useLocation();
   
   return (
     <header className="bg-npfc-green-dark border-b-4 border-black p-4 mb-6">
@@ -36,6 +40,26 @@ const Header: React.FC = () => {
         <p className="font-pixel text-xs text-black mt-3 text-center">
           Training Card Calculator
         </p>
+
+        {/* Navigation links */}
+        <div className="flex space-x-2 mt-3">
+          <Link to="/">
+            <Button
+              variant={location.pathname === '/' ? 'default' : 'outline'}
+              className="font-pixel text-xs h-8"
+            >
+              Cards & Combos
+            </Button>
+          </Link>
+          <Link to="/training-regime">
+            <Button
+              variant={location.pathname === '/training-regime' ? 'default' : 'outline'}
+              className="font-pixel text-xs h-8"
+            >
+              Training Regime
+            </Button>
+          </Link>
+        </div>
       </div>
     </header>
   );
