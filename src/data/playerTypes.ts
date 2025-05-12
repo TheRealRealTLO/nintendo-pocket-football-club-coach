@@ -5,9 +5,8 @@ export type StatRank = "E" | "D" | "C" | "B" | "A" | "S";
 export type Position = "GK" | "DF" | "MF" | "FW";
 export type FatigueStatus = "Green" | "Amber" | "Red";
 
-export interface PlayerStats {
-  [key in StatType]: StatRank;
-}
+// Correct definition - PlayerStats is a mapped type (Record)
+export type PlayerStats = Record<StatType, StatRank>;
 
 export interface TrainingHistoryEntry {
   trained: boolean;
